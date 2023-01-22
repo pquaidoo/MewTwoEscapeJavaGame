@@ -1,42 +1,19 @@
-import java.io.*;
-
 import javax.swing.*;
- 
-// Main class
-
-class JSwing Test {
- 
-
-    // Main driver method
-
+public class JSwingTest {
     public static void main(String[] args) {
+        JFrame window = new JFrame();
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
+        window.setTitle("2D Adventure");
 
-        JFrame frame
+        GamePanel gamePanel=new GamePanel();
+        window.add(gamePanel);
 
-            = new JFrame(); // creating instance of JFrame
- 
+        window.pack();
 
-        JButton button = new JButton(
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
 
-            " GFG WebSite Click"); // creating instance of
-
-                                   // JButton
-
-        button.setBounds(
-
-            150, 200, 220,
-
-            50); // x axis, y axis, width, height
- 
-
-        frame.add(button); // adding button in JFrame
- 
-
-        frame.setSize(500, 600); // 400 width and 500 height
-
-        frame.setLayout(null); // using no layout managers
-
-        frame.setVisible(true); // making the frame visible
-
+        gamePanel.startGameThread();//starts game
     }
-}
+}  
