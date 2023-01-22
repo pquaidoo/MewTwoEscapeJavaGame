@@ -1,5 +1,5 @@
 public class Game {
     public static void main(String[] args) {
-        System.out.println("nope it still sucks!!!!!");
+        System.out.println("sighs idk anymore");
     }
 }
