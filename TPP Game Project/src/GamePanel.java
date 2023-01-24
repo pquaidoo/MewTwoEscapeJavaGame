@@ -15,17 +15,22 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenWidth = tileSize * maxScreenCol; //786 px
     final int screenHeight = tileSize * maxScreenRow; //576 px
 
+    Keyhandler keyH= new Keyhandler();
     Thread gameThread;//Creates time in game for FPS , implements runnable, calls run method
 
     public GamePanel( ){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true); //improved rendering performance
+        this.addKeyListener(keyH);
+        this.setFocusable(true);    //makes gamePanel "focused to receive input", so basically makes input faster ig.
     }
+
     public void startGameThread(){
         gameThread = new Thread(this);
         gameThread.start();//calls run method
     }
+
     @Override
     public void run() {//Game loop
         while(gameThread!=null){
@@ -39,9 +44,11 @@ public class GamePanel extends JPanel implements Runnable {
             repaint();//calls paintComponent method.
         }
     }
+
     public void update(){
 
     }
+
     public void paintComponent(Graphics graphics){
 
         super.paintComponent(graphics);                 //Referencing JPanel
