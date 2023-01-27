@@ -14,9 +14,15 @@ public class GamePanel extends JPanel implements Runnable {
     final int maxScreenRow = 12;
     final int screenWidth = tileSize * maxScreenCol; //786 px
     final int screenHeight = tileSize * maxScreenRow; //576 px
+    int FPS =60;
 
     Keyhandler keyH= new Keyhandler();
     Thread gameThread;//Creates time in game for FPS , implements runnable, calls run method
+
+    //Set player's default position
+    int playerX=100;
+    int playerY=100;
+    int playerSpeed=4;
 
     public GamePanel( ){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -33,19 +39,57 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {//Game loop
+
+        double drawInterval = 1000000000/FPS;//0.0166666666 seconds if 60 fps
+        double nextDrawTime = System.nanoTime() +drawInterval;
+
         while(gameThread!=null){
 
-            System.out.println("game loop lmao");// prints in terminal
+            long currentTime = System.nanoTime();
+            System.out.println("Current Time: "+currentTime);
+
+            //System.out.println("game loop lmao");// prints in terminal
             //1 UPDATE: update info such as char positions
             update();//calls update method.
 
 
+
             //2 DRAW: shows on screen with updated info
             repaint();//calls paintComponent method.
+
+            try {//Checks for when its time to update to next frame, "sleeps" until it's time to update
+                double remainingTime = nextDrawTime - System.nanoTime();
+                remainingTime=remainingTime/1000000;//converts nano seconds to miliseconds.
+
+                if(remainingTime<0){
+                    remainingTime=0;
+                }
+
+                Thread.sleep((long) remainingTime);//bc of this need try and catch
+
+                nextDrawTime+=drawInterval;
+
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+
         }
     }
 
     public void update(){
+
+        //Array coordinates so values increase as they go right or down
+        if(keyH.upPressed){//Checks if true
+            playerY-=playerSpeed;
+        } else if (keyH.downPressed) {
+            playerY+=playerSpeed;
+
+        } else if (keyH.rightPressed) {
+            playerX+=playerSpeed;
+
+        }else if(keyH.leftPressed){
+            playerX-=playerSpeed;
+        }
 
     }
 
@@ -57,7 +101,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         graphics2.setColor(Color.white);    //
 
-        graphics2.fillRect(100,100, /*width*/ tileSize, /*height*/ tileSize);   //Player Character
+        graphics2.fillRect(playerX,playerY, /*width*/ tileSize, /*height*/ tileSize);   //Player Character
 
         graphics2.dispose();    //Helps Performance
 
