@@ -3,7 +3,7 @@ import java.awt.event.KeyListener;
 /*
     Gets input from keyboard and sets booleans accordingly so game can react to it.
  */
-public class Keyhandler implements KeyListener {
+public class KeyHandler implements KeyListener {
 
     public boolean upPressed, downPressed, leftPressed, rightPressed;
     @Override
