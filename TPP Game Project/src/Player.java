@@ -4,6 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ * Controls player sprites and stats.
+ */
 public class Player extends Character{
 
     GamePanel gp;
