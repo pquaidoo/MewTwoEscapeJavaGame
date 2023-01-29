@@ -16,10 +16,11 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenHeight = tileSize * maxScreenRow; //576 px
     int FPS =60;
 
-    Keyhandler keyH= new Keyhandler();
+    KeyHandler keyH= new KeyHandler();
     Thread gameThread;//Creates time in game for FPS , implements runnable, calls run method
+    Player player = new Player(this, keyH);
 
-    //Set player's default position
+    //Set res.player's default position
     int playerX=100;
     int playerY=100;
     int playerSpeed=4;
@@ -46,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
         while(gameThread!=null){
 
             long currentTime = System.nanoTime();
-            System.out.println("Current Time: "+currentTime);
+
 
             //System.out.println("game loop lmao");// prints in terminal
             //1 UPDATE: update info such as char positions
@@ -78,18 +79,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update(){
 
-        //Array coordinates so values increase as they go right or down
-        if(keyH.upPressed){//Checks if true
-            playerY-=playerSpeed;
-        } else if (keyH.downPressed) {
-            playerY+=playerSpeed;
-
-        } else if (keyH.rightPressed) {
-            playerX+=playerSpeed;
-
-        }else if(keyH.leftPressed){
-            playerX-=playerSpeed;
-        }
+    player.update();
 
     }
 
@@ -99,9 +89,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D graphics2= (Graphics2D)graphics;     //Graphics2D is a class that helps control sophisticated visuals.
 
-        graphics2.setColor(Color.white);    //
-
-        graphics2.fillRect(playerX,playerY, /*width*/ tileSize, /*height*/ tileSize);   //Player Character
+        player.draw(graphics2);
 
         graphics2.dispose();    //Helps Performance
 
