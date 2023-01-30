@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenWidth = tileSize * maxScreenCol; //786 px
     final int screenHeight = tileSize * maxScreenRow; //576 px
     int FPS =60;
+    TileManager tileM = new TileManager(this);
 
     KeyHandler keyH= new KeyHandler();
     Thread gameThread;                              //Creates time in game for FPS , implements runnable, calls run method
@@ -93,6 +94,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D graphics2= (Graphics2D)graphics;     //Graphics2D is a class that helps control sophisticated visuals.
 
+        tileM.draw(graphics2);                          //Tiles before player so tiles don't cover player.
         player.draw(graphics2);                         //Calls player draw method.
 
         graphics2.dispose();                            //Helps Performance.
