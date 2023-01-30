@@ -1,16 +1,22 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-/*
-    Gets input from keyboard and sets booleans accordingly so game can react to it.
+/**
+ * Gets input from keyboard and sets booleans accordingly so game can react to it.
  */
 public class KeyHandler implements KeyListener {
 
     public boolean upPressed, downPressed, leftPressed, rightPressed;
+
     @Override
     public void keyTyped(KeyEvent e) {}
 
+    /**
+     * Changes booleans if key is pressed.
+     *
+     * @param e the event to be processed
+     */
     @Override
-    public void keyPressed(KeyEvent e) {    //Checks if key is pressed and sets boolan to true
+    public void keyPressed(KeyEvent e) {
 
         int code = e.getKeyCode();      //returns int of keyCode associated with key pressed.
 
@@ -32,8 +38,13 @@ public class KeyHandler implements KeyListener {
 
     }
 
+    /**
+     * Changes boolean if button is no longer pressed.
+     *
+     * @param e the event to be processed
+     */
     @Override
-    public void keyReleased(KeyEvent e) {       //Checks if key is pressed and sets boolan to false
+    public void keyReleased(KeyEvent e) {
 
         int code= e.getKeyCode();
 
