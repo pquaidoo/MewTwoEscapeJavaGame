@@ -27,6 +27,9 @@ public class Player extends Character{
      */
     public void getplayerImage(){
         try{
+
+            //up1. ImageIO.read(getClass().getResourceAsStream("TPP Game Project/res/player/boy_up_1.png"));
+            //what was used in tutorial ^
             up1= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_up_1.png"));
             up2= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_up_2.png"));
             down1= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_down_1.png"));
