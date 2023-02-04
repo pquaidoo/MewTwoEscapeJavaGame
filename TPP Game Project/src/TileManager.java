@@ -49,14 +49,14 @@ public class TileManager {
 
                 String line = br.readLine();//reads whole line of text.
 
-                while (col < gp.maxScreenCol) {
+                while (col < gp.maxWorldCol) {
                     String numbers[]=line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row]=num;
                     col++;
 
                 }
-                if(col==gp.maxScreenCol){
+                if(col==gp.maxWorldCol){
                     col=0;
                     row++;
                 }
@@ -66,22 +66,35 @@ public class TileManager {
         }
     }
         public void draw(Graphics2D graphics2){
-            int col = 0;
-            int row=0;
-            int x=0;
-            int y=0;
-            while (col < gp.maxScreenCol&& row<gp.maxScreenRow){
+            int worldCol = 0;
+            int worldRow = 0;
 
-                int tileNum=mapTileNum[col][row];
+            while (worldCol < gp.maxWorldCol&& worldRow<gp.maxWorldRow){
 
-                graphics2.drawImage(tile[tileNum].image,x ,y, gp.tileSize,gp.tileSize,null);
-                col++;
-                x+=gp.tileSize;
-                if(col == gp.maxScreenCol){
-                    col=0;
-                    x=0;
-                    row++;
-                    y+=gp.tileSize;
+                int tileNum=mapTileNum[worldCol][worldRow];
+
+
+                //usually would display only screen size from 0,0
+                //with this figures out where player is and displays pixels surrounding them.
+                //+gp.player.screenX screen makes it so player is not displayed in right top corner.
+                int worldX = worldCol*gp.tileSize;
+                int worldY = worldRow*gp.tileSize;
+                int screenX = worldX - gp.player.worldX + gp.player.screenX;
+                int screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+
+                if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
+                    worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
+                    worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
+                    worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {//doesn't display pixels if its within camera
+
+                    graphics2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                }
+                worldCol++;
+
+                if(worldCol == gp.maxWorldCol){
+                    worldCol = 0;
+                    worldRow++;
                 }
 
             }

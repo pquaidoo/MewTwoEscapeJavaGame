@@ -17,13 +17,20 @@ public class Player extends Character{
 
         this.gp=gp;
         this.keyH=keyH;
-        screenX=gp.screenWidth/2-gp.tileSize/2;
+        screenX=gp.screenWidth/2 - gp.tileSize/2;
         screenY=gp.screenHeight/2-gp.tileSize/2;  //sets camera size
         setDefaultValues();
         getplayerImage();
         direction="down";
+    }
 
-
+    /**
+     *  Sets Default values for player.
+     */
+    public void setDefaultValues(){
+        worldX = gp.tileSize * 1;
+        worldY = gp.tileSize * 25;
+        speed=4;
     }
 
     /**
@@ -48,14 +55,7 @@ public class Player extends Character{
         }
     }
 
-    /**
-     *  Sets Default values for player.
-     */
-    public void setDefaultValues(){
-        worldX=gp.tileSize*23;
-        worldY=gp.tileSize*21;
-        speed=4;
-    }
+
     /**
      *  Updates the player data (60FPS).
      */

@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     KeyHandler keyH= new KeyHandler();
     Thread gameThread;                              //Creates time in game for FPS , implements runnable, calls run method
-    Player player = new Player(this, keyH);
+    public Player player = new Player(this, keyH);
 
     /**
      * Constructor for game panel that instantiates screen size, color, input and other cool jazz.
