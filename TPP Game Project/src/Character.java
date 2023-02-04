@@ -3,8 +3,10 @@ import java.awt.image.BufferedImage;
 /**
  *  Template class for Player, Enemy, NPC
  */
+
 public class Character {
-    public int x, y;
+    String name;
+    public int worldX, worldY;
     public int speed;
 
 
@@ -13,4 +15,6 @@ public class Character {
 
     public int spriteCounter = 0;   //Used as timer to determine when to switch sprites.
     public int spriteNum = 1;       //Used to set values to individual sprites.
+
+
 }

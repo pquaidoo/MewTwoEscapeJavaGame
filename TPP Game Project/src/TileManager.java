@@ -12,7 +12,7 @@ public class TileManager {
         public TileManager(GamePanel gp){
             this.gp=gp;
             tile = new Tiles[10];
-            mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
+            mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
             getTileImage();
             loadMap("TPP Game Project/res/maps/map01.txt");
         }
@@ -28,6 +28,12 @@ public class TileManager {
                 tile[1].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/water.png"));
                 tile[2] = new Tiles();
                 tile[2].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/wall.png"));
+                tile[3] = new Tiles();
+                tile[3].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/earth.png"));
+                tile[4] = new Tiles();
+                tile[4].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/tree.png"));
+                tile[5] = new Tiles();
+                tile[5].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/sand.png"));
 
             }catch(IOException e){
                 e.printStackTrace();
@@ -39,7 +45,7 @@ public class TileManager {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));//reads contents of text file.
             int col=0;
             int row=0;
-            while(col<gp.maxScreenCol && row< gp.maxScreenRow){
+            while(col<gp.maxWorldCol && row< gp.maxWorldRow){
 
                 String line = br.readLine();//reads whole line of text.
 

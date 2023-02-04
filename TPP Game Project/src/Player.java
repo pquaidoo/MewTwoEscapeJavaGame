@@ -11,14 +11,18 @@ public class Player extends Character{
 
     GamePanel gp;
     KeyHandler keyH;
-
+    public final int screenX;
+    public final int screenY;
     public Player(GamePanel gp, KeyHandler keyH){
 
         this.gp=gp;
         this.keyH=keyH;
+        screenX=gp.screenWidth/2-gp.tileSize/2;
+        screenY=gp.screenHeight/2-gp.tileSize/2;  //sets camera size
         setDefaultValues();
         getplayerImage();
         direction="down";
+
 
     }
 
@@ -48,8 +52,8 @@ public class Player extends Character{
      *  Sets Default values for player.
      */
     public void setDefaultValues(){
-        x=100;
-        y=100;
+        worldX=gp.tileSize*23;
+        worldY=gp.tileSize*21;
         speed=4;
     }
     /**
@@ -66,18 +70,18 @@ public class Player extends Character{
 
             if (keyH.upPressed) {
                 direction = "up";
-                y -= speed;
+                worldY -= speed;
             } else if (keyH.downPressed) {
                 direction = "down";
-                y += speed;
+                worldY += speed;
 
             } else if (keyH.rightPressed) {
                 direction = "right";
-                x += speed;
+                worldX += speed;
 
             } else if (keyH.leftPressed) {
                 direction = "left";
-                x -= speed;
+                worldX -= speed;
             }
 
             //Alternates sprite number so draw method can switch sprites for animation.
@@ -141,6 +145,6 @@ public class Player extends Character{
             }
 
         //Changes image, puts it where it goes, changes how big it is.
-        graphics2.drawImage(image, x, y, gp.tileSize,gp.tileSize,null);
+        graphics2.drawImage(image, screenX, screenY, gp.tileSize,gp.tileSize,null);
     }
 }
