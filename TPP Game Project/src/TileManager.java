@@ -4,7 +4,7 @@ import java.io.*;
 
 public class TileManager {
     GamePanel gp;
-    Tiles[] tile;
+    public Tiles[] tile;
 
     int mapTileNum[][];
 
@@ -24,16 +24,25 @@ public class TileManager {
                 //tutorial version ^
                 tile[0] = new Tiles();
                 tile[0].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/grass.png"));
+
                 tile[1] = new Tiles();
                 tile[1].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/water.png"));
+                tile[1].collision = true;
+
                 tile[2] = new Tiles();
                 tile[2].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/wall.png"));
+                tile[2].collision = true;
+
                 tile[3] = new Tiles();
                 tile[3].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/earth.png"));
+
                 tile[4] = new Tiles();
                 tile[4].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/tree.png"));
+                tile[4].collision = true;
+
                 tile[5] = new Tiles();
                 tile[5].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/sand.png"));
+
 
             }catch(IOException e){
                 e.printStackTrace();

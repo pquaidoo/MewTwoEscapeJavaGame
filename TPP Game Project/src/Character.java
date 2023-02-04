@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -15,6 +16,8 @@ public class Character {
 
     public int spriteCounter = 0;   //Used as timer to determine when to switch sprites.
     public int spriteNum = 1;       //Used to set values to individual sprites.
+    public Rectangle solidArea;
+    public boolean collisionOn = false;
 
 
 }

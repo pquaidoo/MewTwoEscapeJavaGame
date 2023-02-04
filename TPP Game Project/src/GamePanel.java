@@ -28,6 +28,7 @@ public class GamePanel extends JPanel implements Runnable {
     TileManager tileM = new TileManager(this);
 
     KeyHandler keyH= new KeyHandler();
+    public CollisionChecker cChecker = new CollisionChecker(this);
     Thread gameThread;                              //Creates time in game for FPS , implements runnable, calls run method
     public Player player = new Player(this, keyH);
 
