@@ -14,7 +14,7 @@ public class TileManager {
             tile = new Tiles[10];
             mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
             getTileImage();
-            loadMap("TPP Game Project/res/maps/map01.txt");
+            loadMap("TPP Game Project/res/maps/map2.txt");
         }
 
         public void getTileImage(){

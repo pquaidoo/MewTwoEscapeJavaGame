@@ -31,8 +31,8 @@ public class Player extends Character{
      *  Sets Default values for player.
      */
     public void setDefaultValues(){
-        worldX = gp.tileSize * 1;
-        worldY = gp.tileSize * 25;
+        worldX = gp.tileSize * 24;
+        worldY = gp.tileSize * 24;
         speed=4;
     }
 
