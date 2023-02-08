@@ -23,7 +23,7 @@ public class JSwingTest {
         window.setLocationRelativeTo(null);
 
         window.setVisible(true);
-
+        gamePanel.setupGame();
         gamePanel.startGameThread();                            //Starts game
     }
 }  

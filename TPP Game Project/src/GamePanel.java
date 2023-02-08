@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-
+import Object.SuperObject;
 
 /**
  *  Instantiates Game and runs game loop.
@@ -29,9 +29,10 @@ public class GamePanel extends JPanel implements Runnable {
 
     KeyHandler keyH= new KeyHandler();
     public CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSetter aSetter = new AssetSetter(this);
     Thread gameThread;                              //Creates time in game for FPS , implements runnable, calls run method
     public Player player = new Player(this, keyH);
-
+    public SuperObject obj[] = new SuperObject[10];
     /**
      * Constructor for game panel that instantiates screen size, color, input and other cool jazz.
      */
@@ -41,6 +42,10 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);               //improved rendering performance
         this.addKeyListener(keyH);
         this.setFocusable(true);                    //makes gamePanel "focused to receive input", so basically makes input faster ig.
+    }
+
+    public void setupGame() {
+        aSetter.setObject();
     }
 
     /**
@@ -101,7 +106,17 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D graphics2= (Graphics2D)graphics;     //Graphics2D is a class that helps control sophisticated visuals.
 
+        //TILE
         tileM.draw(graphics2);                          //Tiles before player so tiles don't cover player.
+
+        //OBJECT
+        for(int i = 0; i < obj.length; i++) {
+            if (obj[i] != null) {
+                obj[i].draw(graphics2, this);
+            }
+        }
+
+        //PLAYER
         player.draw(graphics2);                         //Calls player draw method.
 
         graphics2.dispose();                            //Helps Performance.

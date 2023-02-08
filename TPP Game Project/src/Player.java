@@ -60,7 +60,7 @@ public class Player extends Character{
 
 
     /**
-     *  Updates the player data (60FPS).
+         *  Updates the player data (60FPS).
      */
     public void update(){
 
