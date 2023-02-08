@@ -13,6 +13,7 @@ public class Player extends Character{
     KeyHandler keyH;
     public final int screenX;
     public final int screenY;
+    int hasKey = 0;
     public Player(GamePanel gp, KeyHandler keyH){
 
         this.gp=gp;
@@ -21,6 +22,8 @@ public class Player extends Character{
         screenY = gp.screenHeight/2 - gp.tileSize/2;  //sets camera size
 
         solidArea = new Rectangle(8,16,32,32);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
         setDefaultValues();
         getplayerImage();
@@ -88,6 +91,15 @@ public class Player extends Character{
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
+            // Check Tile Collision
+            collisionOn = false;
+            gp.cChecker.checkTile(this);
+
+
+            int objIndex = gp.cChecker.checkObject(this,true);
+            pickupObject(objIndex);
+
+
             //if collision is false player can movew
             if(collisionOn == false){
 
@@ -117,6 +129,26 @@ public class Player extends Character{
             }
         }
     }
+
+    public void pickupObject(int i){
+        if(i !=999){
+
+            String objectName= gp.obj[i].name;
+            switch(objectName){
+                case"Key":
+                    hasKey++;
+                    gp.obj[i]=null;
+                    System.out.println("Keys: "+ hasKey);
+                    break;
+                case"Door":
+                    if(hasKey>0){
+                        gp.obj[i] = null;
+                        hasKey--;
+                    }
+            }
+        }
+    }
+
     /**
      * Updates screen with player images (60FPS).
      */
@@ -167,4 +199,5 @@ public class Player extends Character{
         //Changes image, puts it where it goes, changes how big it is.
         graphics2.drawImage(image, screenX, screenY, gp.tileSize,gp.tileSize,null);
     }
+
 }
