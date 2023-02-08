@@ -1,7 +1,6 @@
-package Object;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import GamePanel;
+
 public class SuperObject {
 
     public BufferedImage image;

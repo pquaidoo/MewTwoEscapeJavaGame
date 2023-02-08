@@ -1,12 +1,11 @@
-package Object;
-
+import java.io.FileInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 public class OBJ_Key extends SuperObject {
     public OBJ_Key() {
         name = "Key";
         try {
-            image = ImageIO.read(getClass().getResourceAsStream("/Objects/key.png"));
+            image = ImageIO.read(new FileInputStream("TPP Game Project/res/Objects/key.png"));
         }catch(IOException e) {
             e.printStackTrace();
         }

@@ -1,7 +1,3 @@
-import Object.OBJ_Key;
-import Object.OBJ_Chest;
-import Object.OBJ_Door;
-
 public class AssetSetter {
     GamePanel gp;
 

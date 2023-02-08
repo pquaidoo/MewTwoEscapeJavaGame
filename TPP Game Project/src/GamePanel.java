@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import Object.SuperObject;
 
 /**
  *  Instantiates Game and runs game loop.
