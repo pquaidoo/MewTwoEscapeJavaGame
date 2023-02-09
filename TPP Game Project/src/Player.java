@@ -43,25 +43,29 @@ public class Player extends Character{
      *  Gets player sprites from res directory.
      */
     public void getplayerImage(){
-        try{
+        //up1. ImageIO.read(getClass().getResourceAsStream("TPP Game Project/res/player/boy_up_1.png"));
+        //what was used in tutorial ^
+        up1 = setup("boy_up_1");
+        up2 = setup("boy_up_2");
+        down1 = setup("boy_down_1");
+        down2 = setup("boy_down_2");
+        right1 = setup("boy_right_1");
+        right2 = setup("boy_right_2");
+        left1 = setup("boy_left_1");
+        left2 = setup("boy_left_2");
+    }
+    public BufferedImage setup(String imageName) {
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
 
-            //up1. ImageIO.read(getClass().getResourceAsStream("TPP Game Project/res/player/boy_up_1.png"));
-            //what was used in tutorial ^
-            up1= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_up_1.png"));
-            up2= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_up_2.png"));
-            down1= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_down_1.png"));
-            down2= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_down_2.png"));
-            right1= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_right_1.png"));
-            right2= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_right_2.png"));
-            left1= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_left_1.png"));
-            left2= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_left_2.png"));
-
-        }catch(IOException e){
+        try {
+            image = ImageIO.read(new FileInputStream("TPP Game Project/res/player/" + imageName + ".png"));
+            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+        }catch(IOException e) {
             e.printStackTrace();
         }
+        return image;
     }
-
-
     /**
          *  Updates the player data (60FPS).
      */
@@ -215,7 +219,7 @@ public class Player extends Character{
             }
 
         //Changes image, puts it where it goes, changes how big it is.
-        graphics2.drawImage(image, screenX, screenY, gp.tileSize,gp.tileSize,null);
+        graphics2.drawImage(image, screenX, screenY,null);
     }
 
 }

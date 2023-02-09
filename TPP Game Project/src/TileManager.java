@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class TileManager {
@@ -18,36 +19,28 @@ public class TileManager {
         }
 
         public void getTileImage(){
-
-            try{
                 //ImageIO.read(get.Class().getResourceAsStream("TPP Game Project/tiles/grass.png"));
                 //tutorial version ^
-                tile[0] = new Tiles();
-                tile[0].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/grass.png"));
+                setup(0, "grass", false);
+                setup(1, "water", true);
+                setup(2, "wall", true);
+                setup(3, "earth", false);
+                setup(4, "tree", true);
+                setup(5, "sand", false);
+        }
+    public void setup(int index, String imageName, boolean collision) {
+            UtilityTool uTool = new UtilityTool();
 
-                tile[1] = new Tiles();
-                tile[1].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/water.png"));
-                tile[1].collision = true;
+            try{
+                tile[index] = new Tiles();
+                tile[index].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/" + imageName + ".png"));
+                tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
+                tile[index].collision = collision;
 
-                tile[2] = new Tiles();
-                tile[2].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/wall.png"));
-                tile[2].collision = true;
-
-                tile[3] = new Tiles();
-                tile[3].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/earth.png"));
-
-                tile[4] = new Tiles();
-                tile[4].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/tree.png"));
-                tile[4].collision = true;
-
-                tile[5] = new Tiles();
-                tile[5].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/sand.png"));
-
-
-            }catch(IOException e){
+            } catch(IOException e) {
                 e.printStackTrace();
             }
-        }
+    }
     public void loadMap(String mapFilePath){
         try{
             InputStream is = new FileInputStream((mapFilePath));
@@ -97,7 +90,7 @@ public class TileManager {
                     worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                     worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {//doesn't display pixels if its within camera
 
-                    graphics2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                    graphics2.drawImage(tile[tileNum].image, screenX, screenY, null);
                 }
                 worldCol++;
 
