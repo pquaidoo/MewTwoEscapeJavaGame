@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS =60;
     TileManager tileM = new TileManager(this);
 
-    KeyHandler keyH= new KeyHandler();
+    KeyHandler keyH= new KeyHandler(this);
     Sound music = new Sound();
     Sound se = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -37,6 +37,12 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;                              //Creates time in game for FPS , implements runnable, calls run method
     public Player player = new Player(this, keyH);
     public SuperObject obj[] = new SuperObject[10];
+
+    // GAME STATE
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
+
     /**
      * Constructor for game panel that instantiates screen size, color, input and other cool jazz.
      */
@@ -51,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         aSetter.setObject();
         playMusic(0);
+        gameState = playState;
     }
 
     /**
@@ -95,9 +102,12 @@ public class GamePanel extends JPanel implements Runnable {
      * Calls update methods in classes
      */
     public void update(){
-
-        player.update();                            //Calls player update method.
-
+        if(gameState == playState) {
+            player.update();         //Calls player update method.
+        }
+        if(gameState == pauseState) {
+            // nothing
+        }
     }
 
     /**
