@@ -136,15 +136,24 @@ public class Player extends Character{
             String objectName= gp.obj[i].name;
             switch(objectName){
                 case"Key":
+                    gp.playSE(1);//calls sound effect according to soundUrl array.
                     hasKey++;
                     gp.obj[i]=null;
                     System.out.println("Keys: "+ hasKey);
                     break;
                 case"Door":
                     if(hasKey>0){
+                        gp.playSE(4);
                         gp.obj[i] = null;
                         hasKey--;
                     }
+                    System.out.println("Keys: " + hasKey);
+                    break;
+                case "Boots":
+                    gp.playSE(3);
+                    speed+=10;          // if you make this 100 you weirdly can barely move.
+                    gp.obj[i] = null;
+                    break;
             }
         }
     }
