@@ -9,14 +9,12 @@ import java.io.IOException;
  */
 public class Player extends Character{
 
-    GamePanel gp;
     KeyHandler keyH;
     public final int screenX;
     public final int screenY;
     int hasKey = 0;
     public Player(GamePanel gp, KeyHandler keyH){
-
-        this.gp=gp;
+        super(gp);
         this.keyH=keyH;
         screenX = gp.screenWidth/2 - gp.tileSize/2;
         screenY = gp.screenHeight/2 - gp.tileSize/2;  //sets camera size
@@ -45,26 +43,14 @@ public class Player extends Character{
     public void getplayerImage(){
         //up1. ImageIO.read(getClass().getResourceAsStream("TPP Game Project/res/player/boy_up_1.png"));
         //what was used in tutorial ^
-        up1 = setup("boy_up_1");
-        up2 = setup("boy_up_2");
-        down1 = setup("boy_down_1");
-        down2 = setup("boy_down_2");
-        right1 = setup("boy_right_1");
-        right2 = setup("boy_right_2");
-        left1 = setup("boy_left_1");
-        left2 = setup("boy_left_2");
-    }
-    public BufferedImage setup(String imageName) {
-        UtilityTool uTool = new UtilityTool();
-        BufferedImage image = null;
-
-        try {
-            image = ImageIO.read(new FileInputStream("TPP Game Project/res/player/" + imageName + ".png"));
-            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        }catch(IOException e) {
-            e.printStackTrace();
-        }
-        return image;
+        up1 = setup("TPP Game Project/res/player/boy_up_1");
+        up2 = setup("TPP Game Project/res/player/boy_up_2");
+        down1 = setup("TPP Game Project/res/player/boy_down_1");
+        down2 = setup("TPP Game Project/res/player/boy_down_2");
+        right1 = setup("TPP Game Project/res/player/boy_right_1");
+        right2 = setup("TPP Game Project/res/player/boy_right_2");
+        left1 = setup("TPP Game Project/res/player/boy_left_1");
+        left2 = setup("TPP Game Project/res/player/boy_left_2");
     }
     /**
          *  Updates the player data (60FPS).
@@ -95,16 +81,16 @@ public class Player extends Character{
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
-            // Check Tile Collision
-            collisionOn = false;
-            gp.cChecker.checkTile(this);
-
-
+            // Check object collision
             int objIndex = gp.cChecker.checkObject(this,true);
             pickupObject(objIndex);
 
+            //Check NPC collision
+            int npcIndex = gp.cChecker.checkCharacter(this, gp.npc);
+            interactNPC(npcIndex);
 
-            //if collision is false player can movew
+
+            //if collision is false player can move
             if(collisionOn == false){
 
                 switch (direction){
@@ -170,6 +156,11 @@ public class Player extends Character{
             }
         }
     }
+    public void interactNPC(int i) {
+        if(i != 999) {
+
+        }
+    }
 
     /**
      * Updates screen with player images (60FPS).
@@ -215,7 +206,6 @@ public class Player extends Character{
                     image = left2;
                 }
                 break;
-
             }
 
         //Changes image, puts it where it goes, changes how big it is.
