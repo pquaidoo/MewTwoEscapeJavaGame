@@ -139,20 +139,29 @@ public class Player extends Character{
                     gp.playSE(1);//calls sound effect according to soundUrl array.
                     hasKey++;
                     gp.obj[i]=null;
-                    System.out.println("Keys: "+ hasKey);
+                    gp.ui.showMessage("You got a key!");
                     break;
                 case"Door":
                     if(hasKey>0){
                         gp.playSE(4);
                         gp.obj[i] = null;
                         hasKey--;
+                        gp.ui.showMessage("You opened the door!");
                     }
-                    System.out.println("Keys: " + hasKey);
+                    else {
+                        gp.ui.showMessage("You need a key!");
+                    }
                     break;
                 case "Boots":
                     gp.playSE(3);
                     speed+=10;          // if you make this 100 you weirdly can barely move.
                     gp.obj[i] = null;
+                    gp.ui.showMessage("Speed up!");
+                    break;
+                case "Chest":
+                    gp.ui.gameFinished = true;
+                    gp.stopMusic();
+                    gp.playSE(2);
                     break;
             }
         }
