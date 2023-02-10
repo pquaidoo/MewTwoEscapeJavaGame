@@ -42,6 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Character npc[] = new Character[10];
 
     // GAME STATE
+    public final int titleState = 0;
     public int gameState;
     public final int playState = 1;
     public final int pauseState = 2;
@@ -61,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setObject();
         aSetter.setNPC();
         playMusic(0);
-        gameState = playState;
+        gameState = titleState;
     }
 
     /**
@@ -135,37 +136,49 @@ public class GamePanel extends JPanel implements Runnable {
         if(keyH.checkDrawTime) {
             drawStart = System.nanoTime();
         }
-        //TILE
-        tileM.draw(graphics2);                          //Tiles before player so tiles don't cover player.
 
-        //OBJECT
-        for(int i = 0; i < obj.length; i++) {
-            if (obj[i] != null) {
-                obj[i].draw(graphics2, this);
+        //TITLE SCREEN
+        if(gameState == titleState){
+            ui.draw(graphics2);
+        }
+
+        //OTHER
+        else{
+
+            //TILE
+            tileM.draw(graphics2);                          //Tiles before player so tiles don't cover player.
+
+            //OBJECT
+            for(int i = 0; i < obj.length; i++) {
+                if (obj[i] != null) {
+                    obj[i].draw(graphics2, this);
+                }
             }
-        }
-        //NPC
-        for(int i = 0; i < npc.length; i++) {
-            if(npc[i] != null) {
-                npc[i].draw(graphics2);
+            //NPC
+            for(int i = 0; i < npc.length; i++) {
+                if(npc[i] != null) {
+                    npc[i].draw(graphics2);
+                }
             }
+
+
+            //PLAYER
+            player.draw(graphics2);                         //Calls player draw method.
+
+            //UI
+            ui.draw(graphics2);
+
+            //DEBUG
+            if(keyH.checkDrawTime) {
+                long drawEnd = System.nanoTime();
+                long passed = drawEnd - drawStart;
+                graphics2.setColor(Color.white);
+                graphics2.drawString("Draw Time: " + passed, 10, 400);
+                System.out.println("Draw Time:"+ passed);
+            }
+            graphics2.dispose();                            //Helps Performance.
+
         }
-
-        //PLAYER
-        player.draw(graphics2);                         //Calls player draw method.
-
-        //UI
-        ui.draw(graphics2);
-
-        //DEBUG
-        if(keyH.checkDrawTime) {
-            long drawEnd = System.nanoTime();
-            long passed = drawEnd - drawStart;
-            graphics2.setColor(Color.white);
-            graphics2.drawString("Draw Time: " + passed, 10, 400);
-            System.out.println("Draw Time:"+ passed);
-        }
-        graphics2.dispose();                            //Helps Performance.
 
     }
     public void playMusic(int i){
