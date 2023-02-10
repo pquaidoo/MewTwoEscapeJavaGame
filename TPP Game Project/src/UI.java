@@ -11,6 +11,7 @@ public class UI {
     public String message = "";
     int messageCounter = 0;
     public boolean gameFinished = false;
+    public int commandNum=0;
 
     double playTime;
     DecimalFormat dFormat = new DecimalFormat("#0.00");
@@ -128,19 +129,26 @@ public class UI {
 
         text = "NEW GAME";
         x = getXforCenteredText(text);
-        y+=gp.tileSize*3.5;
+        y+=gp.tileSize*4;
         g2.drawString(text,x,y);
-
+        if(commandNum == 0){
+            g2.drawString(">",x-gp.tileSize,y);
+        }
         text = "LOAD GAME";
         x = getXforCenteredText(text);
         y+=gp.tileSize;
         g2.drawString(text,x,y);
+        if(commandNum == 1){
+            g2.drawString(">",x-gp.tileSize,y);
+        }
 
         text = "QUIT";
         x = getXforCenteredText(text);
         y+=gp.tileSize;
         g2.drawString(text,x,y);
-
+        if(commandNum == 2){
+            g2.drawString(">",x-gp.tileSize,y);
+        }
     }
     public void drawPauseScreen() {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
