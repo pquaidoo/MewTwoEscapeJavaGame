@@ -1,11 +1,13 @@
 import javax.swing.*;
+import java.net.MalformedURLException;
+
 public class JSwingTest {
     /**
      * Acts as Game Driver
      *
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MalformedURLException {
         JFrame window = new JFrame();                           //Creates Window
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  //Stops Program when Exit button is pressed

@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.net.MalformedURLException;
 
 /**
  *  Instantiates Game and runs game loop.
@@ -15,8 +16,8 @@ public class GamePanel extends JPanel implements Runnable {
     //World Settings
     public final int maxWorldCol=50;
     public final int maxWorldRow=50;
-    public final int worldWidth =tileSize * maxWorldCol;
-    public final int worldHeight = tileSize * maxWorldRow;
+//    public final int worldWidth =tileSize * maxWorldCol;
+//    public final int worldHeight = tileSize * maxWorldRow; //dont actually need
 
         //Screen Resolution
     final int maxScreenCol = 16;
@@ -26,16 +27,29 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS =60;
     TileManager tileM = new TileManager(this);
 
-    KeyHandler keyH= new KeyHandler();
+    KeyHandler keyH= new KeyHandler(this);
+    Sound music = new Sound();
+    Sound se = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
+
     public AssetSetter aSetter = new AssetSetter(this);
+    public UI ui = new UI(this);
     Thread gameThread;                              //Creates time in game for FPS , implements runnable, calls run method
+
+    // ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
     public SuperObject obj[] = new SuperObject[10];
+    public Character npc[] = new Character[10];
+
+    // GAME STATE
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
+
     /**
      * Constructor for game panel that instantiates screen size, color, input and other cool jazz.
      */
-    public GamePanel( ){
+    public GamePanel( ) throws MalformedURLException {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);               //improved rendering performance
@@ -45,6 +59,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         aSetter.setObject();
+        aSetter.setNPC();
+        playMusic(0);
+        gameState = playState;
     }
 
     /**
@@ -89,9 +106,17 @@ public class GamePanel extends JPanel implements Runnable {
      * Calls update methods in classes
      */
     public void update(){
-
-        player.update();                            //Calls player update method.
-
+        if(gameState == playState) {
+            player.update();         //Calls player update method.
+            for(int i = 0; i < npc.length; i++) {
+                if(npc[i] != null) {
+                    npc[i].update();
+                }
+            }
+        }
+        if(gameState == pauseState) {
+            // nothing
+        }
     }
 
     /**
@@ -105,6 +130,11 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D graphics2= (Graphics2D)graphics;     //Graphics2D is a class that helps control sophisticated visuals.
 
+        //DEBUG
+        long drawStart = 0;
+        if(keyH.checkDrawTime) {
+            drawStart = System.nanoTime();
+        }
         //TILE
         tileM.draw(graphics2);                          //Tiles before player so tiles don't cover player.
 
@@ -114,11 +144,42 @@ public class GamePanel extends JPanel implements Runnable {
                 obj[i].draw(graphics2, this);
             }
         }
+        //NPC
+        for(int i = 0; i < npc.length; i++) {
+            if(npc[i] != null) {
+                npc[i].draw(graphics2);
+            }
+        }
 
         //PLAYER
         player.draw(graphics2);                         //Calls player draw method.
 
+        //UI
+        ui.draw(graphics2);
+
+        //DEBUG
+        if(keyH.checkDrawTime) {
+            long drawEnd = System.nanoTime();
+            long passed = drawEnd - drawStart;
+            graphics2.setColor(Color.white);
+            graphics2.drawString("Draw Time: " + passed, 10, 400);
+            System.out.println("Draw Time:"+ passed);
+        }
         graphics2.dispose();                            //Helps Performance.
 
     }
+    public void playMusic(int i){
+        music.setFile(i);
+        music.play();
+        music.loop();
+    }
+    public void stopMusic(){
+        music.stop();
+
+    }
+    public void playSE(int i){
+        se.setFile(i);
+        se.play();
+    }
 }
+

@@ -9,18 +9,19 @@ import java.io.IOException;
  */
 public class Player extends Character{
 
-    GamePanel gp;
     KeyHandler keyH;
     public final int screenX;
     public final int screenY;
+    int hasKey = 0;
     public Player(GamePanel gp, KeyHandler keyH){
-
-        this.gp=gp;
+        super(gp);
         this.keyH=keyH;
         screenX = gp.screenWidth/2 - gp.tileSize/2;
         screenY = gp.screenHeight/2 - gp.tileSize/2;  //sets camera size
 
         solidArea = new Rectangle(8,16,32,32);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
         setDefaultValues();
         getplayerImage();
@@ -40,25 +41,17 @@ public class Player extends Character{
      *  Gets player sprites from res directory.
      */
     public void getplayerImage(){
-        try{
-
-            //up1. ImageIO.read(getClass().getResourceAsStream("TPP Game Project/res/player/boy_up_1.png"));
-            //what was used in tutorial ^
-            up1= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_up_1.png"));
-            up2= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_up_2.png"));
-            down1= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_down_1.png"));
-            down2= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_down_2.png"));
-            right1= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_right_1.png"));
-            right2= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_right_2.png"));
-            left1= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_left_1.png"));
-            left2= ImageIO.read(new FileInputStream("TPP Game Project/res/player/boy_left_2.png"));
-
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+        //up1. ImageIO.read(getClass().getResourceAsStream("TPP Game Project/res/player/boy_up_1.png"));
+        //what was used in tutorial ^
+        up1 = setup("TPP Game Project/res/player/boy_up_1");
+        up2 = setup("TPP Game Project/res/player/boy_up_2");
+        down1 = setup("TPP Game Project/res/player/boy_down_1");
+        down2 = setup("TPP Game Project/res/player/boy_down_2");
+        right1 = setup("TPP Game Project/res/player/boy_right_1");
+        right2 = setup("TPP Game Project/res/player/boy_right_2");
+        left1 = setup("TPP Game Project/res/player/boy_left_1");
+        left2 = setup("TPP Game Project/res/player/boy_left_2");
     }
-
-
     /**
          *  Updates the player data (60FPS).
      */
@@ -88,7 +81,16 @@ public class Player extends Character{
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
-            //if collision is false player can movew
+            // Check object collision
+            int objIndex = gp.cChecker.checkObject(this,true);
+            pickupObject(objIndex);
+
+            //Check NPC collision
+            int npcIndex = gp.cChecker.checkCharacter(this, gp.npc);
+            interactNPC(npcIndex);
+
+
+            //if collision is false player can move
             if(collisionOn == false){
 
                 switch (direction){
@@ -117,6 +119,49 @@ public class Player extends Character{
             }
         }
     }
+
+    public void pickupObject(int i){
+        if(i !=999){
+
+            String objectName= gp.obj[i].name;
+            switch(objectName){
+                case"Key":
+                    gp.playSE(1);//calls sound effect according to soundUrl array.
+                    hasKey++;
+                    gp.obj[i]=null;
+                    gp.ui.showMessage("You got a key!");
+                    break;
+                case"Door":
+                    if(hasKey>0){
+                        gp.playSE(4);
+                        gp.obj[i] = null;
+                        hasKey--;
+                        gp.ui.showMessage("You opened the door!");
+                    }
+                    else {
+                        gp.ui.showMessage("You need a key!");
+                    }
+                    break;
+                case "Boots":
+                    gp.playSE(3);
+                    speed+=10;          // if you make this 100 you weirdly can barely move.
+                    gp.obj[i] = null;
+                    gp.ui.showMessage("Speed up!");
+                    break;
+                case "Chest":
+                    gp.ui.gameFinished = true;
+                    gp.stopMusic();
+                    gp.playSE(2);
+                    break;
+            }
+        }
+    }
+    public void interactNPC(int i) {
+        if(i != 999) {
+
+        }
+    }
+
     /**
      * Updates screen with player images (60FPS).
      */
@@ -161,10 +206,10 @@ public class Player extends Character{
                     image = left2;
                 }
                 break;
-
             }
 
         //Changes image, puts it where it goes, changes how big it is.
-        graphics2.drawImage(image, screenX, screenY, gp.tileSize,gp.tileSize,null);
+        graphics2.drawImage(image, screenX, screenY,null);
     }
+
 }
