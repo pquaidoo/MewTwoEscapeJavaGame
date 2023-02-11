@@ -35,6 +35,9 @@ public class Player extends Character{
         worldX = gp.tileSize * 24;
         worldY = gp.tileSize * 24;
         speed=4;
+        //PLAYER STATUS
+        maxLife = 6;
+        life = maxLife;
     }
 
     /**

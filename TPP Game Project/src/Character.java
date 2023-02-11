@@ -24,7 +24,9 @@ public class Character {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0;
-
+    //CHARACTER STATUS
+    public int maxLife;
+    public int life;
     public Character(GamePanel gp) {
         this.gp = gp;
     }

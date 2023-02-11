@@ -6,6 +6,7 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     Font arial_40, arial_80B;
+    BufferedImage heart_full, heart_half, heart_blank;
     BufferedImage keyImage;
     public boolean messageOn = false;
     public String message = "";
@@ -21,6 +22,13 @@ public class UI {
         arial_80B = new Font("Arial", Font.BOLD, 80);
         OBJ_Key key = new OBJ_Key(gp);
         keyImage = key.image;
+
+        //CREATE 2D OBJ
+        SuperObject heart = new OBJ_Heart(gp);
+        heart_full = heart.image;
+        heart_half = heart.image2;
+        heart_blank=heart.image3;
+
     }
     public void showMessage(String text) {
         message = text;
@@ -32,10 +40,11 @@ public class UI {
         g2.setColor(Color.white);
 
         if(gp.gameState == gp.playState) {
-            // Do playState stuff later
+            drawPlayerLife();
         }
         if(gp.gameState == gp.pauseState) {
             drawPauseScreen();
+            drawPlayerLife();
         }
 
         if (gameFinished) {
@@ -71,17 +80,17 @@ public class UI {
 
 
         } else {
-            g2.setFont(arial_40);
-            g2.setColor(Color.white);
-            g2.drawImage(keyImage, gp.tileSize / 2, gp.tileSize / 2, gp.tileSize, gp.tileSize, null);
-            g2.drawString("x " + gp.player.hasKey, 74, 65);
-
-
-
-
-            // TIME
-            playTime +=(double)1/60; // 1/60 because called 60 times per second (60FPS).
-            g2.drawString("Time:"+ dFormat.format(playTime), gp.tileSize*11, 65);
+//            g2.setFont(arial_40);
+//            g2.setColor(Color.white);
+//            g2.drawImage(keyImage, gp.tileSize / 2, gp.tileSize / 2, gp.tileSize, gp.tileSize, null);
+//            g2.drawString("x " + gp.player.hasKey, 74, 65);
+//
+//
+//
+//
+//            // TIME
+//            playTime +=(double)1/60; // 1/60 because called 60 times per second (60FPS).
+//            g2.drawString("Time:"+ dFormat.format(playTime), gp.tileSize*11, 65);
 
 
 
@@ -102,11 +111,39 @@ public class UI {
             }
         }
     }
+    public void drawPlayerLife(){
+        int x = gp.tileSize/2;
+        int y = gp.tileSize/2;
+        int i=0;
+        //DRAW BLANK HEARTS
+        while(i < gp.player.maxLife/2){//divide by two so when player is loses a full heart they get a blank heart
+            g2.drawImage(heart_blank, x, y, null);
+            i++;
+            x += gp.tileSize;
+        }
+        //RESET
+        x = gp.tileSize/2;
+        y = gp.tileSize/2;
+        i=0;
+
+        //DRAW CURRENT LIFE
+        while(i< gp.player.life){
+            g2.drawImage(heart_half, x, y, null);
+            i++;
+            if(i<gp.player.life){
+                g2.drawImage(heart_full,x,y,null);
+
+                }
+            i++;
+            x += gp.tileSize;
+            }
+        }
+
     public void drawTitleScreen(){
 
         g2.setColor(new Color(70, 120, 80));
         g2.fillRect(0, 0 , gp.screenWidth, gp.screenHeight);
-        //Title NAME
+        //TITLE NAME
         g2.setFont(g2.getFont().deriveFont(Font.BOLD,69F));
         String text = "Blue Boy Adventure";
         int x = getXforCenteredText(text);
