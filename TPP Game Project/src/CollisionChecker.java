@@ -23,7 +23,7 @@ public class CollisionChecker {
                 charTopRow = (charTopWorldY - chara.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[charLeftCol][charTopRow];
                 tileNum2 = gp.tileM.mapTileNum[charRightCol][charTopRow];
-                if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+                if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true) {
                     chara.collisionOn = true;
                 }
                 break;
@@ -31,7 +31,7 @@ public class CollisionChecker {
                 charBottomRow = (charBottomWorldY + chara.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[charLeftCol][charBottomRow];
                 tileNum2 = gp.tileM.mapTileNum[charRightCol][charBottomRow];
-                if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+                if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true) {
                     chara.collisionOn = true;
                 }
                 break;
@@ -39,7 +39,7 @@ public class CollisionChecker {
                 charLeftCol = (charLeftWorldX - chara.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[charLeftCol][charTopRow];
                 tileNum2 = gp.tileM.mapTileNum[charLeftCol][charTopRow];
-                if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+                if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true) {
                     chara.collisionOn = true;
                 }
                 break;
@@ -48,7 +48,7 @@ public class CollisionChecker {
                 charRightCol = (charRightWorldX + chara.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[charRightCol][charTopRow];
                 tileNum2 = gp.tileM.mapTileNum[charRightCol][charTopRow];
-                if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+                if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true) {
                     chara.collisionOn = true;
                 }
                 break;
