@@ -66,8 +66,19 @@ public class Player extends Character{
                 keyH.leftPressed==true||keyH.rightPressed==true) {
 
             //Subtracts speed from x & y coordinates and sets direction for sprite.
+            if(keyH.upPressed && keyH.leftPressed) {
+                direction = "up-left";
 
-            if (keyH.upPressed) {
+            } else if(keyH.upPressed && keyH.rightPressed) {
+                direction = "up-right";
+
+            } else if(keyH.downPressed && keyH.leftPressed) {
+                direction = "down-left";
+
+            } else if(keyH.downPressed && keyH.rightPressed) {
+                direction = "down-right";
+
+            } else if (keyH.upPressed) {
                 direction = "up";
 
             } else if (keyH.downPressed) {
@@ -105,6 +116,17 @@ public class Player extends Character{
                         break;
                     case "right": worldX += speed;
                         break;
+                    case "up-left": worldX -= speed;
+                                    worldY -= speed;
+                        break;
+                    case "up-right": worldY -= speed;
+                                     worldX += speed;
+                        break;
+                    case "down-left": worldY += speed;
+                                      worldX -= speed;
+                        break;
+                    case "down-right": worldY += speed;
+                                       worldY += speed;
                 }
             }
 

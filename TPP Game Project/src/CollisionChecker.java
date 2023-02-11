@@ -52,6 +52,38 @@ public class CollisionChecker {
                     chara.collisionOn = true;
                 }
                 break;
+            case "up-right":
+                charRightCol = (charRightWorldX + chara.speed) / gp.tileSize;
+                tileNum1 = gp.tileM.mapTileNum[charRightCol][charTopRow];
+                tileNum2 = gp.tileM.mapTileNum[charRightCol][charTopRow];
+                if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true) {
+                    chara.collisionOn = true;
+                }
+                break;
+            case "up-left":
+                charLeftCol = (charLeftWorldX - chara.speed) / gp.tileSize;
+                tileNum1 = gp.tileM.mapTileNum[charLeftCol][charTopRow];
+                tileNum2 = gp.tileM.mapTileNum[charLeftCol][charTopRow];
+                if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true) {
+                    chara.collisionOn = true;
+                }
+                break;
+            case "down-right":
+                charRightCol = (charRightWorldX + chara.speed) / gp.tileSize;
+                tileNum1 = gp.tileM.mapTileNum[charRightCol][charTopRow];
+                tileNum2 = gp.tileM.mapTileNum[charRightCol][charTopRow];
+                if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true) {
+                    chara.collisionOn = true;
+                }
+                break;
+            case "down-left":
+                charLeftCol = (charLeftWorldX - chara.speed) / gp.tileSize;
+                tileNum1 = gp.tileM.mapTileNum[charLeftCol][charTopRow];
+                tileNum2 = gp.tileM.mapTileNum[charLeftCol][charTopRow];
+                if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true) {
+                    chara.collisionOn = true;
+                }
+                break;
 
         }
     }
