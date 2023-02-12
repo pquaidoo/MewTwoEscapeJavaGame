@@ -149,6 +149,54 @@ public class CollisionChecker {
                             }
                         }
                         break;
+                    case"up-left":
+                        chara.solidArea.y -=chara.speed;
+                        chara.solidArea.x -=chara.speed;
+                        if(chara.solidArea.intersects(gp.obj[i].solidArea)){
+                            if (gp.obj[i].collision ==true){
+                                chara.collisionOn = true;
+                            }
+                            if(player == true){
+                                index = i;
+                            }
+                        }
+                        break;
+                    case"up-right":
+                        chara.solidArea.y -=chara.speed;
+                        chara.solidArea.x +=chara.speed;
+                        if(chara.solidArea.intersects(gp.obj[i].solidArea)){
+                            if (gp.obj[i].collision ==true){
+                                chara.collisionOn = true;
+                            }
+                            if(player == true){
+                                index = i;
+                            }
+                        }
+                        break;
+                    case"down-left":
+                        chara.solidArea.y +=chara.speed;
+                        chara.solidArea.x -=chara.speed;
+                        if(chara.solidArea.intersects(gp.obj[i].solidArea)){
+                            if (gp.obj[i].collision ==true){
+                                chara.collisionOn = true;
+                            }
+                            if(player == true){
+                                index = i;
+                            }
+                        }
+                        break;
+                    case"down-right":
+                        chara.solidArea.y +=chara.speed;
+                        chara.solidArea.x +=chara.speed;
+                        if(chara.solidArea.intersects(gp.obj[i].solidArea)){
+                            if (gp.obj[i].collision ==true){
+                                chara.collisionOn = true;
+                            }
+                            if(player == true){
+                                index = i;
+                            }
+                        }
+                        break;
 
                 }
                 chara.solidArea.x = chara.solidAreaDefaultX;
@@ -204,9 +252,42 @@ public class CollisionChecker {
                         if(chara.solidArea.intersects(target[i].solidArea)) {
                             chara.collisionOn = true;
                             index = i;
-
-                        break;
                         }
+                        break;
+                    case"up-left":
+                        chara.solidArea.y -=chara.speed;
+                        chara.solidArea.x -=chara.speed;
+                        if(chara.solidArea.intersects(target[i].solidArea)){//checks if rectangle is intersecting anothter
+                            chara.collisionOn = true;
+                            index = i;
+                        }
+                        break;
+                    case"up-right":
+                        chara.solidArea.y -=chara.speed;
+                        chara.solidArea.x +=chara.speed;
+                        if(chara.solidArea.intersects(target[i].solidArea)){//checks if rectangle is intersecting anothter
+                            chara.collisionOn = true;
+                            index = i;
+                        }
+                        break;
+                    case"down-left":
+                        chara.solidArea.y +=chara.speed;
+                        chara.solidArea.x -=chara.speed;
+                        if(chara.solidArea.intersects(target[i].solidArea)){
+                            chara.collisionOn = true;
+                            index = i;
+                        }
+                        break;
+                    case"down-right":
+                        chara.solidArea.y +=chara.speed;
+                        chara.solidArea.x +=chara.speed;
+                        if(chara.solidArea.intersects(target[i].solidArea)){
+                            chara.collisionOn = true;
+                            index = i;
+                        }
+                        break;
+
+
 
                 }
                 chara.solidArea.x = chara.solidAreaDefaultX;
@@ -256,6 +337,35 @@ public class CollisionChecker {
 
                     break;
                 }
+            case"up-left":
+                chara.solidArea.y -=chara.speed;
+                chara.solidArea.x -=chara.speed;
+                if(chara.solidArea.intersects(gp.player.solidArea)){//checks if rectangle is intersecting anothter
+                    chara.collisionOn = true;
+                }
+                break;
+            case"up-right":
+                chara.solidArea.y -=chara.speed;
+                chara.solidArea.x +=chara.speed;
+                if(chara.solidArea.intersects(gp.player.solidArea)){//checks if rectangle is intersecting anothter
+                    chara.collisionOn = true;
+                }
+                break;
+            case"down-left":
+                chara.solidArea.y +=chara.speed;
+                chara.solidArea.x -=chara.speed;
+                if(chara.solidArea.intersects(gp.player.solidArea)){//checks if rectangle is intersecting anothter
+                    chara.collisionOn = true;
+                }
+                break;
+            case"down-right":
+                chara.solidArea.y +=chara.speed;
+                chara.solidArea.x +=chara.speed;
+                if(chara.solidArea.intersects(gp.player.solidArea)){//checks if rectangle is intersecting anothter
+                    chara.collisionOn = true;
+                }
+                break;
+
 
         }
         chara.solidArea.x = chara.solidAreaDefaultX;
