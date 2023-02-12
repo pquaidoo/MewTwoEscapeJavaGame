@@ -126,7 +126,7 @@ public class Player extends Character{
                                       worldX -= speed;
                         break;
                     case "down-right": worldY += speed;
-                                       worldY += speed;
+                                       worldX += speed;
                 }
             }
 
@@ -215,7 +215,7 @@ public class Player extends Character{
                     image = down2;
                 }
                 break;
-            case "right":
+            case "right", "up-right", "down-right":
                 if (spriteNum==1){
                     image = right1;
                 }
@@ -223,7 +223,7 @@ public class Player extends Character{
                     image = right2;
                 }
                 break;
-            case "left":
+            case "left", "up-left", "down-left":
                 if (spriteNum==1){
                     image = left1;
                 }
@@ -231,10 +231,11 @@ public class Player extends Character{
                     image = left2;
                 }
                 break;
-            }
+        }
 
         //Changes image, puts it where it goes, changes how big it is.
         graphics2.drawImage(image, screenX, screenY,null);
+        graphics2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
     }
 
 }
