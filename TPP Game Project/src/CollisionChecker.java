@@ -1,4 +1,4 @@
-public class CollisionChecker {
+public class CollisionChecker { //test
     GamePanel gp;
 
     public CollisionChecker(GamePanel gp) {
