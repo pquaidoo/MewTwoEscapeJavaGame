@@ -6,7 +6,7 @@ public class CollisionChecker {
     }
 
     public void checkTile(Character chara) {
-        int charLeftWorldX = chara.worldX + chara.solidArea.x;
+        int charLeftWorldX = chara.worldX + chara.solidArea.x;//finds player hitbox in world
         int charRightWorldX = chara.worldX + chara.solidArea.x + chara.solidArea.width;
         int charTopWorldY = chara.worldY + chara.solidArea.y;
         int charBottomWorldY = chara.worldY + chara.solidArea.y + chara.solidArea.height;
@@ -38,7 +38,7 @@ public class CollisionChecker {
             case "left":
                 charLeftCol = (charLeftWorldX - chara.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[charLeftCol][charTopRow];
-                tileNum2 = gp.tileM.mapTileNum[charLeftCol][charTopRow];
+                tileNum2 = gp.tileM.mapTileNum[charLeftCol][charBottomRow];
                 if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true) {
                     chara.collisionOn = true;
                 }
@@ -47,7 +47,7 @@ public class CollisionChecker {
             case "right":
                 charRightCol = (charRightWorldX + chara.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[charRightCol][charTopRow];
-                tileNum2 = gp.tileM.mapTileNum[charRightCol][charTopRow];
+                tileNum2 = gp.tileM.mapTileNum[charRightCol][charBottomRow];
                 if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true) {
                     chara.collisionOn = true;
                 }
@@ -55,7 +55,7 @@ public class CollisionChecker {
             case "up-right":
                 charRightCol = (charRightWorldX + chara.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[charRightCol][charTopRow];
-                tileNum2 = gp.tileM.mapTileNum[charRightCol][charTopRow];
+                tileNum2 = gp.tileM.mapTileNum[charRightCol][charBottomRow];
                 if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true) {
                     chara.collisionOn = true;
                 }
@@ -63,7 +63,7 @@ public class CollisionChecker {
             case "up-left":
                 charLeftCol = (charLeftWorldX - chara.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[charLeftCol][charTopRow];
-                tileNum2 = gp.tileM.mapTileNum[charLeftCol][charTopRow];
+                tileNum2 = gp.tileM.mapTileNum[charLeftCol][charBottomRow];
                 if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true) {
                     chara.collisionOn = true;
                 }
@@ -71,7 +71,7 @@ public class CollisionChecker {
             case "down-right":
                 charRightCol = (charRightWorldX + chara.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[charRightCol][charTopRow];
-                tileNum2 = gp.tileM.mapTileNum[charRightCol][charTopRow];
+                tileNum2 = gp.tileM.mapTileNum[charRightCol][charBottomRow];
                 if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true) {
                     chara.collisionOn = true;
                 }
@@ -79,7 +79,7 @@ public class CollisionChecker {
             case "down-left":
                 charLeftCol = (charLeftWorldX - chara.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[charLeftCol][charTopRow];
-                tileNum2 = gp.tileM.mapTileNum[charLeftCol][charTopRow];
+                tileNum2 = gp.tileM.mapTileNum[charLeftCol][charBottomRow];
                 if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true) {
                     chara.collisionOn = true;
                 }
