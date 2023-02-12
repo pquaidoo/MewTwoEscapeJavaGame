@@ -53,7 +53,7 @@ public class CollisionChecker {
                 }
                 break;
             case "up-right":
-                charRightCol = (charRightWorldX + chara.speed) / gp.tileSize;
+                charRightCol = (charRightWorldX + chara.speed) / gp.tileSize;//d
                 tileNum1 = gp.tileM.mapTileNum[charRightCol][charTopRow];
                 tileNum2 = gp.tileM.mapTileNum[charRightCol][charBottomRow];
                 if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true) {
