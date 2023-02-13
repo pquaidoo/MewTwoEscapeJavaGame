@@ -37,7 +37,7 @@ public class Player extends Character{
         speed=4;
         //PLAYER STATUS
         maxLife = 6;
-        life = maxLife;
+        life = 5;//maxlife;
     }
 
     /**
