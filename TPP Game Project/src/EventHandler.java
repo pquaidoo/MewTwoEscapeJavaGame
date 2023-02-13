@@ -20,15 +20,15 @@ public class EventHandler {
 
     public void checkEvent() {
 
-//        if(hit(27,16, "right" ) == true) { //pass coordinates and direction
-//            //damagePit(gp.dialogueState);
-//        }
-//        if(hit(27, 16, "right") == true) {
-//            teleport(gp.dialogueState);
-//        }
-//        if(hit(23,12,"up") == true) {
-//            //healingPool(gp.dialogueState);
-//        }
+        if(hit(27,27, "up") == true) { //pass coordinates and direction
+            damagePit(gp.dialogueState);
+        }
+        if(hit(28, 24, "up") == true) {
+            teleport(gp.dialogueState);
+        }
+        if(hit(24,24, "up") == true) {
+            healingPool(gp.dialogueState);
+        }
     }
     public boolean hit(int eventCol, int EventRow, String reqDirection) { // checks if the player hits the event rectangle
 
@@ -51,25 +51,25 @@ public class EventHandler {
 
         return hit;
     }
-//    public void teleport(int gameState) {
-//
-//        gp.gameState = gameState;
-//        gp.ui.currentDialogue = "Teleport!";
-//        gp.player.worldX = gp.tileSize * 37;
-//        gp.player.worldY = gp.tileSize * 10;
-//    }
-//    public void damagePit(int gameState) {
-//
-//        gp.gameState = gameState;
-//        gp.ui.currentDialogue = "You fell into a pit!";
-//        gp.player.life -= 1;
-//    }
-//    public void healingPool(int gameState) {
-//
-//        if(gp.keyH.enterPressed == true) {
-//            gp.gameState = gameState;
-//            gp.ui.currentDialogue = "You Drunk the water.\nYour life has been recovered.";
-//            gp.player.life = gp.player.maxLife;
-//        }
-//    }
+    public void teleport(int gameState) {
+
+        gp.gameState = gameState;
+        gp.ui.currentDialogue = "Teleport!";
+        gp.player.worldX = gp.tileSize * 37;
+        gp.player.worldY = gp.tileSize * 10;
+    }
+    public void damagePit(int gameState) {
+
+        gp.gameState = gameState;
+        gp.ui.currentDialogue = "You fell into a pit!";
+        gp.player.life -= 1;
+    }
+    public void healingPool(int gameState) {
+        System.out.println("healing");
+        if(gp.keyH.enterPressed  == true) {
+            gp.gameState = gameState;
+            gp.ui.currentDialogue = "You Drunk the water.\nYour life has been recovered.";
+            gp.player.life = gp.player.maxLife;
+        }
+    }
 }
