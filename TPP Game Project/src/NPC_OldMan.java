@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Random;
 
 public class NPC_OldMan extends Character{
-    GamePanel gp;
+
     public NPC_OldMan(GamePanel gp) {
         super(gp);
 
@@ -13,6 +13,7 @@ public class NPC_OldMan extends Character{
         speed = 1;
 
         getImage();
+        setDialogue();
     }
     public void getImage(){
         up1 = setup("TPP Game Project/res/npc/oldman_up_1");
@@ -48,5 +49,15 @@ public class NPC_OldMan extends Character{
             actionLockCounter = 0;
         }
 
+    }
+    public void setDialogue() {
+        dialogues[0] = "Hello, lad.";
+        dialogues[1] = "So you've came to the island\n for the secret treasure...";
+        dialogues[2] = "I used to be a great wizard but now... \nI'm too old for taking an adventure";
+        dialogues[3] = "STOP RIGHT THERE, CRIMINAL\n SCUM.";
+
+    }
+    public void speak() {
+        super.speak();
     }
 }

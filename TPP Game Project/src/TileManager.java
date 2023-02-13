@@ -1,18 +1,17 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class TileManager {
     GamePanel gp;
-    public Tiles[] tile;
+    public Tiles[] Tiles;
 
     int mapTileNum[][];
 
 
         public TileManager(GamePanel gp){
             this.gp=gp;
-            tile = new Tiles[10];
+            Tiles = new Tiles[10];
             mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
             getTileImage();
             loadMap("TPP Game Project/res/maps/map2.txt");
@@ -32,10 +31,10 @@ public class TileManager {
             UtilityTool uTool = new UtilityTool();
 
             try{
-                tile[index] = new Tiles();
-                tile[index].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/" + imageName + ".png"));
-                tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
-                tile[index].collision = collision;
+                Tiles[index] = new Tiles();
+                Tiles[index].image = ImageIO.read(new FileInputStream("TPP Game Project/res/tiles/" + imageName + ".png"));
+                Tiles[index].image = uTool.scaleImage(Tiles[index].image, gp.tileSize, gp.tileSize);
+                Tiles[index].collision = collision;
 
             } catch(IOException e) {
                 e.printStackTrace();
@@ -90,7 +89,7 @@ public class TileManager {
                     worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                     worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {//doesn't display pixels if its within camera
 
-                    graphics2.drawImage(tile[tileNum].image, screenX, screenY, null);
+                    graphics2.drawImage(Tiles[tileNum].image, screenX, screenY, null);
                 }
                 worldCol++;
 

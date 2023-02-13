@@ -35,6 +35,9 @@ public class Player extends Character{
         worldX = gp.tileSize * 24;
         worldY = gp.tileSize * 24;
         speed=4;
+        //PLAYER STATUS
+        maxLife = 6;
+        life = 5;//maxlife;
     }
 
     /**
@@ -63,8 +66,19 @@ public class Player extends Character{
                 keyH.leftPressed==true||keyH.rightPressed==true) {
 
             //Subtracts speed from x & y coordinates and sets direction for sprite.
+            if(keyH.upPressed && keyH.leftPressed) {
+                direction = "up-left";
 
-            if (keyH.upPressed) {
+            } else if(keyH.upPressed && keyH.rightPressed) {
+                direction = "up-right";
+
+            } else if(keyH.downPressed && keyH.leftPressed) {
+                direction = "down-left";
+
+            } else if(keyH.downPressed && keyH.rightPressed) {
+                direction = "down-right";
+
+            } else if (keyH.upPressed) {
                 direction = "up";
 
             } else if (keyH.downPressed) {
@@ -89,6 +103,9 @@ public class Player extends Character{
             int npcIndex = gp.cChecker.checkCharacter(this, gp.npc);
             interactNPC(npcIndex);
 
+            // Check event
+            gp.eHandler.checkEvent();
+
 
             //if collision is false player can move
             if(collisionOn == false){
@@ -102,6 +119,17 @@ public class Player extends Character{
                         break;
                     case "right": worldX += speed;
                         break;
+                    case "up-left": worldX -= speed;
+                                    worldY -= speed;
+                        break;
+                    case "up-right": worldY -= speed;
+                                     worldX += speed;
+                        break;
+                    case "down-left": worldY += speed;
+                                      worldX -= speed;
+                        break;
+                    case "down-right": worldY += speed;
+                                       worldX += speed;
                 }
             }
 
@@ -158,6 +186,8 @@ public class Player extends Character{
     }
     public void interactNPC(int i) {
         if(i != 999) {
+            gp.gameState = gp.dialogueState;
+            gp.npc[i].speak();
 
         }
     }
@@ -190,7 +220,7 @@ public class Player extends Character{
                     image = down2;
                 }
                 break;
-            case "right":
+            case "right", "up-right", "down-right":
                 if (spriteNum==1){
                     image = right1;
                 }
@@ -198,7 +228,7 @@ public class Player extends Character{
                     image = right2;
                 }
                 break;
-            case "left":
+            case "left", "up-left", "down-left":
                 if (spriteNum==1){
                     image = left1;
                 }
@@ -206,10 +236,11 @@ public class Player extends Character{
                     image = left2;
                 }
                 break;
-            }
+        }
 
         //Changes image, puts it where it goes, changes how big it is.
         graphics2.drawImage(image, screenX, screenY,null);
+        graphics2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
     }
 
 }

@@ -12,7 +12,7 @@ public class Character {
     GamePanel gp;
     String name;
     public int worldX, worldY;
-    public int speed;
+    public int speed; //test
 
 
     public BufferedImage up1, up2, down1, down2, left1,left2, right1, right2;   //Instantiates Sprite Images.
@@ -24,11 +24,38 @@ public class Character {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0;
-
+    String dialogues[] = new String[20];
+    int dialogueIndex = 0;
+    //CHARACTER STATUS
+    public int maxLife;
+    public int life;
     public Character(GamePanel gp) {
         this.gp = gp;
     }
     public void setAction() {}
+    public void speak() {
+        if(dialogues[dialogueIndex] == null) {
+            dialogueIndex = 0;
+        }
+        gp.ui.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+
+        switch(gp.player.direction) {
+            case "up":
+                direction = "down";
+                break;
+            case "down":
+                direction = "up";
+                break;
+            case "left", "up-left", "down-left":
+                direction = "right";
+                break;
+            case "right", "up-right", "down-right":
+                direction = "left";
+                break;
+
+        }
+    }
     public void update() {
 
         setAction();
@@ -131,6 +158,5 @@ public class Character {
         }
         return image;
     }
-
 
 }
