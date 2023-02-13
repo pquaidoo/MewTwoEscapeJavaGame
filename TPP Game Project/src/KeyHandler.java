@@ -23,10 +23,6 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
-
-
-
-
         int code = e.getKeyCode();      //returns int of keyCode associated with key pressed.
 
         //TITLE STATE
@@ -78,6 +74,12 @@ public class KeyHandler implements KeyListener {
                 gp.gameState = gp.pauseState;
             }
             else if (gp.gameState == gp.pauseState) {
+                gp.gameState = gp.playState;
+            }
+        }
+        // DIALOGUE STATE
+        if (gp.gameState == gp.dialogueState) {
+            if (code == KeyEvent.VK_ENTER) {
                 gp.gameState = gp.playState;
             }
         }

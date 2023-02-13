@@ -24,6 +24,8 @@ public class Character {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0;
+    String dialogues[] = new String[20];
+    int dialogueIndex = 0;
     //CHARACTER STATUS
     public int maxLife;
     public int life;
@@ -31,6 +33,29 @@ public class Character {
         this.gp = gp;
     }
     public void setAction() {}
+    public void speak() {
+        if(dialogues[dialogueIndex] == null) {
+            dialogueIndex = 0;
+        }
+        gp.ui.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+
+        switch(gp.player.direction) {
+            case "up":
+                direction = "down";
+                break;
+            case "down":
+                direction = "up";
+                break;
+            case "left", "up-left", "down-left":
+                direction = "right";
+                break;
+            case "right", "up-right", "down-right":
+                direction = "left";
+                break;
+
+        }
+    }
     public void update() {
 
         setAction();
@@ -133,6 +158,5 @@ public class Character {
         }
         return image;
     }
-
 
 }

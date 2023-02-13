@@ -186,6 +186,8 @@ public class Player extends Character{
     }
     public void interactNPC(int i) {
         if(i != 999) {
+            gp.gameState = gp.dialogueState;
+            gp.npc[i].speak();
 
         }
     }
