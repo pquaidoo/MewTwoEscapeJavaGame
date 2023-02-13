@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *  Instantiates Game and runs game loop.
@@ -39,8 +42,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
-    public SuperObject obj[] = new SuperObject[10];
+    public Character obj[] = new Character[10];
     public Character npc[] = new Character[10];
+    ArrayList<Character> characterList =new ArrayList<>();
 
     // GAME STATE
     public final int titleState = 0;
@@ -150,35 +154,39 @@ public class GamePanel extends JPanel implements Runnable {
             //TILE
             tileM.draw(graphics2);                          //Tiles before player so tiles don't cover player.
 
-            //OBJECT
-            for(int i = 0; i < obj.length; i++) {
-                if (obj[i] != null) {
-                    obj[i].draw(graphics2, this);
+            characterList.add(player);
+            for(int i = 0; i< npc.length;i++){
+                if(npc[i]!=null){
+                    characterList.add(npc[i]);
                 }
             }
-            //NPC
-            for(int i = 0; i < npc.length; i++) {
-                if(npc[i] != null) {
-                    npc[i].draw(graphics2);
+            for (int i = 0; i < obj.length; i++) {
+                if(obj[i]!=null){
+                    characterList.add(obj[i]);
                 }
             }
 
+            //SORT
+            Collections.sort(characterList, new Comparator<Character>() {
+                @Override
+                public int compare(Character c1, Character c2) {
+                    int result = Integer.compare(c1.worldY,c2.worldY);
+                    return result;
+                }
+            });
+            //DRAW CHARACTER/ENTITIES
+            for (int i = 0; i < characterList.size(); i++) {
+                characterList.get(i).draw(graphics2);
 
-            //PLAYER
-            player.draw(graphics2);                         //Calls player draw method.
 
+            }
+            //EMPTY CHARACTER LIST
+            for (int i = 0; i < characterList.size(); i++) {
+                characterList.remove(i);
+
+            }
             //UI
             ui.draw(graphics2);
-
-            //DEBUG
-            if(keyH.checkDrawTime) {
-                long drawEnd = System.nanoTime();
-                long passed = drawEnd - drawStart;
-                graphics2.setColor(Color.white);
-                graphics2.drawString("Draw Time: " + passed, 10, 400);
-                System.out.println("Draw Time:"+ passed);
-            }
-            graphics2.dispose();                            //Helps Performance.
 
         }
 

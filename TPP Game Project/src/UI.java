@@ -25,7 +25,7 @@ public class UI {
         keyImage = key.image;
 
         //CREATE 2D OBJ
-        SuperObject heart = new OBJ_Heart(gp);
+        Character heart = new OBJ_Heart(gp);
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank=heart.image3;

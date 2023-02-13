@@ -10,13 +10,12 @@ import java.io.IOException;
 
 public class Character {
     GamePanel gp;
-    String name;
     public int worldX, worldY;
     public int speed; //test
 
 
     public BufferedImage up1, up2, down1, down2, left1,left2, right1, right2;   //Instantiates Sprite Images.
-    public String direction;        //Holds direction String.
+    public String direction = "down"; //Holds direction String.
 
     public int spriteCounter = 0;   //Used as timer to determine when to switch sprites.
     public int spriteNum = 1;       //Used to set values to individual sprites.
@@ -26,6 +25,9 @@ public class Character {
     public int actionLockCounter = 0;
     String dialogues[] = new String[20];
     int dialogueIndex = 0;
+    public BufferedImage image, image2, image3;
+    public String name;
+    public boolean collision = false;
     //CHARACTER STATUS
     public int maxLife;
     public int life;
