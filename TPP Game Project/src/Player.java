@@ -91,7 +91,7 @@ public class Player extends Character{
                 direction = "left";
 
             }
-            //Check tile collision
+            // Check tile collision
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
@@ -99,9 +99,13 @@ public class Player extends Character{
             int objIndex = gp.cChecker.checkObject(this,true);
             pickupObject(objIndex);
 
-            //Check NPC collision
+            // Check NPC collision
             int npcIndex = gp.cChecker.checkCharacter(this, gp.npc);
             interactNPC(npcIndex);
+
+            // Check monster collision
+            int monsterIndex = gp.cChecker.checkCharacter(this, gp.monster);
+            contactMonster(monsterIndex);
 
             // Check event
             gp.eHandler.checkEvent();
@@ -144,6 +148,14 @@ public class Player extends Character{
                     spriteNum = 1;
                 }
                 spriteCounter = 0;
+            }
+        }
+
+        if(invincible == true) {
+            invincibleCounter++;
+            if(invincibleCounter > 60) {
+                invincible = false;
+                invincibleCounter = 0;
             }
         }
     }
@@ -189,6 +201,14 @@ public class Player extends Character{
             gp.gameState = gp.dialogueState;
             gp.npc[i].speak();
 
+        }
+    }
+    public void contactMonster(int i) {
+        if(i != 999) {
+            if(invincible == false) {
+                life -= 1;
+                invincible = true;
+            }
         }
     }
 
@@ -238,9 +258,19 @@ public class Player extends Character{
                 break;
         }
 
+        if(invincible == true) {
+            graphics2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+        }
+        graphics2.drawImage(image, screenX, screenY, null);
+
+        // Reset alpha
+        graphics2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
         //Changes image, puts it where it goes, changes how big it is.
-        graphics2.drawImage(image, screenX, screenY,null);
-        graphics2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+       // graphics2.drawImage(image, screenX, screenY,null);
+       // graphics2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+
+
     }
 
 }

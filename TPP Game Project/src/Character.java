@@ -23,11 +23,15 @@ public class Character {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0;
+    public boolean invincible = false;
+    public int invincibleCounter = 0;
     String dialogues[] = new String[20];
     int dialogueIndex = 0;
     public BufferedImage image, image2, image3;
     public String name;
     public boolean collision = false;
+    public int type;
+
     //CHARACTER STATUS
     public int maxLife;
     public int life;
@@ -65,7 +69,17 @@ public class Character {
         collisionOn = false;
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
-        gp.cChecker.checkPlayer(this);
+        gp.cChecker.checkCharacter(this, gp.npc);
+        gp.cChecker.checkCharacter(this, gp.monster);
+        boolean contactPlayer = gp.cChecker.checkPlayer(this);
+
+        if(this.type == 2 && contactPlayer == true) {
+            if(gp.player.invincible == false) {
+                // we can give damage
+                gp.player.life -= 1;
+                gp.player.invincible = true;
+            }
+        }
 
         //if collision is false player can move
         if (collisionOn == false) {
