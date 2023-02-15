@@ -23,6 +23,8 @@ public class Player extends Character{
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
+        attackArea = new Rectangle(0,0,36,36);
+
         getPlayerAttackImage();
         setDefaultValues();
 
@@ -77,10 +79,10 @@ public class Player extends Character{
         //System.out.println(attacking);
         if(attacking == true){
             attacking();
-            System.out.println("attacking is true");
+            //System.out.println("attacking is true");
         } else if(keyH.upPressed==true||keyH.downPressed==true||
-                keyH.leftPressed==true||keyH.rightPressed==true/*|| keyH.enterPressed == true*/) { //Checks all player input to see if moving. (so player animation doesn't move when player is still).
-            System.out.println("attacking is false");
+                keyH.leftPressed==true||keyH.rightPressed==true|| keyH.enterPressed == true) { //Checks all player input to see if moving. (so player animation doesn't move when player is still).
+            //System.out.println("attacking is false");
             //Subtracts speed from x & y coordinates and sets direction for sprite.
             if(keyH.upPressed && keyH.leftPressed) {
                 direction = "up-left";
@@ -129,7 +131,7 @@ public class Player extends Character{
 
 
             //if collision is false player can move
-            if(collisionOn == false /*&& keyH.enterPressed == false*/){
+            if(collisionOn == false && keyH.enterPressed == false){
 
                 switch (direction){
                     case "up": worldY -= speed;
@@ -153,7 +155,7 @@ public class Player extends Character{
                                        worldX += speed;
                 }
             }
-           // gp.keyH.enterPressed = false;//resets
+           gp.keyH.enterPressed = false;//resets
 
 
 
@@ -171,6 +173,7 @@ public class Player extends Character{
         }
 
         if(invincible == true) {
+
             invincibleCounter++;
             if(invincibleCounter > 60) {
                 invincible = false;
@@ -186,6 +189,33 @@ public class Player extends Character{
 
         }if(spriteCounter>5 &&spriteCounter<=25){
             spriteNum=2;
+
+            //SAVE CURRENT X, Y, AND SOLID AREA
+            int currentWorldX = worldX;
+            int currentWorldY = worldY;
+            int solidAreaWidth = solidArea.width;
+            int solidAreaHeight = solidArea.height;
+            //ADJUST PLAYER'S X,Y, AND SOLID AREA
+            switch(direction){
+                case"up":worldY-=attackArea.height; break;
+                case"down":worldY+=attackArea.height;break;
+                case"left":worldX-=attackArea.width;break;
+                case"right":worldX+=attackArea.width; break;
+
+            }
+            //attack area becomes solid area
+            solidArea.width = attackArea.width;
+            solidArea.height = attackArea.height;
+            //check monster collision with the updated worldx, worldy and solid area
+            int monsterIndex = gp.cChecker.checkCharacter(this,gp.monster);
+            damageMonster(monsterIndex);
+
+            worldX=currentWorldX;
+            worldY=currentWorldY;
+            solidArea.width = solidAreaWidth;
+            solidArea.height = solidAreaHeight;
+
+
         }
         if(spriteCounter>25){
             spriteNum=1;
@@ -236,11 +266,14 @@ public class Player extends Character{
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
 
+
             }else{
+               // System.out.println("lmao");
                     attacking=true;
                 }
             }
         }
+
 
     public void contactMonster(int i) {
         if(i != 999) {
@@ -251,6 +284,18 @@ public class Player extends Character{
         }
     }
 
+    public void damageMonster(int i){
+        if(i !=999){
+            if(gp.monster[i].invincible == false){
+                gp.monster[i].life-=1;
+                gp.monster[i].invincible = true;
+                System.out.println(gp.monster[i].life);
+                if(gp.monster[i].life<=0){
+                    gp.monster[i]=null;
+                }
+            }
+        }
+    }
     /**
      * Updates screen with player images (60FPS).
      */
@@ -261,6 +306,8 @@ public class Player extends Character{
         //When direction switches: calls appropriate sprite & alternates between them for animation.
 
         BufferedImage image = null;
+        int tempScreenX = screenX;
+        int tempScreenY = screenY;
         switch (direction) {
             case "up":
                 if (attacking == false) {
@@ -272,7 +319,9 @@ public class Player extends Character{
                     }
                 }
                 if (attacking == true) {
+                    tempScreenY = screenY - gp.tileSize;//corrects displacement of wide sprite
                     if (spriteNum == 1) {
+
                         image = attackUp1;
                     }
                     if (spriteNum == 2) {
@@ -327,6 +376,7 @@ public class Player extends Character{
                     }
                 }
                 if (attacking == true) {
+                    tempScreenX = screenX - gp.tileSize;
                     if (spriteNum == 1) {
                         image = attackLeft1;
                     }
@@ -340,7 +390,7 @@ public class Player extends Character{
         if(invincible == true) {
             graphics2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
         }
-        graphics2.drawImage(image, screenX, screenY, null);
+        graphics2.drawImage(image, tempScreenX, tempScreenY, null);
 
         // Reset alpha
         graphics2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));

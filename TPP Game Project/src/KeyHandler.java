@@ -28,6 +28,7 @@ public class KeyHandler implements KeyListener {
         //TITLE STATE
 
         if(gp.gameState==gp.titleState){
+
             if(code== KeyEvent.VK_W){
                 gp.ui.commandNum--;
                 if (gp.ui.commandNum < 0) {
@@ -55,29 +56,31 @@ public class KeyHandler implements KeyListener {
             }
         }
         //PLAY STATE
-        if(code == KeyEvent.VK_W){
-            upPressed=true;
-        }
-        if(code == KeyEvent.VK_S){
-            downPressed=true;
-
-        }
-        if(code == KeyEvent.VK_A){
-            leftPressed=true;
-
-        }
-        if(code == KeyEvent.VK_D){
-            rightPressed=true;
-        }
-        if(code == KeyEvent.VK_ENTER){
-            enterPressed=true;
-        }
-        if(code == KeyEvent.VK_ESCAPE){
-            if(gp.gameState == gp.playState) {
-                gp.gameState = gp.pauseState;
+        else if (gp.gameState == gp.playState) {
+            if (code == KeyEvent.VK_W) {
+                upPressed = true;
             }
-            else if (gp.gameState == gp.pauseState) {
-                gp.gameState = gp.playState;
+
+            if (code == KeyEvent.VK_S) {
+                downPressed = true;
+
+            }
+            if (code == KeyEvent.VK_A) {
+                leftPressed = true;
+
+            }
+            if (code == KeyEvent.VK_D) {
+                rightPressed = true;
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                enterPressed = true;
+            }
+            if (code == KeyEvent.VK_ESCAPE) {
+                if (gp.gameState == gp.playState) {
+                    gp.gameState = gp.pauseState;
+                } else if (gp.gameState == gp.pauseState) {
+                    gp.gameState = gp.playState;
+                }
             }
         }
         // DIALOGUE STATE
