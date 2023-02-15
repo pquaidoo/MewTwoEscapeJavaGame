@@ -16,6 +16,7 @@ public class UI {
     public String currentDialogue = "";
 
     double playTime;
+    int min = 0;
     DecimalFormat dFormat = new DecimalFormat("#0.00");
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -69,7 +70,7 @@ public class UI {
             y = gp.screenHeight/2 - (gp.tileSize*3);
             g2.drawString(text, x, y);
 
-            text = "Your time is :" + dFormat.format(playTime) + "!";
+            text = "Your time is " + min + ":" + (int)playTime + "!";
             textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
             x = gp.screenWidth/2 - textLength/2;
             y = gp.screenHeight/2 + (gp.tileSize*4);
@@ -96,7 +97,11 @@ public class UI {
 //
 //
 //            // TIME
-//            playTime +=(double)1/60; // 1/60 because called 60 times per second (60FPS).
+            playTime +=(double)1/60; // 1/60 because called 60 times per second (60FPS).
+            if(playTime > 60.0) {
+                min++;
+                playTime -= 60;
+            }
 //            g2.drawString("Time:"+ dFormat.format(playTime), gp.tileSize*11, 65);
 
 
