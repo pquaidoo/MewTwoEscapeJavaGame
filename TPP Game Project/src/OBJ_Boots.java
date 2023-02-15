@@ -8,6 +8,6 @@ public class OBJ_Boots extends Character{
         super(gp);
 
         name = "Boots";
-        down1 = setup("TPP Game Project/res/Objects/boots");
+        down1 = setup("TPP Game Project/res/Objects/boots",gp.tileSize,gp.tileSize);
     }
 }

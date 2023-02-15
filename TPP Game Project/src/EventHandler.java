@@ -46,7 +46,7 @@ public class EventHandler {
             //pass coordinates and direction
             damagePit(34,7,gp.dialogueState);
              }
-            if(hit(23,7, "up") == true) {
+            if(hit(23,7, "any") == true) {
                 healingPool(gp.dialogueState);
             }
         }

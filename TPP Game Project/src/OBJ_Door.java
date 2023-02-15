@@ -8,7 +8,7 @@ public class OBJ_Door extends Character{
         super(gp);
 
         name = "Door";
-        down1 = setup("TPP Game Project/res/Objects/door");
+        down1 = setup("TPP Game Project/res/Objects/door",gp.tileSize,gp.tileSize);
         collision = true;
 
         //Changes hitbox of door

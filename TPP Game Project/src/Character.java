@@ -10,31 +10,39 @@ import java.io.IOException;
 
 public class Character {
     GamePanel gp;
-    public int worldX, worldY;
-    public int speed; //test
-
-
     public BufferedImage up1, up2, down1, down2, left1,left2, right1, right2;   //Instantiates Sprite Images.
-    public String direction = "down"; //Holds direction String.
-
-    public int spriteCounter = 0;   //Used as timer to determine when to switch sprites.
-    public int spriteNum = 1;       //Used to set values to individual sprites.
+    public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2,
+                        attackRight1,attackRight2;
     public Rectangle solidArea = new Rectangle(0, 0, 60, 60); //was 0,0,48,48 changed for collision issues
     public int solidAreaDefaultX, solidAreaDefaultY;
-    public boolean collisionOn = false;
-    public int actionLockCounter = 0;
-    public boolean invincible = false;
-    public int invincibleCounter = 0;
-    String dialogues[] = new String[20];
-    int dialogueIndex = 0;
-    public BufferedImage image, image2, image3;
-    public String name;
     public boolean collision = false;
-    public int type;
+    public BufferedImage image, image2, image3;
+    String dialogues[] = new String[20];
 
-    //CHARACTER STATUS
+    // STATE
+    public int worldX, worldY;
+    public String direction = "down"; //Holds direction String.
+    public int spriteNum = 1;       //Used to set values to individual sprites.
+    int dialogueIndex = 0;
+    public boolean collisionOn = false;
+    public boolean invincible = false;
+    boolean attacking = false;
+
+
+    //COUNTER
+    public int invincibleCounter = 0;
+    public int spriteCounter = 0;   //Used as timer to determine when to switch sprites.
+    public int actionLockCounter = 0;
+
+
+    //CHARACTER ATTRIBUTES
+    public int speed;
+    public int type;
+    public String name;
     public int maxLife;
     public int life;
+
+
     public Character(GamePanel gp) {
         this.gp = gp;
     }
@@ -48,16 +56,16 @@ public class Character {
 
         switch(gp.player.direction) {
             case "up":
-                direction = "down";
-                break;
-            case "down":
                 direction = "up";
                 break;
+            case "down":
+                direction = "down";
+                break;
             case "left", "up-left", "down-left":
-                direction = "right";
+                direction = "left";
                 break;
             case "right", "up-right", "down-right":
-                direction = "left";
+                direction = "right";
                 break;
 
         }
@@ -162,13 +170,13 @@ public class Character {
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
         }
     }
-    public BufferedImage setup(String imagePath) {
+    public BufferedImage setup(String imagePath, int width, int height) {
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
 
         try {
             image = ImageIO.read(new FileInputStream(imagePath + ".png"));
-            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+            image = uTool.scaleImage(image, width, height);
         }catch(IOException e) {
             e.printStackTrace();
         }

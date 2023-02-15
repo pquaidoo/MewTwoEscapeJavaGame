@@ -8,6 +8,6 @@ public class OBJ_Chest extends Character {
         super(gp);
 
         name = "Chest";
-        down1 = setup("TPP Game Project/res/Objects/chest");
+        down1 = setup("TPP Game Project/res/Objects/chest",gp.tileSize,gp.tileSize);
     }
 }

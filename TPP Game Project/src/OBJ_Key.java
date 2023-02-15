@@ -6,6 +6,6 @@ public class OBJ_Key extends Character {
         super(gp);
 
         name = "Key";
-        down1 = setup("TPP Game Project/res/Objects/key");
+        down1 = setup("TPP Game Project/res/Objects/key",gp.tileSize,gp.tileSize);
     }
 }

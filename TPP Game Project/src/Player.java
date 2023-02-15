@@ -23,8 +23,11 @@ public class Player extends Character{
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
+        getPlayerAttackImage();
         setDefaultValues();
+
         getplayerImage();
+
         direction="down";
     }
 
@@ -44,27 +47,40 @@ public class Player extends Character{
      *  Gets player sprites from res directory.
      */
     public void getplayerImage(){
-        //up1. ImageIO.read(getClass().getResourceAsStream("TPP Game Project/res/player/boy_up_1.png"));
+        //up1. ImageIO.read(getClass().getResourceAsStream("TPP Game Project/res/player/boy_up_1"));
         //what was used in tutorial ^
-        up1 = setup("TPP Game Project/res/player/boy_up_1");
-        up2 = setup("TPP Game Project/res/player/boy_up_2");
-        down1 = setup("TPP Game Project/res/player/boy_down_1");
-        down2 = setup("TPP Game Project/res/player/boy_down_2");
-        right1 = setup("TPP Game Project/res/player/boy_right_1");
-        right2 = setup("TPP Game Project/res/player/boy_right_2");
-        left1 = setup("TPP Game Project/res/player/boy_left_1");
-        left2 = setup("TPP Game Project/res/player/boy_left_2");
+        up1 = setup("TPP Game Project/res/player/boy_up_1",gp.tileSize,gp.tileSize);
+        up2 = setup("TPP Game Project/res/player/boy_up_2",gp.tileSize,gp.tileSize);
+        down1 = setup("TPP Game Project/res/player/boy_down_1",gp.tileSize,gp.tileSize);
+        down2 = setup("TPP Game Project/res/player/boy_down_2",gp.tileSize,gp.tileSize);
+        right1 = setup("TPP Game Project/res/player/boy_right_1",gp.tileSize,gp.tileSize);
+        right2 = setup("TPP Game Project/res/player/boy_right_2",gp.tileSize,gp.tileSize);
+        left1 = setup("TPP Game Project/res/player/boy_left_1",gp.tileSize,gp.tileSize);
+        left2 = setup("TPP Game Project/res/player/boy_left_2",gp.tileSize,gp.tileSize);
+    }
+    public void getPlayerAttackImage(){
+        attackUp1 = setup("TPP Game Project/res/player/boy_attack_up_1",gp.tileSize,gp.tileSize*2);
+        attackUp2 = setup("TPP Game Project/res/player/boy_attack_up_2",gp.tileSize,gp.tileSize*2);
+        attackDown1 = setup("TPP Game Project/res/player/boy_attack_down_1",gp.tileSize,gp.tileSize*2);
+        attackDown2 = setup("TPP Game Project/res/player/boy_attack_down_2",gp.tileSize,gp.tileSize*2);
+        attackRight1 = setup("TPP Game Project/res/player/boy_attack_right_1",gp.tileSize*2,gp.tileSize);
+        attackRight2 = setup("TPP Game Project/res/player/boy_attack_right_2",gp.tileSize*2,gp.tileSize);
+        attackLeft1 = setup("TPP Game Project/res/player/boy_attack_left_1",gp.tileSize*2,gp.tileSize);
+        attackLeft2 = setup("TPP Game Project/res/player/boy_attack_left_2",gp.tileSize*2,gp.tileSize);
+
+
     }
     /**
          *  Updates the player data (60FPS).
      */
     public void update(){
-
-        //Checks all player input to see if moving. (so player animation doesn't move when player is still).
-
-        if(keyH.upPressed==true||keyH.downPressed==true||
-                keyH.leftPressed==true||keyH.rightPressed==true) {
-
+        //System.out.println(attacking);
+        if(attacking == true){
+            attacking();
+            System.out.println("attacking is true");
+        } else if(keyH.upPressed==true||keyH.downPressed==true||
+                keyH.leftPressed==true||keyH.rightPressed==true/*|| keyH.enterPressed == true*/) { //Checks all player input to see if moving. (so player animation doesn't move when player is still).
+            System.out.println("attacking is false");
             //Subtracts speed from x & y coordinates and sets direction for sprite.
             if(keyH.upPressed && keyH.leftPressed) {
                 direction = "up-left";
@@ -111,8 +127,9 @@ public class Player extends Character{
             gp.eHandler.checkEvent();
 
 
+
             //if collision is false player can move
-            if(collisionOn == false){
+            if(collisionOn == false /*&& keyH.enterPressed == false*/){
 
                 switch (direction){
                     case "up": worldY -= speed;
@@ -136,6 +153,8 @@ public class Player extends Character{
                                        worldX += speed;
                 }
             }
+           // gp.keyH.enterPressed = false;//resets
+
 
 
             //Alternates sprite number so draw method can switch sprites for animation.
@@ -159,7 +178,21 @@ public class Player extends Character{
             }
         }
     }
+    public void attacking(){
+        spriteCounter++;
 
+        if(spriteCounter <=5){//for speed of animation
+            spriteNum =1;
+
+        }if(spriteCounter>5 &&spriteCounter<=25){
+            spriteNum=2;
+        }
+        if(spriteCounter>25){
+            spriteNum=1;
+            spriteCounter =0;
+            attacking=false;
+        }
+    }
     public void pickupObject(int i){
         if(i !=999){
 
@@ -197,12 +230,18 @@ public class Player extends Character{
         }
     }
     public void interactNPC(int i) {
-        if(i != 999) {
-            gp.gameState = gp.dialogueState;
-            gp.npc[i].speak();
 
+        if(gp.keyH.enterPressed==true){
+            if(i != 999) {
+                gp.gameState = gp.dialogueState;
+                gp.npc[i].speak();
+
+            }else{
+                    attacking=true;
+                }
+            }
         }
-    }
+
     public void contactMonster(int i) {
         if(i != 999) {
             if(invincible == false) {
@@ -215,45 +254,85 @@ public class Player extends Character{
     /**
      * Updates screen with player images (60FPS).
      */
-    public void draw(Graphics2D graphics2){
+    public void draw(Graphics2D graphics2) {
 //        graphics2.setColor(Color.white);
 //        graphics2.fillRect(x,y, /*width*/ gp.tileSize, /*height*/ gp.tileSize);   //Player Character
 
         //When direction switches: calls appropriate sprite & alternates between them for animation.
 
         BufferedImage image = null;
-        switch(direction) {
+        switch (direction) {
             case "up":
-                if (spriteNum==1){
-                    image = up1;
+                if (attacking == false) {
+                    if (spriteNum == 1) {
+                        image = up1;
+                    }
+                    if (spriteNum == 2) {
+                        image = up2;
+                    }
                 }
-                if (spriteNum == 2){
-                    image = up2;
+                if (attacking == true) {
+                    if (spriteNum == 1) {
+                        image = attackUp1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackUp2;
+                    }
                 }
-
                 break;
             case "down":
-                if (spriteNum==1){
-                    image = down1;
+                if (attacking == false) {
+                    if (spriteNum == 1) {
+                        image = down1;
+                    }
+                    if (spriteNum == 2) {
+                        image = down2;
+                    }
                 }
-                if (spriteNum == 2){
-                    image = down2;
+                if (attacking == true) {
+                    if (spriteNum == 1) {
+                        image = attackDown1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackDown2;
+                    }
                 }
                 break;
             case "right", "up-right", "down-right":
-                if (spriteNum==1){
-                    image = right1;
+                if (attacking == false) {
+                    if (spriteNum == 1) {
+                        image = right1;
+                    }
+                    if (spriteNum == 2) {
+                        image = right2;
+                    }
                 }
-                if (spriteNum == 2){
-                    image = right2;
+                if (attacking == true) {
+                    if (spriteNum == 1) {
+                        image = attackRight1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackRight2;
+                    }
                 }
+
                 break;
             case "left", "up-left", "down-left":
-                if (spriteNum==1){
-                    image = left1;
+                if(attacking == false) {
+                    if (spriteNum == 1) {
+                        image = left1;
+                    }
+                    if (spriteNum == 2) {
+                        image = left2;
+                    }
                 }
-                if (spriteNum == 2){
-                    image = left2;
+                if (attacking == true) {
+                    if (spriteNum == 1) {
+                        image = attackLeft1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackLeft2;
+                    }
                 }
                 break;
         }

@@ -115,7 +115,9 @@ public class GamePanel extends JPanel implements Runnable {
      * Calls update methods in classes
      */
     public void update(){
+
         if(gameState == playState) {
+
             player.update();         //Calls player update method.
             for(int i = 0; i < npc.length; i++) {
                 if(npc[i] != null) {
@@ -193,10 +195,8 @@ public class GamePanel extends JPanel implements Runnable {
 
             }
             //EMPTY CHARACTER LIST
-            for (int i = 0; i < characterList.size(); i++) {
-                characterList.remove(i);
+            characterList.clear();
 
-            }
             //UI
             ui.draw(graphics2);
 
