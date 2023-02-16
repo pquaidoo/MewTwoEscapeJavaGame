@@ -22,6 +22,12 @@ public class Sound {
         soundURL[3] = file3.toURI().toURL();
         File file4 = new File("TPP Game Project/res/sound/unlock.wav");
         soundURL[4] = file4.toURI().toURL();
+        File file5 = new File("TPP Game Project/res/sound/hitmonster.wav");
+        soundURL[5] = file5.toURI().toURL();
+        File file6 = new File("TPP Game Project/res/sound/receivedamage.wav");
+        soundURL[6] = file6.toURI().toURL();
+        File file7 = new File("TPP Game Project/res/sound/swingweapon.wav");
+        soundURL[7] = file7.toURI().toURL();
     }
 
     public void setFile(int i){

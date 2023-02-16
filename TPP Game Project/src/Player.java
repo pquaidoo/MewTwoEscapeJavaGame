@@ -269,6 +269,7 @@ public class Player extends Character{
 
             }else{
                // System.out.println("lmao");
+                gp.playSE(7);
                     attacking=true;
                 }
             }
@@ -278,6 +279,7 @@ public class Player extends Character{
     public void contactMonster(int i) {
         if(i != 999) {
             if(invincible == false) {
+                gp.playSE(6);
                 life -= 1;
                 invincible = true;
             }
@@ -286,12 +288,15 @@ public class Player extends Character{
 
     public void damageMonster(int i){
         if(i !=999){
+
             if(gp.monster[i].invincible == false){
+                gp.playSE(5);
                 gp.monster[i].life-=1;
                 gp.monster[i].invincible = true;
+                gp.monster[i].damageReaction();
                 System.out.println(gp.monster[i].life);
                 if(gp.monster[i].life<=0){
-                    gp.monster[i]=null;
+                    gp.monster[i].dying = true;
                 }
             }
         }
