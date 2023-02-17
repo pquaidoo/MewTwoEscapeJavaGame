@@ -39,12 +39,12 @@ public class KeyHandler implements KeyListener {
         }
 
         // DIALOGUE STATE
-        if (gp.gameState == gp.dialogueState) {
+        else if (gp.gameState == gp.dialogueState) {
            dialogueState(code);
         }
 
         //CHARACTER STATE
-        if(gp.gameState == gp.characterState){
+        else if(gp.gameState == gp.characterState){
           characterState(code);
 
         }
@@ -69,9 +69,7 @@ public class KeyHandler implements KeyListener {
 
             if(gp.ui.commandNum== 0){
 
-                System.out.println("attack is canceled");
                 gp.gameState=gp.playState;
-                gp.player.attackCanceled = false;
                 //gp.playMusic(0);
             }
             if(gp.ui.commandNum==1){
@@ -97,12 +95,14 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_D) {
             rightPressed = true;
         }
+
         if (code == KeyEvent.VK_ENTER) {
             enterPressed = true;
         }
-//        if (code == KeyEvent.VK_C) {
-//            gp.gameState = gp.characterState;
-//        }
+        if (code == KeyEvent.VK_C) {
+            gp.gameState = gp.characterState;
+
+        }
         //DEBUG
         if(code == KeyEvent.VK_B){
             if(checkDrawTime == false) {
@@ -129,6 +129,7 @@ public class KeyHandler implements KeyListener {
     public void characterState(int code) {
         if (code == KeyEvent.VK_C) {
             gp.gameState = gp.playState;
+            System.out.println("gaming");
         }
     }
 

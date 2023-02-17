@@ -298,11 +298,21 @@ public class Player extends Character{
 
 
     public void contactMonster(int i) {
-        if(i != 999) {
-            if(invincible == false) {
+        if (i != 999) {
+
+
+            if (invincible == false) {
                 gp.playSE(6);
-                life -= 1;
-                invincible = true;
+                if (gp.monster[i].invincible == false) {
+                    gp.playSE(5);
+
+                    int damage = gp.monster[i].attack - defense;
+                    if (damage < 0) {
+                        damage = 0;
+                    }
+                    life -= damage;
+                    invincible = true;
+                }
             }
         }
     }
@@ -312,7 +322,13 @@ public class Player extends Character{
 
             if(gp.monster[i].invincible == false){
                 gp.playSE(5);
-                gp.monster[i].life-=1;
+
+                int damage = attack - gp.monster[i].defense;
+                if(damage < 0){
+                    damage = 0;
+                }
+
+                gp.monster[i].life-=damage;
                 gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction();
                 System.out.println(gp.monster[i].life);
