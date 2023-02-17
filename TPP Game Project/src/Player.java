@@ -179,6 +179,7 @@ public class Player extends Character{
                 attacking = true;
                 spriteCounter = 0;
             }
+            attackCanceled = false;
            gp.keyH.enterPressed = false;//resets
 
 
