@@ -19,6 +19,16 @@ public class Character {
     public boolean collision = false;
     public BufferedImage image, image2, image3;
     String dialogues[] = new String[20];
+    public int level;
+    public int strength;
+    public int dexterity;
+    public int attack;
+    public int defense;
+    public int exp;
+    public int nextLevelExp;
+    public int coin;
+    public Character currentWeapon;
+    public Character currentShield;
 
     // STATE
     public int worldX, worldY;
@@ -47,7 +57,8 @@ public class Character {
     public String name;
     public int maxLife;
     public int life;
-
+    public int attackValue;
+    public int defenseValue;
 
     public Character(GamePanel gp) {
         this.gp = gp;

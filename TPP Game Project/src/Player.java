@@ -13,6 +13,7 @@ public class Player extends Character{
     public final int screenX;
     public final int screenY;
     int hasKey = 0;
+    public boolean attackCanceled = false;
     public Player(GamePanel gp, KeyHandler keyH){
         super(gp);
         this.keyH=keyH;
@@ -31,6 +32,7 @@ public class Player extends Character{
         getplayerImage();
 
         direction="down";
+
     }
 
     /**
@@ -43,7 +45,23 @@ public class Player extends Character{
         //PLAYER STATUS
         maxLife = 6;
         life = 5;//maxlife;
+        strength =1;
+        dexterity =1;
+        exp = 0;
+        nextLevelExp= 5;
+        coin= 0;
+        currentWeapon = new OBJ_Sword_Normal(gp);
+        currentShield = new OBJ_Shield_Wood(gp);
+        attack= getAttack();
+        defense = getDefense();
     }
+    public int getAttack(){
+        return attack = strength*currentWeapon.attackValue;
+    }
+    public int getDefense(){
+        return defense = dexterity * currentShield.defenseValue;
+    }
+
 
     /**
      *  Gets player sprites from res directory.
@@ -155,6 +173,12 @@ public class Player extends Character{
                                        worldX += speed;
                 }
             }
+
+            if(keyH.enterPressed == true && attackCanceled== false){
+                gp.playSE(7);
+                attacking = true;
+                spriteCounter = 0;
+            }
            gp.keyH.enterPressed = false;//resets
 
 
@@ -263,14 +287,10 @@ public class Player extends Character{
 
         if(gp.keyH.enterPressed==true){
             if(i != 999) {
+                attackCanceled = true;
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
 
-
-            }else{
-               // System.out.println("lmao");
-                gp.playSE(7);
-                    attacking=true;
                 }
             }
         }
