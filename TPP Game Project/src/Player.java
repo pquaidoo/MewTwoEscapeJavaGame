@@ -56,6 +56,16 @@ public class Player extends Character{
         attack= getAttack();
         defense = getDefense();
     }
+    public void setDefaultPositions() {
+        worldX = gp.tileSize * 24;
+        worldY = gp.tileSize * 24;
+        //direction?
+    }
+    public void resetoreLifeAndMan() {
+        life = maxLife;
+        mana = maxMana;
+        invincible = false;
+    }
     public int getAttack(){
         return attack = strength*currentWeapon.attackValue;
     }
@@ -220,6 +230,11 @@ public class Player extends Character{
         }
         if(shotAvailableCounter < 45) {
             shotAvailableCounter++;
+        }
+        if(life <= 0) {
+            gp.gameState = gp.gameOverState;
+            gp.stopMusic();
+            gp.playSE(9);
         }
     }
     public void attacking(){

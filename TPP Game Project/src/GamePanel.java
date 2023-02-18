@@ -55,6 +55,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int pauseState = 2;
     public final int dialogueState = 3;
     public final int characterState = 4;
+    public final int gameOverState = 6;
 
     /**
      * Constructor for game panel that instantiates screen size, color, input and other cool jazz.
@@ -73,6 +74,22 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setMonster();
         playMusic(0);
         gameState = titleState;
+    }
+    public void retry() {
+        player.setDefaultPositions();
+        player.resetoreLifeAndMan();
+        aSetter.setMonster();
+        aSetter.setNPC();
+        playMusic(0);
+    }
+    public void restart() {
+        player.setDefaultValues();
+        player.setDefaultPositions();
+        player.resetoreLifeAndMan();
+        aSetter.setObject();
+        aSetter.setNPC();
+        aSetter.setMonster();
+        playMusic(0);
     }
 
     /**
