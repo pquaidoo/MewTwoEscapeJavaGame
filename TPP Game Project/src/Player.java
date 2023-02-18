@@ -44,7 +44,7 @@ public class Player extends Character{
         speed=4;
         //PLAYER STATUS
         maxLife = 6;
-        life = 5;//maxlife;
+        life = maxLife;
         strength =1;
         dexterity =1;
         exp = 0;
@@ -52,6 +52,7 @@ public class Player extends Character{
         coin= 0;
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
+        projectile = new OBJ_Fireball(gp);
         attack= getAttack();
         defense = getDefense();
     }
@@ -197,6 +198,18 @@ public class Player extends Character{
             }
         }
 
+        if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 45) {
+            // SET DEFAULT COORDINATES, DIRECTION AND USER
+            projectile.set(worldX, worldY, direction, true, this);
+
+            // ADD IT TO THE LIST
+            gp.projectileList.add(projectile);
+
+            shotAvailableCounter = 0;
+
+            gp.playSE(8);
+        }
+
         if(invincible == true) {
 
             invincibleCounter++;
@@ -204,6 +217,9 @@ public class Player extends Character{
                 invincible = false;
                 invincibleCounter = 0;
             }
+        }
+        if(shotAvailableCounter < 45) {
+            shotAvailableCounter++;
         }
     }
     public void attacking(){
@@ -233,7 +249,7 @@ public class Player extends Character{
             solidArea.height = attackArea.height;
             //check monster collision with the updated worldx, worldy and solid area
             int monsterIndex = gp.cChecker.checkCharacter(this,gp.monster);
-            damageMonster(monsterIndex);
+            damageMonster(monsterIndex, attack);
 
             worldX=currentWorldX;
             worldY=currentWorldY;
@@ -317,7 +333,7 @@ public class Player extends Character{
         }
     }
 
-    public void damageMonster(int i){
+    public void damageMonster(int i, int attack){
         if(i !=999){
 
             if(gp.monster[i].invincible == false){

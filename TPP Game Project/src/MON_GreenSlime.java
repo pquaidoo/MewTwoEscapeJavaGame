@@ -7,7 +7,7 @@ public class MON_GreenSlime extends Character {
         type = 2;
         name = "Green Slime";
         speed = 1;
-        maxLife = 20;
+        maxLife = 15;
         life = maxLife;
         attack = 5;
         defense = 0;

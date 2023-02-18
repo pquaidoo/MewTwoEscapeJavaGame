@@ -46,6 +46,7 @@ public class Character {
     //COUNTER
     public int invincibleCounter = 0;
     public int spriteCounter = 0;   //Used as timer to determine when to switch sprites.
+    public int shotAvailableCounter = 0;
     public int actionLockCounter = 0;
     int dyingCounter = 0;
     int hpBarCounter = 0;
@@ -57,8 +58,13 @@ public class Character {
     public String name;
     public int maxLife;
     public int life;
+    public int maxMana;
+    public int mana;
+    public Projectile projectile;
     public int attackValue;
     public int defenseValue;
+    public int useCost;
+
 
     public Character(GamePanel gp) {
         this.gp = gp;
@@ -180,7 +186,7 @@ public class Character {
                         image = down2;
                     }
                     break;
-                case "right":
+                case "right", "up-right", "down-right":
                     if (spriteNum==1){
                         image = right1;
                     }
@@ -188,7 +194,7 @@ public class Character {
                         image = right2;
                     }
                     break;
-                case "left":
+                case "left", "up-left", "down-left":
                     if (spriteNum==1){
                         image = left1;
                     }
