@@ -42,7 +42,7 @@ public class PathFinder {
             node[col][row].checked = false;
             node[col][row].solid = false;
             col++;
-            if (col == gp.maxScreenCol) {
+            if (col == gp.maxWorldCol) {
                 col = 0;
                 row++;
             }
@@ -118,15 +118,15 @@ public class PathFinder {
                         openNode(node[col][row - 1]);
                     }
                     //open left node
-                    if (row - 1 >= 0) {
+                    if (col - 1 >= 0) {
                         openNode(node[col - 1][row]);
                     }
                     //Open down node
-                    if (row + 1 < gp.maxWorldCol) {
+                    if (row + 1 < gp.maxWorldRow) {
                         openNode(node[col][row + 1]);
                     }
                     //Open right node
-                    if (row + 1 < gp.maxWorldRow) {
+                    if (col + 1 < gp.maxWorldRow) {
                         openNode(node[col + 1][row]);
                     }
 
