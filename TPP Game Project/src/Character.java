@@ -298,8 +298,11 @@ public class Character {
             int enTopY = worldY + solidArea.y;
             int enBottomY = worldY + solidArea.y + solidArea.height;
 
+            System.out.println(nextX +","+ nextY);
+
             if(enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
                 direction = "up";
+                System.out.println("up");
 
             } else if(enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
                 direction = "down";
@@ -307,7 +310,9 @@ public class Character {
                 direction = "down";
                 //left or right
                 if (enLeftX > nextX) {
+                    System.out.println("left");
                     direction = "left";
+
                 }
                 if(enLeftX < nextX){
                     direction = "right";
@@ -316,13 +321,16 @@ public class Character {
             else if(enTopY > nextY && enLeftX > nextX){
                 //up or left
                 direction = "up";
+                System.out.println("up2");
                 checkCollision();
                 if(collisionOn == true){
+                    System.out.println("upleft");
                     direction = "left";
                 }
             } else if (enTopY > nextY && enLeftX < nextX) {
                 //up or right
                 direction = "up";
+                System.out.println("up3");
                 checkCollision();
                 if(collisionOn==true){
                     direction = "right";
@@ -333,6 +341,7 @@ public class Character {
                 direction= "down";
                 checkCollision();
                 if(collisionOn == true){
+                    System.out.println("down left");
                     direction = "left";
                 }
             } else if(enTopY < nextY && enLeftX < nextX){

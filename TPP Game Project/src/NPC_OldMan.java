@@ -29,7 +29,7 @@ public class NPC_OldMan extends Character{
 
         if(onPath == true) {
             int goalCol = 22;
-            int goalRow = 8;
+            int goalRow = 9;
             searchPath(goalCol, goalRow);
 
         }else {
