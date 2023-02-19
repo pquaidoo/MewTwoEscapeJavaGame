@@ -106,16 +106,7 @@ public class Character {
         boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
         if(this.type == 2 && contactPlayer == true) {
-            if(gp.player.invincible == false) {
-                // we can give damage
-                gp.playSE(6);
-                int damage = attack - gp.player.defense;
-                if(damage < 0){
-                    damage = 0;
-                }
-                gp.player.life -= damage;
-                gp.player.invincible = true;
-            }
+            damagePlayer(attack);
         }
 
         //if collision is false player can move
@@ -157,6 +148,23 @@ public class Character {
                 invincibleCounter = 0;
             }
         }
+        if(shotAvailableCounter < 45) {
+            shotAvailableCounter++;
+        }
+    }
+
+    public void damagePlayer(int attack){
+        if(gp.player.invincible == false) {
+            // we can give damage
+            gp.playSE(6);
+            int damage = attack - gp.player.defense;
+            if(damage < 0){
+                damage = 0;
+            }
+            gp.player.life -= damage;
+            gp.player.invincible = true;
+        }
+
     }
     public void draw(Graphics2D g2) {
 

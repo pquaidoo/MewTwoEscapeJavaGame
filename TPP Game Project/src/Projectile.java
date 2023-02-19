@@ -24,7 +24,10 @@ public class Projectile extends Character{
             }
         }
         if(user != gp.player) {
-
+            boolean contactPlayer = gp.cChecker.checkPlayer(this);
+            if(gp.player.invincible == false && contactPlayer == true){
+                alive = false;
+            }
         }
 
         switch (direction) {
