@@ -307,7 +307,7 @@ public class Character {
             } else if(enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
                 direction = "down";
             } else if(enTopY >= nextY && enBottomY < nextX + gp.tileSize){
-                direction = "down";
+                //direction = "right";
                 //left or right
                 if (enLeftX > nextX) {
                     System.out.println("left");
