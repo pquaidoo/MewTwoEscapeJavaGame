@@ -62,7 +62,7 @@ public class MON_GreenSlime extends Character {
         if(i>99&&projectile.alive==false&&shotAvailableCounter == 45){
             projectile.set(worldX, worldY, direction, true, this);
             gp.projectileList.add(projectile);
-            shotAvailableCounter=0;
+            shotAvailableCounter=0;//d
         }
     }
     public void damageReaction() {
