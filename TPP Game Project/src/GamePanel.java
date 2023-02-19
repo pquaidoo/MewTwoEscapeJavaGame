@@ -38,7 +38,9 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
+    public PathFinder pFinder = new PathFinder(this);
     Thread gameThread;                              //Creates time in game for FPS , implements runnable, calls run method
+
 
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
