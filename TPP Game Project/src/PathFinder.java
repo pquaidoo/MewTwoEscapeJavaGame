@@ -126,7 +126,7 @@ public class PathFinder {
                         openNode(node[col][row + 1]);
                     }
                     //Open right node
-                    if (col + 1 < gp.maxWorldRow) {
+                    if (col + 1 < gp.maxWorldCol) {
                         openNode(node[col + 1][row]);
                     }
 
