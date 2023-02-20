@@ -85,6 +85,7 @@ public class Character {
                 break;
             case "down":
                 direction = "up";
+                System.out.println("i swear to god");
                 break;
             case "left":
                 direction = "right";
@@ -288,6 +289,7 @@ public class Character {
 
         gp.pFinder.setNodes(startCol,startRow,goalCol, goalRow);
         if(gp.pFinder.search()==true){// IF ITS FOUND A PATH
+            //System.out.println(("tired as hell"));
 
             //NEXT WORLDX & WORLDY
             int nextX = gp.pFinder.pathList.get(0).col * gp.tileSize;
@@ -298,7 +300,7 @@ public class Character {
             int enRightX = worldX+ solidArea.x + solidArea.width;
             int enTopY = worldY + solidArea.y;
             int enBottomY = worldY + solidArea.y + solidArea.height;
-            System.out.println(enLeftX/gp.tileSize + ", "+ enTopY/gp.tileSize);
+            //System.out.println(enLeftX/gp.tileSize + ", "+ enTopY/gp.tileSize);
 
 
             if(enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
@@ -309,14 +311,14 @@ public class Character {
             } else if(enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
                 direction = "down";
             } else if(enTopY >= nextY && enBottomY < nextY + gp.tileSize){
-                //direction = "right";
                 //left or right
                 if (enLeftX > nextX) {
-                    //System.out.println("left");
+                    System.out.println("left");
                     direction = "left";
 
                 }
                 if(enLeftX < nextX){
+                    System.out.println("righty");
                     direction = "right";
                 }
             }
@@ -325,6 +327,8 @@ public class Character {
                 direction = "up";
                 System.out.println("up2");
                 checkCollision();
+                System.out.println(collisionOn);
+
                 if(collisionOn == true){
                     System.out.println("upleft");
                     direction = "left";
@@ -332,9 +336,11 @@ public class Character {
             } else if (enTopY > nextY && enLeftX < nextX) {
                 //up or right
                 direction = "up";
-                System.out.println("up3");
+                System.out.println(":up3");
                 checkCollision();
+                System.out.println(collisionOn);
                 if(collisionOn==true){
+                    System.out.println("righty1");
                     direction = "right";
                 }
 
@@ -351,6 +357,7 @@ public class Character {
                 direction = "down";
                 checkCollision();
                 if(collisionOn == true){
+                    System.out.println("righty3");
                     direction = "right";
                 }
             }
