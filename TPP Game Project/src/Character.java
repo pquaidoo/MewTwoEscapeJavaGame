@@ -308,7 +308,7 @@ public class Character {
 
             } else if(enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
                 direction = "down";
-            } else if(enTopY >= nextY && enBottomY < nextX + gp.tileSize){
+            } else if(enTopY >= nextY && enBottomY < nextY + gp.tileSize){
                 //direction = "right";
                 //left or right
                 if (enLeftX > nextX) {
@@ -323,7 +323,7 @@ public class Character {
             else if(enTopY > nextY && enLeftX > nextX){
                 //up or left
                 direction = "up";
-                //System.out.println("up2");
+                System.out.println("up2");
                 checkCollision();
                 if(collisionOn == true){
                     System.out.println("upleft");
