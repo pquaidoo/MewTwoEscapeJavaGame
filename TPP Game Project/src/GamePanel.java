@@ -141,18 +141,18 @@ public class GamePanel extends JPanel implements Runnable {
         if(gameState == playState) {
 
             player.update();         //Calls player update method.
-            for(int i = 0; i < npc[1].length; i++) {
+            for(int i = 0; i < npc[0].length; i++) {
                 if(npc[currentMap][i] != null) {
                     npc[currentMap][i].update();
                 }
             }
-            for(int i = 0; i < monster[1].length; i++) {
-                if(monster[i] != null) {
+            for(int i = 0; i < monster[0].length; i++) {
+                if(monster[currentMap][i] != null) {
                     if(monster[currentMap][i].alive == true && monster[currentMap][i].dying == false) {
                         monster[currentMap][i].update();
                     }
                     if(monster[currentMap][i].alive == false) {
-                        monster[i] = null;
+                        monster[currentMap][i] = null;
                     }
                 }
             }
@@ -201,17 +201,17 @@ public class GamePanel extends JPanel implements Runnable {
             tileM.draw(graphics2);                          //Tiles before player so tiles don't cover player.
 
             characterList.add(player);
-            for(int i = 0; i< npc[1].length;i++){
+            for(int i = 0; i< npc[0].length;i++){
                 if(npc[currentMap][i]!=null){
                     characterList.add(npc[currentMap][i]);
                 }
             }
-            for (int i = 0; i < obj[1].length; i++) {
+            for (int i = 0; i < obj[0].length; i++) {
                 if(obj[currentMap][i]!=null){
                     characterList.add(obj[currentMap][i]);
                 }
             }
-            for (int i = 0; i < monster[1].length; i++) {
+            for (int i = 0; i < monster[0].length; i++) {
                 if(monster[currentMap][i]!=null){
                     characterList.add(monster[currentMap][i]);
                 }

@@ -287,7 +287,7 @@ public class Player extends Character{
                 case"Key":
                     gp.playSE(1);//calls sound effect according to soundUrl array.
                     hasKey++;
-                    gp.obj[i]=null;
+                    gp.obj[gp.currentMap][i]=null;
                     gp.ui.showMessage("You got a key!");
                     break;
                 case"Door":

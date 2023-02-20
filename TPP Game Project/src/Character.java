@@ -99,7 +99,7 @@ public class Character {
         collisionOn = false;
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
-        gp.cChecker.checkCharacter(this, gp.npc[][]);
+        gp.cChecker.checkCharacter(this, gp.npc);
         gp.cChecker.checkCharacter(this, gp.monster);
         boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
