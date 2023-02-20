@@ -70,14 +70,11 @@ public class PathFinder {
 
         while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
             //SET SOLID NODE
-
             //CHECK TILES
             int tileNum = gp.tileM.mapTileNum[col][row];//different from video because we dont have multiple maps.
-
             if (gp.tileM.Tiles[tileNum].collision == true) {
                // System.out.println("ive fallen and I cant get up");
                 node[col][row].solid = true;
-
             }
             //SET COST
             getCost(node[col][row]);
@@ -94,20 +91,21 @@ public class PathFinder {
                 //G cost
                 int xDistance = Math.abs(node.col - startNode.col);
                 int yDistance = Math.abs(node.row  - startNode.row);
-                node.gCost = xDistance + yDistance;
+                node.gCost = (xDistance + yDistance);
                 // H cost
                 xDistance = Math.abs(node.col - goalNode.col);
                 yDistance = Math.abs(node.row - goalNode.row);
-                node.hCost = xDistance + yDistance;
+                node.hCost = (xDistance + yDistance);
 
                 //F cost
-                node.fCost= node.gCost + node.hCost;
+                node.fCost = (node.gCost + node.hCost);
             }
             public boolean search(){
                 while(goalReached == false && step < 500) {
 
                     int col = currentNode.col;
                     int row = currentNode.row;
+                   // System.out.println(row +"," +col);
 
                     //Check the current Node
                     currentNode.checked = true;
@@ -129,6 +127,7 @@ public class PathFinder {
                     if (col + 1 < gp.maxWorldCol) {
                         openNode(node[col + 1][row]);
                     }
+
 
                 //find best nodes
                 int bestNodeIndex=0;
@@ -158,12 +157,13 @@ public class PathFinder {
 
                     if(currentNode == goalNode){
                         goalReached = true;
-                        trackthePath();
+                        trackThePath();
                     }
                     step++;
                 }
                 return goalReached;
             }
+    //XX
             public void openNode(Node node){
                 if(node.open == false && node.checked == false && node.solid == false){
                     node.open = true;
@@ -171,7 +171,7 @@ public class PathFinder {
                     openList.add(node);
                 }
             }
-        public void trackthePath(){
+        public void trackThePath(){
 
               Node current = goalNode;
 

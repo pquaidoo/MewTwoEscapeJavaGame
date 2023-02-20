@@ -28,13 +28,11 @@ public class NPC_OldMan extends Character{
     public void setAction() {
 
         if(onPath == true) {
-            int goalCol = 22;
-            int goalRow = 9;
+            int goalCol = 39;
+            int goalRow = 7;
             searchPath(goalCol, goalRow);
 
         }else {
-
-
             actionLockCounter++;
 
             if (actionLockCounter == 120) { // Slows down NPC so he moves every 2 seconds (60FPS)

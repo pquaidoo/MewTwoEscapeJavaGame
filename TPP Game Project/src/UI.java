@@ -209,7 +209,7 @@ public class UI {
     }
     public void drawPauseScreen() {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
-        String text = "PAUSED";
+        String text = "PAUSED"+"\n "+gp.player.worldX/gp.tileSize+", "+gp.player.worldY/gp.tileSize;
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = getXforCenteredText(text);
         int y = gp.screenHeight/2;

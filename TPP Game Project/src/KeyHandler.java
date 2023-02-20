@@ -37,7 +37,9 @@ public class KeyHandler implements KeyListener {
         else if (gp.gameState == gp.playState) {
           playState(code);
         }
-
+        else if(gp.gameState == gp.pauseState){
+            pauseState(code);
+        }
         // DIALOGUE STATE
         else if (gp.gameState == gp.dialogueState) {
            dialogueState(code);
@@ -110,6 +112,9 @@ public class KeyHandler implements KeyListener {
             gp.gameState = gp.characterState;
 
         }
+        if(code == KeyEvent.VK_ESCAPE){
+            gp.gameState = gp.pauseState;
+        }
         //DEBUG
         if(code == KeyEvent.VK_B){
             if(checkDrawTime == false) {
@@ -149,9 +154,7 @@ public class KeyHandler implements KeyListener {
         }
     }
     public void pauseState(int code) {
-        if (gp.gameState == gp.playState) {
-            gp.gameState = gp.pauseState;
-        } else if (gp.gameState == gp.pauseState) {
+        if (code == KeyEvent.VK_ESCAPE) {
             gp.gameState = gp.playState;
         }
     }
