@@ -282,7 +282,7 @@ public class Player extends Character{
     public void pickupObject(int i){
         if(i !=999){
 
-            String objectName= gp.obj[i].name;
+            String objectName= gp.obj[gp.currentMap][i].name;
             switch(objectName){
                 case"Key":
                     gp.playSE(1);//calls sound effect according to soundUrl array.
@@ -321,7 +321,7 @@ public class Player extends Character{
             if(i != 999) {
                 attackCanceled = true;
                 gp.gameState = gp.dialogueState;
-                gp.npc[i].speak();
+                gp.npc[gp.currentMap][i].speak();
 
                 }
             }
@@ -334,10 +334,10 @@ public class Player extends Character{
 
             if (invincible == false) {
                 gp.playSE(6);
-                if (gp.monster[i].invincible == false) {
+                if (gp.monster[gp.currentMap][i].invincible == false) {
                     gp.playSE(5);
 
-                    int damage = gp.monster[i].attack - defense;
+                    int damage = gp.monster[gp.currentMap][i].attack - defense;
                     if (damage < 0) {
                         damage = 0;
                     }
@@ -351,20 +351,20 @@ public class Player extends Character{
     public void damageMonster(int i, int attack){
         if(i !=999){
 
-            if(gp.monster[i].invincible == false){
+            if(gp.monster[gp.currentMap][i].invincible == false){
                 gp.playSE(5);
 
-                int damage = attack - gp.monster[i].defense;
+                int damage = attack - gp.monster[gp.currentMap][i].defense;
                 if(damage < 0){
                     damage = 0;
                 }
 
-                gp.monster[i].life-=damage;
-                gp.monster[i].invincible = true;
-                gp.monster[i].damageReaction();
-                System.out.println(gp.monster[i].life);
-                if(gp.monster[i].life<=0){
-                    gp.monster[i].dying = true;
+                gp.monster[gp.currentMap][i].life-=damage;
+                gp.monster[gp.currentMap][i].invincible = true;
+                gp.monster[gp.currentMap][i].damageReaction();
+                System.out.println(gp.monster[gp.currentMap][i].life);
+                if(gp.monster[gp.currentMap][i].life<=0){
+                    gp.monster[gp.currentMap][i].dying = true;
                 }
             }
         }

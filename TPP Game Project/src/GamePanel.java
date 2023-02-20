@@ -19,8 +19,8 @@ public class GamePanel extends JPanel implements Runnable {
     //World Settings
     public final int maxWorldCol=50;
     public final int maxWorldRow=50;
-//    public final int worldWidth =tileSize * maxWorldCol;
-//    public final int worldHeight = tileSize * maxWorldRow; //dont actually need
+    public final int maxMap =  10;
+    public int  currentMap= 0;
 
         //Screen Resolution
     final int maxScreenCol = 16;
@@ -44,9 +44,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
-    public Character obj[] = new Character[10];
-    public Character npc[] = new Character[10];
-    public Character monster[] = new Character[20];
+    public Character obj[][] = new Character[maxMap][10];
+    public Character npc[][] = new Character[maxMap][10];
+    public Character monster[][] = new Character[maxMap][20];
     public ArrayList<Character> projectileList = new ArrayList<>();
     ArrayList<Character> characterList =new ArrayList<>();
 
@@ -141,17 +141,17 @@ public class GamePanel extends JPanel implements Runnable {
         if(gameState == playState) {
 
             player.update();         //Calls player update method.
-            for(int i = 0; i < npc.length; i++) {
-                if(npc[i] != null) {
-                    npc[i].update();
+            for(int i = 0; i < npc[1].length; i++) {
+                if(npc[currentMap][i] != null) {
+                    npc[currentMap][i].update();
                 }
             }
-            for(int i = 0; i < monster.length; i++) {
+            for(int i = 0; i < monster[1].length; i++) {
                 if(monster[i] != null) {
-                    if(monster[i].alive == true && monster[i].dying == false) {
-                        monster[i].update();
+                    if(monster[currentMap][i].alive == true && monster[currentMap][i].dying == false) {
+                        monster[currentMap][i].update();
                     }
-                    if(monster[i].alive == false) {
+                    if(monster[currentMap][i].alive == false) {
                         monster[i] = null;
                     }
                 }
@@ -201,19 +201,19 @@ public class GamePanel extends JPanel implements Runnable {
             tileM.draw(graphics2);                          //Tiles before player so tiles don't cover player.
 
             characterList.add(player);
-            for(int i = 0; i< npc.length;i++){
-                if(npc[i]!=null){
-                    characterList.add(npc[i]);
+            for(int i = 0; i< npc[1].length;i++){
+                if(npc[currentMap][i]!=null){
+                    characterList.add(npc[currentMap][i]);
                 }
             }
-            for (int i = 0; i < obj.length; i++) {
-                if(obj[i]!=null){
-                    characterList.add(obj[i]);
+            for (int i = 0; i < obj[1].length; i++) {
+                if(obj[currentMap][i]!=null){
+                    characterList.add(obj[currentMap][i]);
                 }
             }
-            for (int i = 0; i < monster.length; i++) {
-                if(monster[i]!=null){
-                    characterList.add(monster[i]);
+            for (int i = 0; i < monster[1].length; i++) {
+                if(monster[currentMap][i]!=null){
+                    characterList.add(monster[currentMap][i]);
                 }
             }
             for (int i = 0; i < projectileList.size(); i++) {
