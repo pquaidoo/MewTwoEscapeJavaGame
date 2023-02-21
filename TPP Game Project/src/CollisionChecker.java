@@ -167,6 +167,7 @@ public class CollisionChecker { //test
                 target[gp.currentMap][i].solidArea.x = target[gp.currentMap][i].worldX +target[gp.currentMap][i].solidArea.x;
                 target[gp.currentMap][i].solidArea.y = target[gp.currentMap][i].worldY +target[gp.currentMap][i].solidArea.y;
 
+
                 switch(chara.direction){
                     case"up":
                         chara.solidArea.y -=chara.speed;

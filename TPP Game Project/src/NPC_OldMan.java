@@ -14,6 +14,12 @@ public class NPC_OldMan extends Character{
 
         getImage();
         setDialogue();
+        solidArea.x = 8;
+        solidArea.y = 8;
+        solidArea.width = 32;
+        solidArea.height = 32;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
     }
     public void getImage(){
         up1 = setup("TPP Game Project/res/npc/oldman_up_1",gp.tileSize,gp.tileSize);

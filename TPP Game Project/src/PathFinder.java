@@ -71,9 +71,10 @@ public class PathFinder {
         while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
             //SET SOLID NODE
             //CHECK TILES
-            int tileNum = gp.tileM.mapTileNum[gp.currentMap][col][row];//different from video because we dont have multiple maps.
+            int tileNum = gp.tileM.mapTileNum[gp.currentMap][col][row];
             if (gp.tileM.Tiles[tileNum].collision == true) {
-               // System.out.println("ive fallen and I cant get up");
+                //System.out.println(node[col][row].col+ ", "+node[col][row].row+ "type: "+tileNum);
+
                 node[col][row].solid = true;
             }
             //SET COST

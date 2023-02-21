@@ -13,7 +13,7 @@ public class Character {
     public BufferedImage up1, up2, down1, down2, left1,left2, right1, right2;   //Instantiates Sprite Images.
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2,
                         attackRight1,attackRight2;
-    public Rectangle solidArea = new Rectangle(0, 0, 60, 60); //was 0,0,48,48 changed for collision issues
+    public Rectangle solidArea = new Rectangle(0, 0, 48, 48); //was 0,0,48,48 changed for collision issues
     public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collision = false;
@@ -285,6 +285,8 @@ public class Character {
     public void searchPath(int goalCol, int goalRow){
         int startCol = (worldX + solidArea.x)/gp.tileSize;
         int startRow = (worldY + solidArea.y)/gp.tileSize;
+//        startCol-=1;
+//       startRow-=1;
 
 
         gp.pFinder.setNodes(startCol,startRow,goalCol, goalRow);
@@ -294,18 +296,18 @@ public class Character {
             //NEXT WORLDX & WORLDY
             int nextX = gp.pFinder.pathList.get(0).col * gp.tileSize;
             int nextY = gp.pFinder.pathList.get(0).row * gp.tileSize;
-           // System.out.println(nextX/gp.tileSize +","+ nextY/gp.tileSize);
+           //System.out.println("NPC goal: "+nextX/gp.tileSize +","+ nextY/gp.tileSize);
             //entity'es solid area pos
-            int enLeftX = worldX +solidArea.x;
-            int enRightX = worldX+ solidArea.x + solidArea.width;
+            int enLeftX = worldX-1 +solidArea.x;
+            int enRightX = worldX-1 + solidArea.x + solidArea.width;
             int enTopY = worldY + solidArea.y;
             int enBottomY = worldY + solidArea.y + solidArea.height;
-            //System.out.println(enLeftX/gp.tileSize + ", "+ enTopY/gp.tileSize);
+            //System.out.println("NPC current: "+enLeftX/gp.tileSize + ", "+ enTopY/gp.tileSize);
 
 
             if(enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
                 direction = "up";
-                System.out.println("up");
+                //System.out.println("up");
 
 
             } else if(enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
@@ -313,7 +315,7 @@ public class Character {
             } else if(enTopY >= nextY && enBottomY < nextY + gp.tileSize){
                 //left or right
                 if (enLeftX > nextX) {
-                    System.out.println("left");
+                    System.out.println("lefty");
                     direction = "left";
 
                 }
@@ -325,24 +327,26 @@ public class Character {
             else if(enTopY > nextY && enLeftX > nextX){
                 //up or left
                 direction = "up";
-                System.out.println("up2");
+                System.out.println("up left");
                 checkCollision();
-                System.out.println(collisionOn);
+                //System.out.println(collisionOn);
 
                 if(collisionOn == true){
-                    System.out.println("upleft");
+                    System.out.println("up left collision");
                     direction = "left";
                 }
             } else if (enTopY > nextY && enLeftX < nextX) {
                 //up or right
                 direction = "up";
-                System.out.println(":up3");
+                System.out.println("up right");
+                //System.out.println(enTopY > nextY && enLeftX < nextX);
                 checkCollision();
-                System.out.println(collisionOn);
+                //System.out.println(collisionOn);
                 if(collisionOn==true){
-                    System.out.println("righty1");
+                    System.out.println("up right collision");
                     direction = "right";
                 }
+
 
             } else if (enTopY < nextY && enLeftX > nextX) {
                 //down or left
@@ -357,14 +361,19 @@ public class Character {
                 direction = "down";
                 checkCollision();
                 if(collisionOn == true){
-                    System.out.println("righty3");
+                    //System.out.println("righty3");
                     direction = "right";
                 }
+
+//            }else{
+//                //System.out.println("gaming");
             }
+
             //if reaches goal stops search
             int nextCol = gp.pFinder.pathList.get(0).col;
             int nextRow = gp.pFinder.pathList.get(0).row;
             if(nextCol == goalCol && nextRow == goalRow){
+                System.out.println("LEZ FUCKING GOOOOO");
                 onPath = false;
             }
         }
