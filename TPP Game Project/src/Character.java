@@ -370,12 +370,12 @@ public class Character {
             }
 
             //if reaches goal stops search
-            int nextCol = gp.pFinder.pathList.get(0).col;
-            int nextRow = gp.pFinder.pathList.get(0).row;
-            if(nextCol == goalCol && nextRow == goalRow){
-                System.out.println("LEZ FUCKING GOOOOO");
-                onPath = false;
-            }
+//            int nextCol = gp.pFinder.pathList.get(0).col;
+//            int nextRow = gp.pFinder.pathList.get(0).row;
+//            if(nextCol == goalCol && nextRow == goalRow){
+//                System.out.println("LEZ FUCKING GOOOOO");
+//                onPath = false;
+//            }
         }
 
     }

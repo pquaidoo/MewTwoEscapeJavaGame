@@ -34,8 +34,11 @@ public class NPC_OldMan extends Character{
     public void setAction() {
 
         if(onPath == true) {
-            int goalCol = 39;
-            int goalRow = 7;
+//            int goalCol = 39;
+//            int goalRow = 7;
+            int goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+            int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
+
             searchPath(goalCol, goalRow);
 
         }else {

@@ -33,41 +33,70 @@ public class MON_GreenSlime extends Character {
         right1 = setup("TPP Game Project/res/monster/greenslime_down_1",gp.tileSize,gp.tileSize);
         right2 = setup("TPP Game Project/res/monster/greenslime_down_2",gp.tileSize,gp.tileSize);
     }
+    public void update(){
+        super.update();
+        int xDistance = Math.abs(worldX - gp.player.worldX);
+        int yDistance = Math.abs(worldY - gp.player.worldY);
+        int tileDistance = (xDistance + yDistance)/gp.tileSize;
+
+        if(onPath == false && tileDistance < 5){
+            int i = new Random().nextInt(100)+1;
+                    if(i>50){
+                        onPath= true;
+                    }
+
+        }
+        if(onPath==true&&tileDistance>20){
+            onPath = false;
+        }
+    }
     public void setAction() {
 
-        actionLockCounter++;
+        if(onPath == true ) {
+//            int goalCol = 39;
+//            int goalRow = 7;
+            int goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+            int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
 
-        if(actionLockCounter == 120) {
-            Random random = new Random();
-            int i = random.nextInt(100) +1;
+            searchPath(goalCol, goalRow);
 
-            if(i <= 25) {
-                direction = "up";
-            }
-            if(i > 25 && i <= 50) {
-                direction =  "down";
-            }
-            if(i > 50 && i <= 75) {
-                direction = "left";
-            }
-            if(i > 65 && i <= 100) {
-                direction = "right";
+            int i = new Random().nextInt(100)+1;
+            if(i>97&&projectile.alive==false&&shotAvailableCounter == 45){
+                projectile.set(worldX, worldY, direction, true, this);
+                gp.projectileList.add(projectile);
+                shotAvailableCounter=0;//d
             }
 
-            actionLockCounter = 0;
+        }else {
+            actionLockCounter++;
 
+            if (actionLockCounter == 120) { // Slows down NPC so he moves every 2 seconds (60FPS)
+                Random random = new Random();
+                int i = random.nextInt(100) + 1; //random num 1 - 100
 
+                if (i <= 25) {
+                    direction = "up";
+                }
+                if (i > 25 && i <= 50) {
+                    direction = "down";
+                }
+                if (i > 50 && i <= 75) {
+                    direction = "left";
+                }
+                if (i > 65 && i <= 100) {
+                    direction = "right";
+                }
+
+                actionLockCounter = 0;
+            }
         }
-        int i = new Random().nextInt(100)+1;
-        if(i>99&&projectile.alive==false&&shotAvailableCounter == 45){
-            projectile.set(worldX, worldY, direction, true, this);
-            gp.projectileList.add(projectile);
-            shotAvailableCounter=0;//d
-        }
+
     }
     public void damageReaction() {
 
         actionLockCounter = 0;
+
+        onPath=true;
         if(gp.player.direction.equals("up-right") || gp.player.direction.equals("down-right")) {
             direction = "right";
         } else if(gp.player.direction.equals("up-left") || gp.player.direction.equals("down-left")) {

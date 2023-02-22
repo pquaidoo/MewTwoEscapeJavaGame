@@ -293,7 +293,7 @@ public class Player extends Character{
                 case"Door":
                     if(hasKey>0){
                         gp.playSE(4);
-                        gp.obj[i] = null;
+                        gp.obj[gp.currentMap][i] = null;
                         hasKey--;
                         gp.ui.showMessage("You opened the door!");
                     }
@@ -304,7 +304,7 @@ public class Player extends Character{
                 case "Boots":
                     gp.playSE(3);
                     speed+=10;          // if you make this 100 you weirdly can barely move.
-                    gp.obj[i] = null;
+                    gp.obj[gp.currentMap][i] = null;
                     gp.ui.showMessage("Speed up!");
                     break;
                 case "Chest":
