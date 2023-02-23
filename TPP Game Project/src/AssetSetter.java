@@ -40,6 +40,7 @@ public class AssetSetter {
         gp.obj[mapNum][7].worldX = 37 * gp.tileSize;
         gp.obj[mapNum][7].worldY = 42 * gp.tileSize;
 
+
     }
     public void setNPC() {
         int mapNum= 0;
@@ -56,6 +57,14 @@ public class AssetSetter {
         gp.monster[mapNum][1] = new MON_GreenSlime(gp);
         gp.monster[mapNum][1].worldX = gp.tileSize * 23;
         gp.monster[mapNum][1].worldY = gp.tileSize * 37;
+
+        gp.monster[mapNum][2] = new MON_Boss(gp);
+        gp.monster[mapNum][2].worldX = gp.tileSize * 20;
+        gp.monster[mapNum][2].worldY = gp.tileSize * 20;
+
+        gp.monster[mapNum][3] = new MON_Static_Up(gp);
+        gp.monster[mapNum][3].worldX = gp.tileSize * 23;
+        gp.monster[mapNum][3].worldY = gp.tileSize * 25;
 
     }
 }

@@ -2,6 +2,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -18,6 +19,8 @@ public class Character {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collision = false;
     public BufferedImage image, image2, image3;
+    public boolean inRage = false;
+    public boolean BossDead = false;
     String dialogues[] = new String[20];
     public int level;
     public int strength;
@@ -270,6 +273,7 @@ public class Character {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
 
     }
+    public void checkDrop() {}
     public BufferedImage setup(String imagePath, int width, int height) {
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
@@ -277,6 +281,18 @@ public class Character {
         try {
             image = ImageIO.read(new FileInputStream(imagePath + ".png"));
             image = uTool.scaleImage(image, width, height);
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+        return image;
+    }
+    public BufferedImage setup(String imagePath, int width, int height, int scale) {
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try {
+            image = ImageIO.read(new FileInputStream(imagePath + ".png"));
+            image = uTool.scaleImage(image, width * scale, height * scale);
         }catch(IOException e) {
             e.printStackTrace();
         }
