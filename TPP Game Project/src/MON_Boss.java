@@ -25,24 +25,24 @@ public class MON_Boss extends Character {
     public void getImage() {
         int i = 5;
         if(inRage == false) {
-            up1 = setup("TPP Game Project/res/monster/skeletonlord_up_1", gp.tileSize * i, gp.tileSize * i);
-            up2 = setup("TPP Game Project/res/monster/skeletonlord_up_2", gp.tileSize * i, gp.tileSize * i);
-            down1 = setup("TPP Game Project/res/monster/skeletonlord_down_1", gp.tileSize * i, gp.tileSize * i);
-            down2 = setup("TPP Game Project/res/monster/skeletonlord_down_2", gp.tileSize * i, gp.tileSize * i);
-            right1 = setup("TPP Game Project/res/monster/skeletonlord_right_1", gp.tileSize * i, gp.tileSize * i);
-            right2 = setup("TPP Game Project/res/monster/skeletonlord_right_2", gp.tileSize * i, gp.tileSize * i);
-            left1 = setup("TPP Game Project/res/monster/skeletonlord_left_1", gp.tileSize * i, gp.tileSize * i);
-            left2 = setup("TPP Game Project/res/monster/skeletonlord_left_2", gp.tileSize * i, gp.tileSize * i);
+            up1 = setup("TPP Game Project/res/monster/magnezone_down_1", gp.tileSize * i, gp.tileSize * i);
+            up2 = setup("TPP Game Project/res/monster/magnezone_down_1", gp.tileSize * i, gp.tileSize * i);
+            down1 = setup("TPP Game Project/res/monster/magnezone_down_1", gp.tileSize * i, gp.tileSize * i);
+            down2 = setup("TPP Game Project/res/monster/magnezone_down_1", gp.tileSize * i, gp.tileSize * i);
+            right1 = setup("TPP Game Project/res/monster/magnezone_down_1", gp.tileSize * i, gp.tileSize * i);
+            right2 = setup("TPP Game Project/res/monster/magnezone_down_1", gp.tileSize * i, gp.tileSize * i);
+            left1 = setup("TPP Game Project/res/monster/magnezone_down_1", gp.tileSize * i, gp.tileSize * i);
+            left2 = setup("TPP Game Project/res/monster/magnezone_down_1", gp.tileSize * i, gp.tileSize * i);
         }
         if(inRage == true) {
-            up1 = setup("TPP Game Project/res/monster/skeletonlord_phase2_up_1", gp.tileSize * i, gp.tileSize * i);
-            up2 = setup("TPP Game Project/res/monster/skeletonlord_phase2_up_2", gp.tileSize * i, gp.tileSize * i);
-            down1 = setup("TPP Game Project/res/monster/skeletonlord_phase2_down_1", gp.tileSize * i, gp.tileSize * i);
-            down2 = setup("TPP Game Project/res/monster/skeletonlord_phase2_down_2", gp.tileSize * i, gp.tileSize * i);
-            right1 = setup("TPP Game Project/res/monster/skeletonlord_phase2_right_1", gp.tileSize * i, gp.tileSize * i);
-            right2 = setup("TPP Game Project/res/monster/skeletonlord_phase2_right_2", gp.tileSize * i, gp.tileSize * i);
-            left1 = setup("TPP Game Project/res/monster/skeletonlord_phase2_left_1", gp.tileSize * i, gp.tileSize * i);
-            left2 = setup("TPP Game Project/res/monster/skeletonlord_phase2_left_2", gp.tileSize * i, gp.tileSize * i);
+            up1 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
+            up2 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
+            down1 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
+            down2 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
+            right1 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
+            right2 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
+            left1 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
+            left2 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
         }
     }
     public void update(){

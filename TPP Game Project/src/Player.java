@@ -41,7 +41,7 @@ public class Player extends Character{
     public void setDefaultValues(){
         worldX = gp.tileSize * 24;
         worldY = gp.tileSize * 24;
-        speed=4;
+        speed = 4;
         //PLAYER STATUS
         maxLife = 6;
         life = maxLife;
@@ -55,8 +55,10 @@ public class Player extends Character{
         projectile = new OBJ_Fireball(gp);
         attack= getAttack();
         defense = getDefense();
+        System.out.println(speed);
     }
     public void setDefaultPositions() {
+
         worldX = gp.tileSize * 24;
         worldY = gp.tileSize * 24;
         //direction?
@@ -80,14 +82,14 @@ public class Player extends Character{
     public void getplayerImage(){
         //up1. ImageIO.read(getClass().getResourceAsStream("TPP Game Project/res/player/boy_up_1"));
         //what was used in tutorial ^
-        up1 = setup("TPP Game Project/res/player/boy_up_1",gp.tileSize,gp.tileSize);
-        up2 = setup("TPP Game Project/res/player/boy_up_2",gp.tileSize,gp.tileSize);
-        down1 = setup("TPP Game Project/res/player/boy_down_1",gp.tileSize,gp.tileSize);
-        down2 = setup("TPP Game Project/res/player/boy_down_2",gp.tileSize,gp.tileSize);
-        right1 = setup("TPP Game Project/res/player/boy_right_1",gp.tileSize,gp.tileSize);
-        right2 = setup("TPP Game Project/res/player/boy_right_2",gp.tileSize,gp.tileSize);
-        left1 = setup("TPP Game Project/res/player/boy_left_1",gp.tileSize,gp.tileSize);
-        left2 = setup("TPP Game Project/res/player/boy_left_2",gp.tileSize,gp.tileSize);
+        up1 = setup("TPP Game Project/res/player/mewtwo_up_1",gp.tileSize,gp.tileSize);
+        up2 = setup("TPP Game Project/res/player/mewtwo_up_2",gp.tileSize,gp.tileSize);
+        down1 = setup("TPP Game Project/res/player/mewtwo_down_1",gp.tileSize,gp.tileSize);
+        down2 = setup("TPP Game Project/res/player/mewtwo_down_2",gp.tileSize,gp.tileSize);
+        right1 = setup("TPP Game Project/res/player/mewtwo_right_1",gp.tileSize,gp.tileSize);
+        right2 = setup("TPP Game Project/res/player/mewtwo_right_2",gp.tileSize,gp.tileSize);
+        left1 = setup("TPP Game Project/res/player/mewtwo_left_1",gp.tileSize,gp.tileSize);
+        left2 = setup("TPP Game Project/res/player/mewtwo_left_2",gp.tileSize,gp.tileSize);
     }
     public void getPlayerAttackImage(){
         attackUp1 = setup("TPP Game Project/res/player/boy_attack_up_1",gp.tileSize,gp.tileSize*2);
@@ -305,7 +307,7 @@ public class Player extends Character{
                     break;
                 case "Boots":
                     gp.playSE(3);
-                    speed+=10;          // if you make this 100 you weirdly can barely move.
+                    speed += 10;        // if you make this 100 you weirdly can barely move.
                     gp.obj[gp.currentMap][i] = null;
                     gp.ui.showMessage("Speed up!");
                     break;

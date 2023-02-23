@@ -78,6 +78,7 @@ public class GamePanel extends JPanel implements Runnable {
         gameState = titleState;
     }
     public void retry() {
+        player.speed = 4; //temp fix
         player.setDefaultPositions();
         player.resetoreLifeAndMan();
         aSetter.setObject();
