@@ -231,10 +231,12 @@ public class Player extends Character{
         if(shotAvailableCounter < 45) {
             shotAvailableCounter++;
         }
-        if(life <= 0) {
-            gp.gameState = gp.gameOverState;
-            gp.stopMusic();
-            gp.playSE(9);
+        if(keyH.godModeOn == false) {
+            if(life <= 0) {
+                gp.gameState = gp.gameOverState;
+                gp.stopMusic();
+                gp.playSE(9);
+            }
         }
     }
     public void attacking(){
