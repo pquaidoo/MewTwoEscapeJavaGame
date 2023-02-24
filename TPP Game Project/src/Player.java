@@ -39,9 +39,9 @@ public class Player extends Character{
      *  Sets Default values for player.
      */
     public void setDefaultValues(){
-        worldX = gp.tileSize * 24;
-        worldY = gp.tileSize * 24;
-        speed = 4;
+        worldX = gp.tileSize * 125;
+        worldY = gp.tileSize * 125;
+        speed = 20;
         //PLAYER STATUS
         maxLife = 6;
         life = maxLife;
@@ -82,6 +82,7 @@ public class Player extends Character{
     public void getplayerImage(){
         //up1. ImageIO.read(getClass().getResourceAsStream("TPP Game Project/res/player/boy_up_1"));
         //what was used in tutorial ^
+        int i=2;
         up1 = setup("TPP Game Project/res/player/mewtwo_up_1",gp.tileSize,gp.tileSize);
         up2 = setup("TPP Game Project/res/player/mewtwo_up_2",gp.tileSize,gp.tileSize);
         down1 = setup("TPP Game Project/res/player/mewtwo_down_1",gp.tileSize,gp.tileSize);
