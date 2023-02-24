@@ -22,12 +22,13 @@ public class TileManager {
         public void getTileImage(){
                 //ImageIO.read(get.Class().getResourceAsStream("TPP Game Project/tiles/grass.png"));
                 //tutorial version ^
-                setup(0, "grass", false);
-                setup(1, "water", true);
-                setup(2, "wall", true);
-                setup(3, "earth", false);
-                setup(4, "tree", true);
-                setup(5, "sand", false);
+            setup(0, "black", false);
+            setup(1, "grass", false);
+            setup(2, "top", true);
+            setup(3, "earth", false);
+            setup(4, "sand", true);
+            setup(5, "wall2", true);
+            setup(6, "black", true);
         }
     public void setup(int index, String imageName, boolean collision) {
             UtilityTool uTool = new UtilityTool();
