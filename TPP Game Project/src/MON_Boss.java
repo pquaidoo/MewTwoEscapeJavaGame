@@ -12,11 +12,11 @@ public class MON_Boss extends Character {
         defense = 0;
         projectile = new OBJ_ElecticBall(gp);
 
-
-        solidArea.x = 3;
-        solidArea.y = 18;
-        solidArea.width = 42;
-        solidArea.height = 30;
+        int size = gp.tileSize*5;
+        solidArea.x = 48;
+        solidArea.y = 60;
+        solidArea.width = size - 48*2;
+        solidArea.height = size - 150;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
@@ -25,8 +25,8 @@ public class MON_Boss extends Character {
     public void getImage() {
         int i = 5;
         if(inRage == false) {
-            up1 = setup("TPP Game Project/res/monster/magnezone_down_1", gp.tileSize * i, gp.tileSize * i);
-            up2 = setup("TPP Game Project/res/monster/magnezone_down_1", gp.tileSize * i, gp.tileSize * i);
+            up1 = setup("TPP Game Project/res/monster/magnezone_down_1", gp.tileSize, gp.tileSize, i);
+            up2 = setup("TPP Game Project/res/monster/magnezone_down_1", gp.tileSize, gp.tileSize, i);
             down1 = setup("TPP Game Project/res/monster/magnezone_down_1", gp.tileSize * i, gp.tileSize * i);
             down2 = setup("TPP Game Project/res/monster/magnezone_down_1", gp.tileSize * i, gp.tileSize * i);
             right1 = setup("TPP Game Project/res/monster/magnezone_down_1", gp.tileSize * i, gp.tileSize * i);
@@ -45,6 +45,29 @@ public class MON_Boss extends Character {
             left2 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
         }
     }
+//    public void moveTowardPlayer(int interval) {
+//        actionLockCounter++;
+//
+//        if(actionLockCounter > interval) {
+//            if(getXdistance(gp.player) > getYdistance(gp.player)) {
+//                if(gp.player.getCenterX() < getCenterX()) {
+//                    direction = "left";
+//                }
+//            }
+//            else {
+//                direction = "right";
+//            }
+//        }
+//        else if(getXdistance(gp.player) < getYdistance(gp.player)) {
+//            if(gp.player.getCenterY() < getCenterY()) {
+//                direction = "up";
+//            }
+//            else {
+//                direction = "down";
+//            }
+//        }
+//        actionLockCounter = 0;
+//    }
     public void update(){
         super.update();
         int xDistance = Math.abs(worldX - gp.player.worldX);
@@ -63,6 +86,10 @@ public class MON_Boss extends Character {
         }
     }
     public void setAction() {
+//        if(getTileDistance(gp.player) < 10) {
+//
+//            moveTowardPlayer(60);
+//        }
 
         if(inRage == false && life < 15) {
             inRage = true;

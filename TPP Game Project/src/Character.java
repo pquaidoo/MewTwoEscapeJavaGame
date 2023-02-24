@@ -73,6 +73,22 @@ public class Character {
     public Character(GamePanel gp) {
         this.gp = gp;
     }
+//    public int getCenterX() {
+//        int centerX = worldX + up1.getWidth()/2;
+//        return centerX;
+//    }
+//    public int getCenterY() {
+//        int centerY = worldY + left1.getHeight()/2;
+//        return centerY;
+//    }
+//    public int getXdistance(Character target) {
+//        int xDistance = Math.abs(getCenterX() - target.getCenterX());
+//        return xDistance;
+//    }
+//    public int getYdistance(Character target) {
+//        int yDistance = Math.abs(getCenterY() - target.getCenterY());
+//        return yDistance;
+//    }
     public void setAction() {}
     public void damageReaction() {};
     public void speak() {
