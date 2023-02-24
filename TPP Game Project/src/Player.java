@@ -59,8 +59,8 @@ public class Player extends Character{
     }
     public void setDefaultPositions() {
 
-        worldX = gp.tileSize * 24;
-        worldY = gp.tileSize * 24;
+        worldX = gp.tileSize * 125;
+        worldY = gp.tileSize * 125;
         //direction?
     }
     public void resetoreLifeAndMan() {
