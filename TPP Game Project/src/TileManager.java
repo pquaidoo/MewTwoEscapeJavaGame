@@ -23,7 +23,7 @@ public class TileManager {
                 //ImageIO.read(get.Class().getResourceAsStream("TPP Game Project/tiles/grass.png"));
                 //tutorial version ^
             setup(0, "black", false);
-            setup(1, "grass", false);
+            setup(1, "floor", false);
             setup(2, "top", true);
             setup(3, "earth", false);
             setup(4, "sand", true);
