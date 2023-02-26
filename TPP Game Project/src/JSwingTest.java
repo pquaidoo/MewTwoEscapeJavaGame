@@ -5,7 +5,7 @@ import java.net.MalformedURLException;
 
 public class JSwingTest {
     /**
-     * Acts as Game Driverw
+     * Acts as Game Driver
      *w
      * @param args
      */

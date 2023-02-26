@@ -66,6 +66,52 @@ public class AssetSetter {
         gp.monster[mapNum][2].worldX = gp.tileSize * 125;
         gp.monster[mapNum][2].worldY = gp.tileSize * 80;
 
+        gp.monster[mapNum][3] = new MON_Static_Down(gp);
+        gp.monster[mapNum][3].worldX = gp.tileSize * 92;
+        gp.monster[mapNum][3].worldY = gp.tileSize * 168;
 
+        gp.monster[mapNum][4] = new MON_Static_Up(gp);
+        gp.monster[mapNum][4].worldX = gp.tileSize * 94;
+        gp.monster[mapNum][4].worldY = gp.tileSize * 179;
+
+        gp.monster[mapNum][5] = new MON_Static_Down(gp);
+        gp.monster[mapNum][5].worldX = gp.tileSize * 96;
+        gp.monster[mapNum][5].worldY = gp.tileSize * 168;
+
+        gp.monster[mapNum][6] = new MON_Static_Up(gp);
+        gp.monster[mapNum][6].worldX = gp.tileSize * 98;
+        gp.monster[mapNum][6].worldY = gp.tileSize * 179;
+
+        gp.monster[mapNum][7] = new MON_Static_Down(gp);
+        gp.monster[mapNum][7].worldX = gp.tileSize * 100;
+        gp.monster[mapNum][7].worldY = gp.tileSize * 168;
+
+        gp.monster[mapNum][8] = new MON_Static_Up(gp);
+        gp.monster[mapNum][8].worldX = gp.tileSize * 102;
+        gp.monster[mapNum][8].worldY = gp.tileSize * 179;
+
+        gp.monster[mapNum][9] = new MON_Static_Down(gp);
+        gp.monster[mapNum][9].worldX = gp.tileSize * 104;
+        gp.monster[mapNum][9].worldY = gp.tileSize * 168;
+
+        gp.monster[mapNum][10] = new MON_Static_Up(gp);
+        gp.monster[mapNum][10].worldX = gp.tileSize * 106;
+        gp.monster[mapNum][10].worldY = gp.tileSize * 179;
+
+        gp.monster[mapNum][11] = new MON_Static_Down(gp);
+        gp.monster[mapNum][11].worldX = gp.tileSize * 108;
+        gp.monster[mapNum][11].worldY = gp.tileSize * 168;
+
+        gp.monster[mapNum][12] = new MON_Static_Up(gp);
+        gp.monster[mapNum][12].worldX = gp.tileSize * 110;
+        gp.monster[mapNum][12].worldY = gp.tileSize * 179;
+
+        gp.monster[mapNum][13] = new MON_Static_Down(gp);
+        gp.monster[mapNum][13].worldX = gp.tileSize * 112;
+        gp.monster[mapNum][13].worldY = gp.tileSize * 168;
+
+        gp.monster[mapNum][14] = new MON_Static_Up(gp);
+        gp.monster[mapNum][14].worldX = gp.tileSize * 114;
+        gp.monster[mapNum][14].worldY = gp.tileSize * 179;
     }
 }
