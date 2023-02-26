@@ -46,7 +46,7 @@ public class EventHandler {
             //pass coordinates and direction
             damagePit(34,7,gp.dialogueState);
              }
-            if(hit(23,7, "up") == true) {
+            if(hit(23,7, "any") == true) {
                 healingPool(gp.dialogueState);
             }
         }
@@ -101,6 +101,7 @@ public class EventHandler {
     public void healingPool(int gameState) {
         //System.out.println("heal");
         if(gp.keyH.enterPressed  == true) {
+            gp.player.attackCanceled = true;
             gp.gameState = gameState;
             gp.ui.currentDialogue = "You Drunk the water.\nYour life has been recovered.";
             gp.player.life = gp.player.maxLife;

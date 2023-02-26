@@ -6,26 +6,29 @@ public class TileManager {
     GamePanel gp;
     public Tiles[] Tiles;
 
-    int mapTileNum[][];
+    int mapTileNum[][][];
+    boolean drawPath = true;
 
 
         public TileManager(GamePanel gp){
             this.gp=gp;
             Tiles = new Tiles[10];
-            mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+            mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
+
             getTileImage();
-            loadMap("TPP Game Project/res/maps/map2.txt");
+            loadMap("TPP Game Project/res/maps/Map03.txt",0);
         }
 
         public void getTileImage(){
                 //ImageIO.read(get.Class().getResourceAsStream("TPP Game Project/tiles/grass.png"));
                 //tutorial version ^
-                setup(0, "grass", false);
-                setup(1, "water", true);
-                setup(2, "wall", true);
-                setup(3, "earth", false);
-                setup(4, "tree", true);
-                setup(5, "sand", false);
+            setup(0, "black", false);
+            setup(1, "floor", false);
+            setup(2, "top", true);
+            setup(3, "earth", false);
+            setup(4, "sand", true);
+            setup(5, "wall2", true);
+            setup(6, "black", true);
         }
     public void setup(int index, String imageName, boolean collision) {
             UtilityTool uTool = new UtilityTool();
@@ -40,7 +43,7 @@ public class TileManager {
                 e.printStackTrace();
             }
     }
-    public void loadMap(String mapFilePath){
+    public void loadMap(String mapFilePath, int map){
         try{
             InputStream is = new FileInputStream((mapFilePath));
             BufferedReader br = new BufferedReader(new InputStreamReader(is));//reads contents of text file.
@@ -53,7 +56,7 @@ public class TileManager {
                 while (col < gp.maxWorldCol) {
                     String numbers[]=line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
-                    mapTileNum[col][row]=num;
+                    mapTileNum[map][col][row]=num;
                     col++;
 
                 }
@@ -72,7 +75,7 @@ public class TileManager {
 
             while (worldCol < gp.maxWorldCol&& worldRow<gp.maxWorldRow){
 
-                int tileNum=mapTileNum[worldCol][worldRow];
+                int tileNum=mapTileNum[gp.currentMap][worldCol][worldRow];
 
 
                 //usually would display only screen size from 0,0
@@ -98,6 +101,20 @@ public class TileManager {
                     worldRow++;
                 }
 
+            }
+            if(drawPath == true){
+                graphics2.setColor(new Color(255, 0, 0, 70));
+
+                for (int i = 0; i < gp.pFinder.pathList.size(); i++) {
+                    int worldX = gp.pFinder.pathList.get(i).col * gp.tileSize;
+                    int worldY = gp.pFinder.pathList.get(i).row * gp.tileSize;
+                    int screenX = worldX - gp.player.worldX + gp.player.screenX;
+                    int screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+                    graphics2.fillRect(screenX, screenY, gp.tileSize, gp.tileSize);
+
+
+                }
             }
 
         }
