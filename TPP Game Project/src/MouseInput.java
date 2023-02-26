@@ -8,7 +8,7 @@ public class MouseInput implements MouseListener {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-                System.out.println("firing");
+
 //                int mx = e.getX() + gp.player.screenX;
 //                int my = e.getY() + gp.player.screenY;
 //
@@ -18,12 +18,13 @@ public class MouseInput implements MouseListener {
 
         @Override
         public void mousePressed(MouseEvent e) {
-
+                System.out.println("firing");
+                mousePress=true;
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-
+                mousePress =false;
         }
 
         @Override

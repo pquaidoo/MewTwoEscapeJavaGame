@@ -8,7 +8,7 @@ import java.io.IOException;
  * Controls player sprites and stats.
  */
 public class Player extends Character{
-    //MouseInput mouseIn;
+    MouseInput mouseIn;
 
     KeyHandler keyH;
     public final int screenX;
@@ -17,7 +17,7 @@ public class Player extends Character{
     public boolean attackCanceled = false;
     public Player(GamePanel gp, KeyHandler keyH){
         super(gp);
-       // this.mouseIn =mouseIn;
+        this.mouseIn = mouseIn;
         this.keyH=keyH;
         screenX = gp.screenWidth/2 - gp.tileSize/2;
         screenY = gp.screenHeight/2 - gp.tileSize/2;  //sets camera size
@@ -195,6 +195,7 @@ public class Player extends Character{
                 attacking = true;
                 spriteCounter = 0;
             }
+
             attackCanceled = false;
            gp.keyH.enterPressed = false;//resets
 
@@ -212,11 +213,25 @@ public class Player extends Character{
                 spriteCounter = 0;
             }
         }
-        System.out.println(shotAvailableCounter);
+
         if(gp.keyH.shotKeyPressed == true && shotAvailableCounter == 10) {
             // SET DEFAULT COORDINATES, DIRECTION AND USER
             Projectile proj = new OBJ_Fireball(gp);
             proj.set(worldX, worldY, direction, true, this);
+
+            // ADD IT TO THE LIST
+            gp.projectileList.add(proj);
+
+            shotAvailableCounter = 0;
+
+            gp.playSE(8);
+        }
+
+        if( gp.mouseIn.mousePress == true && shotAvailableCounter == 10) {
+            // SET DEFAULT COORDINATES, DIRECTION AND USER
+            OBJ_Player_Projectile proj = new OBJ_Player_Projectile(gp);
+
+            proj.set(worldX, worldY, mx, my, "polar", true, this);
 
             // ADD IT TO THE LIST
             gp.projectileList.add(proj);
