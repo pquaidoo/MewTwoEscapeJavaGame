@@ -212,13 +212,14 @@ public class Player extends Character{
                 spriteCounter = 0;
             }
         }
-
-        if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 45) {
+        System.out.println(shotAvailableCounter);
+        if(gp.keyH.shotKeyPressed == true && shotAvailableCounter == 10) {
             // SET DEFAULT COORDINATES, DIRECTION AND USER
-            projectile.set(worldX, worldY, direction, true, this);
+            Projectile proj = new OBJ_Fireball(gp);
+            proj.set(worldX, worldY, direction, true, this);
 
             // ADD IT TO THE LIST
-            gp.projectileList.add(projectile);
+            gp.projectileList.add(proj);
 
             shotAvailableCounter = 0;
 
@@ -233,7 +234,7 @@ public class Player extends Character{
                 invincibleCounter = 0;
             }
         }
-        if(shotAvailableCounter < 45) {
+        if(shotAvailableCounter < 10) {
             shotAvailableCounter++;
         }
         if(keyH.godModeOn == false) {

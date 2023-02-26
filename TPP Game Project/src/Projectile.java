@@ -33,6 +33,7 @@ public class Projectile extends Character{
             gp.cChecker.checkTile(this);
             if(collisionOn==true){
                 alive = false;
+                gp.playSE(8);
             }
             collisionOn = false;        //resets collision
         }
@@ -40,6 +41,10 @@ public class Projectile extends Character{
             boolean contactPlayer = gp.cChecker.checkPlayer(this);
             if(gp.player.invincible == false && contactPlayer == true){
                 damagePlayer(attack);
+                alive = false;
+            }
+            life--;
+            if(life <= 0) {
                 alive = false;
             }
         }
@@ -57,11 +62,9 @@ public class Projectile extends Character{
                             worldY -= speed; break;
             case "down-left": worldX -= speed;
                               worldY += speed; break;
+            case "polar": worldX-=speed; break;
         }
-        life--;
-        if(life <= 0) {
-            alive = false;
-        }
+
 
         spriteCounter++;
         if(spriteCounter > 12) {
