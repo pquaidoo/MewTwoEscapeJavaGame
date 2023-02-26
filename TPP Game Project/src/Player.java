@@ -8,6 +8,7 @@ import java.io.IOException;
  * Controls player sprites and stats.
  */
 public class Player extends Character{
+    //MouseInput mouseIn;
 
     KeyHandler keyH;
     public final int screenX;
@@ -16,6 +17,7 @@ public class Player extends Character{
     public boolean attackCanceled = false;
     public Player(GamePanel gp, KeyHandler keyH){
         super(gp);
+       // this.mouseIn =mouseIn;
         this.keyH=keyH;
         screenX = gp.screenWidth/2 - gp.tileSize/2;
         screenY = gp.screenHeight/2 - gp.tileSize/2;  //sets camera size

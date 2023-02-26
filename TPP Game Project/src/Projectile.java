@@ -3,6 +3,7 @@ public class Projectile extends Character{
     Character user;
     public Projectile(GamePanel gp) {
         super(gp);
+
     }
 
     public void set(int worldX, int worldY, String direction, boolean alive, Character user) {
@@ -14,6 +15,12 @@ public class Projectile extends Character{
         this.user = user;
         this.life = this.maxLife;
     }
+    public void set2(int worldX, int worldY,Character user) {
+
+        this.worldX = worldX;
+        this.worldY = worldY;
+
+    }
     public void update() {
 
         if(user == gp.player) {
@@ -22,6 +29,12 @@ public class Projectile extends Character{
                 gp.player.damageMonster(monsterIndex, attack);
                 alive = false;
             }
+            //Prevents player from shooting through tiles
+            gp.cChecker.checkTile(this);
+            if(collisionOn==true){
+                alive = false;
+            }
+            collisionOn = false;        //resets collision
         }
         if(user != gp.player) {
             boolean contactPlayer = gp.cChecker.checkPlayer(this);

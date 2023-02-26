@@ -93,6 +93,7 @@ public class KeyHandler implements KeyListener {
     }
     public void playState(int code) {
         if (code == KeyEvent.VK_W) {
+
             upPressed = true;
         }
 
@@ -179,6 +180,7 @@ public class KeyHandler implements KeyListener {
     }
     public void mapState(int code) {
         if(code == KeyEvent.VK_M) {
+
             gp.gameState = gp.playState;
         }
     }

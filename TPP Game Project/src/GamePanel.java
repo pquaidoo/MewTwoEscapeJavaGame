@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenHeight = tileSize * maxScreenRow; //576 px
     int FPS =60;
     TileManager tileM = new TileManager(this);
-
+    MouseInput mouseIn = new MouseInput();
     KeyHandler keyH= new KeyHandler(this);
     Sound music = new Sound();
     Sound se = new Sound();
@@ -69,6 +69,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);               //improved rendering performance
         this.addKeyListener(keyH);
+        this.addMouseListener(mouseIn);
         this.setFocusable(true);                    //makes gamePanel "focused to receive input", so basically makes input faster ig.
     }
 
