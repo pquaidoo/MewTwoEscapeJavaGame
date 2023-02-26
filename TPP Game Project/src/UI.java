@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 public class UI {
     GamePanel gp;
     Graphics2D g2;
+    public Font maruMonica;
     Font arial_40, arial_80B;
     BufferedImage heart_full, heart_half, heart_blank;
     BufferedImage keyImage;

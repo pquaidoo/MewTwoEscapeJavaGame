@@ -39,6 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
     public PathFinder pFinder = new PathFinder(this);
+    Map map = new Map(this);
     Thread gameThread;                              //Creates time in game for FPS , implements runnable, calls run method
 
 
@@ -58,6 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int dialogueState = 3;
     public final int characterState = 4;
     public final int gameOverState = 6;
+    public final int mapState = 10;
 
     /**
      * Constructor for game panel that instantiates screen size, color, input and other cool jazz.
@@ -196,6 +198,11 @@ public class GamePanel extends JPanel implements Runnable {
             ui.draw(graphics2);
         }
 
+        //MAP SCREEN
+        else if(gameState == mapState) {
+            map.drawFullMapScreen(graphics2);
+        }
+
         //OTHER
         else{
 
@@ -240,6 +247,9 @@ public class GamePanel extends JPanel implements Runnable {
             }
             //EMPTY CHARACTER LIST
             characterList.clear();
+
+            // MINI MAP
+            map.drawMiniMap(graphics2);
 
             //UI
             ui.draw(graphics2);
