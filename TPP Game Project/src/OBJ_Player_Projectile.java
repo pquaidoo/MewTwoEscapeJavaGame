@@ -6,7 +6,7 @@ public class OBJ_Player_Projectile extends Projectile{
         this.gp=gp;
 
         name = "pProj";
-        speed = 100;
+        speed = 15;
         maxLife = 80;
         life = maxLife;
         attack = 2;
@@ -26,13 +26,15 @@ public class OBJ_Player_Projectile extends Projectile{
         this.alive = alive;
         this.user = user;
         this.life = this.maxLife;
+
         double distX=(mx-(gp.player.worldX));
         double distY=(my-(gp.player.worldY));
-        VelX = (distX)/speed;
-        VelY = (distY)/speed;
+        double dist = Math.sqrt((Math.pow(distX,2)+Math.pow(distY,2)));
+        VelX = (distX/dist)*speed;
+        VelY = (distY/dist)*speed;
 
         System.out.println("world Position: "+gp.player.worldX/gp.tileSize +", "+gp.player.worldY/gp.tileSize);
-        System.out.println("slope: "+distX +", "+distY);
+        System.out.println("slope: "+distX +", "+distY+", "+dist);
 
         System.out.println("Vel: "+VelX +", "+VelY);
 

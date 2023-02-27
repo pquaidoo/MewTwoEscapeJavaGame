@@ -22,7 +22,7 @@ public class Player extends Character{
         screenX = gp.screenWidth/2 - gp.tileSize/2;
         screenY = gp.screenHeight/2 - gp.tileSize/2;  //sets camera size
 
-        solidArea = new Rectangle(8,16,32,32);
+        solidArea = new Rectangle(16,16,32,48);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
@@ -43,7 +43,7 @@ public class Player extends Character{
     public void setDefaultValues(){
         worldX = gp.tileSize * 125;
         worldY = gp.tileSize * 125;
-        speed = 20;
+        speed = 10;
         //PLAYER STATUS
         maxLife = 6;
         life = maxLife;
@@ -85,14 +85,14 @@ public class Player extends Character{
         //up1. ImageIO.read(getClass().getResourceAsStream("TPP Game Project/res/player/boy_up_1"));
         //what was used in tutorial ^
         int i=2;
-        up1 = setup("TPP Game Project/res/player/mewtwo_up_1",gp.tileSize,gp.tileSize);
-        up2 = setup("TPP Game Project/res/player/mewtwo_up_2",gp.tileSize,gp.tileSize);
-        down1 = setup("TPP Game Project/res/player/mewtwo_down_1",gp.tileSize,gp.tileSize);
-        down2 = setup("TPP Game Project/res/player/mewtwo_down_2",gp.tileSize,gp.tileSize);
-        right1 = setup("TPP Game Project/res/player/mewtwo_right_1",gp.tileSize,gp.tileSize);
-        right2 = setup("TPP Game Project/res/player/mewtwo_right_2",gp.tileSize,gp.tileSize);
-        left1 = setup("TPP Game Project/res/player/mewtwo_left_1",gp.tileSize,gp.tileSize);
-        left2 = setup("TPP Game Project/res/player/mewtwo_left_2",gp.tileSize,gp.tileSize);
+        up1 = setup("TPP Game Project/res/player/super_mewtwo_up_1",gp.tileSize,gp.tileSize*i);
+        up2 = setup("TPP Game Project/res/player/super_mewtwo_up_2",gp.tileSize,gp.tileSize*i);
+        down1 = setup("TPP Game Project/res/player/super_mewtwo_down_1",gp.tileSize,gp.tileSize*i);
+        down2 = setup("TPP Game Project/res/player/super_mewtwo_down_2",gp.tileSize,gp.tileSize*i);
+        right1 = setup("TPP Game Project/res/player/super_mewtwo_right_1",gp.tileSize,gp.tileSize*i);
+        right2 = setup("TPP Game Project/res/player/super_mewtwo_right_2",gp.tileSize,gp.tileSize*i);
+        left1 = setup("TPP Game Project/res/player/super_mewtwo_left_1",gp.tileSize,gp.tileSize*i);
+        left2 = setup("TPP Game Project/res/player/super_mewtwo_left_2",gp.tileSize,gp.tileSize*i);
     }
     public void getPlayerAttackImage(){
         attackUp1 = setup("TPP Game Project/res/player/boy_attack_up_1",gp.tileSize,gp.tileSize*2);
@@ -239,6 +239,7 @@ public class Player extends Character{
             shotAvailableCounter = 0;
 
             gp.playSE(8);
+            mouseIn.mousePress=false;
         }
 
         if(invincible == true) {

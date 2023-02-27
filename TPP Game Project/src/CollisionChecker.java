@@ -16,7 +16,7 @@ public class CollisionChecker { //test
         int charTopRow = charTopWorldY / gp.tileSize;
         int charBottomRow = charBottomWorldY / gp.tileSize;
 
-        int tileNum1, tileNum2;
+        int tileNum1, tileNum2, tileNum3, tileNum4;
 
         switch (chara.direction) {
             case "up":
@@ -84,7 +84,20 @@ public class CollisionChecker { //test
                     chara.collisionOn = true;
                 }
                 break;
+            case "polar":
+                charTopRow = (charTopWorldY ) / gp.tileSize;
+                charBottomRow = (charBottomWorldY) / gp.tileSize;
+                charRightCol = (charRightWorldX) / gp.tileSize;
+                charLeftCol = (charLeftWorldX) / gp.tileSize;
+                tileNum1 = gp.tileM.mapTileNum[gp.currentMap][charLeftCol][charBottomRow];
+                tileNum2 = gp.tileM.mapTileNum[gp.currentMap][charRightCol][charBottomRow];
+                tileNum3 = gp.tileM.mapTileNum[gp.currentMap][charLeftCol][charTopRow];
+                tileNum4 = gp.tileM.mapTileNum[gp.currentMap][charRightCol][charTopRow];
+                if (gp.tileM.Tiles[tileNum1].collision == true || gp.tileM.Tiles[tileNum2].collision == true
+                        || gp.tileM.Tiles[tileNum3].collision == true || gp.tileM.Tiles[tileNum4].collision == true) {
+                    chara.collisionOn = true;
 
+                }
         }
     }
 

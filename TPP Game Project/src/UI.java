@@ -180,7 +180,7 @@ public class UI {
         //BLUE BOY IMAGE
         x = gp.screenWidth/2-(gp.tileSize*2)/2;
         y +=gp.tileSize*2;
-        g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
+        g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*4, null);
 
         //MENU
         g2.setFont(g2.getFont().deriveFont(Font.BOLD,48F));

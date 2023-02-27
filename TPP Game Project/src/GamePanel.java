@@ -81,7 +81,7 @@ public class GamePanel extends JPanel implements Runnable {
         gameState = titleState;
     }
     public void retry() {
-        player.speed = 4; //temp fix
+        player.speed = 10; //temp fix
         player.setDefaultPositions();
         player.resetoreLifeAndMan();
         aSetter.setObject();
@@ -211,6 +211,7 @@ public class GamePanel extends JPanel implements Runnable {
             tileM.draw(graphics2);                          //Tiles before player so tiles don't cover player.
 
             characterList.add(player);
+
             for(int i = 0; i< npc[0].length;i++){
                 if(npc[currentMap][i]!=null){
                     characterList.add(npc[currentMap][i]);
@@ -246,6 +247,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
             }
+            tileM.draw2(graphics2);
             //EMPTY CHARACTER LIST
             characterList.clear();
 

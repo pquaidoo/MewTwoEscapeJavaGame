@@ -28,6 +28,7 @@ public class Projectile extends Character{
             }
             //Prevents player from shooting through tiles
             gp.cChecker.checkTile(this);
+            //System.out.println(collisionOn);
             if(collisionOn==true){
                 alive = false;
                 gp.playSE(8);

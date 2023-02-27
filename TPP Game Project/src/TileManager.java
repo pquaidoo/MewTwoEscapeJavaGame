@@ -118,5 +118,38 @@ public class TileManager {
             }
 
         }
+    public void draw2(Graphics2D graphics2) {
+        int worldCol = 0;
+        int worldRow = 0;
+
+        while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
+
+            int tileNum = mapTileNum[gp.currentMap][worldCol][worldRow];
+
+
+            //usually would display only screen size from 0,0
+            //with this figures out where player is and displays pixels surrounding them.
+            //+gp.player.screenX screen makes it so player is not displayed in right top corner.
+            int worldX = worldCol * gp.tileSize;
+            int worldY = worldRow * gp.tileSize;
+            int screenX = worldX - gp.player.worldX + gp.player.screenX;
+            int screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+
+            if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
+                    worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
+                    worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
+                    worldY - gp.tileSize < gp.player.worldY + gp.player.screenY && tileNum==2) {//doesn't display pixels if its within camera
+
+                graphics2.drawImage(Tiles[tileNum].image, screenX, screenY, null);
+            }
+            worldCol++;
+
+            if (worldCol == gp.maxWorldCol) {
+                worldCol = 0;
+                worldRow++;
+            }
+        }
+    }
 
 }

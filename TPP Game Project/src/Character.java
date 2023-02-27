@@ -32,8 +32,8 @@ public class Character {
     public int coin;
     public Character currentWeapon;
     public Character currentShield;
-    int mx;//Mouse position
-    int my;
+    double mx;//Mouse position
+    double my;
    double VelX;
     double VelY;
 
