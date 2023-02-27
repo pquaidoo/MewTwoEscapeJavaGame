@@ -21,7 +21,7 @@ public class MouseInput implements MouseListener {
         @Override
         public void mousePressed(MouseEvent e) {
                 mx = (e.getX() + (gp.player.worldX)-gp.player.screenX);
-                my = (e.getY() + (gp.player.worldY-gp.player.screenY));
+                my = (e.getY() + (gp.player.worldY)-gp.player.screenY);
 
                 System.out.println("---------------------------------");
                 System.out.println("Mouse: "+mx +", "+my);
