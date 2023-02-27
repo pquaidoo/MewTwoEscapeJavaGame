@@ -22,7 +22,7 @@ public class Player extends Character{
         screenX = gp.screenWidth/2 - gp.tileSize/2;
         screenY = gp.screenHeight/2 - gp.tileSize/2;  //sets camera size
 
-        solidArea = new Rectangle(16,16,32,48);
+        solidArea = new Rectangle(16,16,32,36);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
