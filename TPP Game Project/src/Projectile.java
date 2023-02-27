@@ -15,10 +15,11 @@ public class Projectile extends Character{
         this.user = user;
         this.life = this.maxLife;
     }
+
     public void update() {
 
         if(user == gp.player) {
-            System.out.println(direction);
+            //System.out.println(direction);
             int monsterIndex = gp.cChecker.checkCharacter(this, gp.monster);
             if(monsterIndex != 999) {
                 gp.player.damageMonster(monsterIndex, attack);
@@ -46,7 +47,7 @@ public class Projectile extends Character{
         }
         //
         //
-         System.out.println(direction);
+         //System.out.println(direction);
         switch (direction) {
             case "up": worldY -= speed; break;
             case "down": worldY += speed; break;
@@ -60,8 +61,9 @@ public class Projectile extends Character{
                             worldY -= speed; break;
             case "down-left": worldX -= speed;
                               worldY += speed; break;
-            case "polar": System.out.println(worldX-=speed);
-                worldX-=speed;
+            case "polar": //System.out.println(worldX+ ", "+ worldY);
+                worldX+=VelX;
+                worldY+=VelY;
                            break;
         }
 

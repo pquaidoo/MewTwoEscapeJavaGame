@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenHeight = tileSize * maxScreenRow; //576 px
     int FPS =60;
     TileManager tileM = new TileManager(this);
-    MouseInput mouseIn = new MouseInput();
+    MouseInput mouseIn = new MouseInput(this);
     KeyHandler keyH= new KeyHandler(this);
     Sound music = new Sound();
     Sound se = new Sound();
@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     // ENTITY AND OBJECT
-    public Player player = new Player(this, keyH);
+    public Player player = new Player(this, keyH, mouseIn);
     public Character obj[][] = new Character[maxMap][10];
     public Character npc[][] = new Character[maxMap][10];
     public Character monster[][] = new Character[maxMap][20];

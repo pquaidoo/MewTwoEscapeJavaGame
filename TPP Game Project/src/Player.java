@@ -15,7 +15,7 @@ public class Player extends Character{
     public final int screenY;
     int hasKey = 0;
     public boolean attackCanceled = false;
-    public Player(GamePanel gp, KeyHandler keyH){
+    public Player(GamePanel gp, KeyHandler keyH, MouseInput mouseIn){
         super(gp);
         this.mouseIn = mouseIn;
         this.keyH=keyH;
@@ -231,11 +231,11 @@ public class Player extends Character{
             // SET DEFAULT COORDINATES, DIRECTION AND USER
             OBJ_Player_Projectile proj = new OBJ_Player_Projectile(gp);
 
-            proj.set(worldX, worldY, mx, my, "polar", true, this);
+            proj.set(worldX, worldY, mouseIn.mx, mouseIn.my, "polar", true, this);
 
             // ADD IT TO THE LIST
             gp.projectileList.add(proj);
-
+            //System.out.println(gp.projectileList);
             shotAvailableCounter = 0;
 
             gp.playSE(8);

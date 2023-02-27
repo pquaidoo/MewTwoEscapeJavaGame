@@ -189,7 +189,7 @@ public class Character {
                 worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
             switch(direction) {
-                case "up":
+                case "up", "polar":
                     if (spriteNum==1){
                         image = up1;
                     }
