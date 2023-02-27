@@ -21,10 +21,13 @@ public class MouseInput implements MouseListener {
         @Override
         public void mousePressed(MouseEvent e) {
 
-                mx = (e.getX() + (gp.player.screenX/gp.tileSize));
-                my = (e.getY() + (gp.player.screenY/gp.tileSize));
-                System.out.println("Mouse: "+e.getX() +", "+e.getY());
-                System.out.println("firing");
+                mx = (e.getX() + (gp.player.worldX)-gp.player.screenX);
+                my = (e.getY() + (gp.player.worldY-gp.player.screenY));
+                System.out.println("---------------------------------");
+                System.out.println("Mouse: "+mx +", "+my);
+               // System.out.println("getx"+e.getX());
+                //System.out.println("screen: "+gp.player.screenX+", "+gp.player.screenY);
+
                 mousePress=true;
 
         }
