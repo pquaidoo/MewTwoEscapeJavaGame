@@ -1,6 +1,6 @@
-public class OBJ_ElecticBall extends Projectile{
+public class OBJ_Magnamite_Proj extends Projectile {
     GamePanel gp;
-    public OBJ_ElecticBall(GamePanel gp) {
+    public OBJ_Magnamite_Proj(GamePanel gp) {
         super(gp);
         this.gp = gp;
 
@@ -25,3 +25,4 @@ public class OBJ_ElecticBall extends Projectile{
         left2 = setup("TPP Game Project/res/Projectile/Electric_down_1",gp.tileSize,gp.tileSize);
     }
 }
+

@@ -44,6 +44,7 @@ public class Projectile extends Character{
             life--;
             if(life <= 0) {
                 alive = false;
+                System.out.println("test");
             }
         }
         //

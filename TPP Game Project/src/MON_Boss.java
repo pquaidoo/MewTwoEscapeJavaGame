@@ -10,7 +10,7 @@ public class MON_Boss extends Character {
         life = maxLife;
         attack = 5;
         defense = 0;
-        projectile = new OBJ_ElecticBall(gp);
+        projectile = new OBJ_Magnazone_Proj(gp);
 
 
         solidArea.x = 3;

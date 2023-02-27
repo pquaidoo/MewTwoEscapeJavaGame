@@ -1,6 +1,5 @@
-import java.util.Random;
-
 public class MON_Static_Up extends Character {
+    private int counter;
     public MON_Static_Up(GamePanel gp) {
         super(gp);
         direction = "up";
@@ -9,9 +8,9 @@ public class MON_Static_Up extends Character {
         speed = 1;
         maxLife = 15;
         life = maxLife;
-        attack = 5;
+        attack = 7;
         defense = 0;
-        projectile = new OBJ_ElecticBall(gp);
+        projectile = new OBJ_Electode_Proj(gp);
 
 
         solidArea.x = 3;
@@ -34,13 +33,18 @@ public class MON_Static_Up extends Character {
         right2 = setup("TPP Game Project/res/monster/elec_up_2",gp.tileSize,gp.tileSize);
     }
     public void setAction() {
-
-        int i = new Random().nextInt(100)+1;
-        if(i>90&&projectile.alive==false&&shotAvailableCounter == 45){
+        counter++;
+        if(counter > 60 && shotAvailableCounter == 45) {
             projectile.set(worldX, worldY, direction, true, this);
             gp.projectileList.add(projectile);
-            shotAvailableCounter=0;//d
+            counter = 0;
         }
+//        int i = new Random().nextInt(100)+1;
+//        if(i>90&&projectile.alive==false&&shotAvailableCounter == 45){
+//            projectile.set(worldX, worldY, direction, true, this);
+//            gp.projectileList.add(projectile);
+//            shotAvailableCounter=0;//d
+//        }
     }
     public void update() {
 

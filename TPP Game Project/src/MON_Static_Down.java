@@ -1,6 +1,5 @@
-import java.util.Random;
-
 public class MON_Static_Down extends Character {
+    private int counter;
     public MON_Static_Down(GamePanel gp) {
         super(gp);
         type = 2;
@@ -10,7 +9,7 @@ public class MON_Static_Down extends Character {
         life = maxLife;
         attack = 5;
         defense = 0;
-        projectile = new OBJ_ElecticBall(gp);
+        projectile = new OBJ_Electode_Proj(gp);
 
 
         solidArea.x = 3;
@@ -33,13 +32,18 @@ public class MON_Static_Down extends Character {
         right2 = setup("TPP Game Project/res/monster/elec_down_2",gp.tileSize,gp.tileSize);
     }
     public void setAction() {
-
-        int i = new Random().nextInt(100)+1;
-        if(i>90&&projectile.alive==false&&shotAvailableCounter == 45){
+        counter++;
+        if(counter > 60 && shotAvailableCounter == 45) {
             projectile.set(worldX, worldY, direction, true, this);
             gp.projectileList.add(projectile);
-            shotAvailableCounter=0;//d
+            counter = 0;
         }
+//        int i = new Random().nextInt(100)+1;
+//        if(i>90&&projectile.alive==false&&shotAvailableCounter == 45){
+//            projectile.set(worldX, worldY, direction, true, this);
+//            gp.projectileList.add(projectile);
+//            shotAvailableCounter=0;//d
+//        }
     }
     public void update() {
 

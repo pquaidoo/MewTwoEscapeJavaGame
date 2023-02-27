@@ -11,7 +11,7 @@ public class MON_GreenSlime extends Character {
         life = maxLife;
         attack = 5;
         defense = 0;
-        projectile = new OBJ_ElecticBall(gp);
+        projectile = new OBJ_Magnamite_Proj(gp);
 
 
         solidArea.x = 3;
