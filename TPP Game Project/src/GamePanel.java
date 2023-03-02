@@ -47,11 +47,11 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH, mouseIn);
     public Character obj[][] = new Character[maxMap][10];
     public Character npc[][] = new Character[maxMap][10];
-    public Character monster[][] = new Character[maxMap][20];
+    public Character monster[][] = new Character[maxMap][26];
     public ArrayList<Character> projectileList = new ArrayList<>();
     ArrayList<Character> characterList =new ArrayList<>();
 
-    // GAME STATE
+    // GAME STATEd
     public final int titleState = 0;
     public int gameState;
     public final int playState = 1;
