@@ -20,8 +20,6 @@ public class OBJ_Player_Projectile extends Projectile{
         if(user!=gp.player){
             speed =5;
         }
-
-
         this.worldX = worldX;
         this.worldY = worldY;
         this.mx=mx;
