@@ -9,6 +9,8 @@ import java.io.IOException;
  */
 public class Player extends Character{
     MouseInput mouseIn;
+    int slowSpeed;
+    int currentSpeed;
 
     KeyHandler keyH;
     public final int screenX;
@@ -44,6 +46,8 @@ public class Player extends Character{
         worldX = gp.tileSize * 125;
         worldY = gp.tileSize * 125;
         speed = 10;
+        slowSpeed = speed-6;
+         currentSpeed =speed;
         //PLAYER STATUS
         maxLife = 6;
         life = maxLife;
@@ -230,16 +234,20 @@ public class Player extends Character{
         if( gp.mouseIn.mousePress == true && shotAvailableCounter == 10) {
             // SET DEFAULT COORDINATES, DIRECTION AND USER
             OBJ_Player_Projectile proj = new OBJ_Player_Projectile(gp);
-
+            gp.player.speed = slowSpeed;
             proj.set(worldX, worldY, mouseIn.mx, mouseIn.my, "polar", true, this);
 
             // ADD IT TO THE LIST
             gp.projectileList.add(proj);
-            //System.out.println(gp.projectileList);
+            System.out.println(speed);
             shotAvailableCounter = 0;
+
 
             gp.playSE(8);
             mouseIn.mousePress=false;
+        }else if(slowCounter == 15){
+            speed = currentSpeed;
+            slowCounter = 0;
         }
 
         if(invincible == true) {
@@ -253,6 +261,9 @@ public class Player extends Character{
         if(shotAvailableCounter < 10) {
             shotAvailableCounter++;
         }
+        if(slowCounter < 15) {
+            slowCounter++;
+        }
         if(keyH.godModeOn == false) {
             if(life <= 0) {
                 gp.gameState = gp.gameOverState;
@@ -260,6 +271,7 @@ public class Player extends Character{
                 gp.playSE(9);
             }
         }
+
     }
     public void attacking(){
         spriteCounter++;

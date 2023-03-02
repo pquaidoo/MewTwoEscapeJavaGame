@@ -54,6 +54,7 @@ public class Character {
     //COUNTER
     public int invincibleCounter = 0;
     public int spriteCounter = 0;   //Used as timer to determine when to switch sprites.
+    public int slowCounter = 0;
     public int shotAvailableCounter = 0;
     public int actionLockCounter = 0;
     int dyingCounter = 0;
