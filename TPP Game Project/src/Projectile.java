@@ -65,6 +65,7 @@ public class Projectile extends Character{
             case "polar": //System.out.println(worldX+ ", "+ worldY);
                 worldX+=VelX;
                 worldY+=VelY;
+                System.out.println("ha");
                            break;
         }
 

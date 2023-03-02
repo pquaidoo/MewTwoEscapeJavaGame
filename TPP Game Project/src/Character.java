@@ -93,7 +93,7 @@ public class Character {
                 break;
             case "down":
                 direction = "up";
-                System.out.println("i swear to god");
+                //System.out.println("i swear to god");
                 break;
             case "left":
                 direction = "right";
@@ -312,59 +312,47 @@ public class Character {
 
         gp.pFinder.setNodes(startCol,startRow,goalCol, goalRow);
         if(gp.pFinder.search()==true){// IF ITS FOUND A PATH
-            //System.out.println(("tired as hell"));
+
 
             //NEXT WORLDX & WORLDY
             int nextX = gp.pFinder.pathList.get(0).col * gp.tileSize;
             int nextY = gp.pFinder.pathList.get(0).row * gp.tileSize;
-           //System.out.println("NPC goal: "+nextX/gp.tileSize +","+ nextY/gp.tileSize);
-            //entity'es solid area pos
+
             int enLeftX = worldX-1 +solidArea.x;
             int enRightX = worldX-1 + solidArea.x + solidArea.width;
             int enTopY = worldY + solidArea.y;
             int enBottomY = worldY + solidArea.y + solidArea.height;
-            //System.out.println("NPC current: "+enLeftX/gp.tileSize + ", "+ enTopY/gp.tileSize);
 
 
             if(enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
                 direction = "up";
-                //System.out.println("up");
-
 
             } else if(enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
                 direction = "down";
             } else if(enTopY >= nextY && enBottomY < nextY + gp.tileSize){
                 //left or right
                 if (enLeftX > nextX) {
-                    System.out.println("lefty");
                     direction = "left";
 
                 }
                 if(enLeftX < nextX){
-                    System.out.println("righty");
                     direction = "right";
                 }
             }
             else if(enTopY > nextY && enLeftX > nextX){
                 //up or left
                 direction = "up";
-                System.out.println("up left");
                 checkCollision();
-                //System.out.println(collisionOn);
 
                 if(collisionOn == true){
-                    System.out.println("up left collision");
                     direction = "left";
                 }
             } else if (enTopY > nextY && enLeftX < nextX) {
                 //up or right
                 direction = "up";
-                System.out.println("up right");
-                //System.out.println(enTopY > nextY && enLeftX < nextX);
                 checkCollision();
-                //System.out.println(collisionOn);
+
                 if(collisionOn==true){
-                    System.out.println("up right collision");
                     direction = "right";
                 }
 
@@ -374,7 +362,7 @@ public class Character {
                 direction= "down";
                 checkCollision();
                 if(collisionOn == true){
-                    System.out.println("down left");
+
                     direction = "left";
                 }
             } else if(enTopY < nextY && enLeftX < nextX){
@@ -382,12 +370,8 @@ public class Character {
                 direction = "down";
                 checkCollision();
                 if(collisionOn == true){
-                    //System.out.println("righty3");
                     direction = "right";
                 }
-
-//            }else{
-//                //System.out.println("gaming");
             }
 
             //if reaches goal stops search

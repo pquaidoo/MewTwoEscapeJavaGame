@@ -235,7 +235,7 @@ public class Player extends Character{
             // SET DEFAULT COORDINATES, DIRECTION AND USER
             OBJ_Player_Projectile proj = new OBJ_Player_Projectile(gp);
             gp.player.speed = slowSpeed;
-            proj.set(worldX, worldY, mouseIn.mx, mouseIn.my, "polar", true, this);
+            proj.set(gp.player.worldX, gp.player.worldY, mouseIn.mx, mouseIn.my, "polar", true, this);
 
             // ADD IT TO THE LIST
             gp.projectileList.add(proj);

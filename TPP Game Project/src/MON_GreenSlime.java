@@ -61,10 +61,11 @@ public class MON_GreenSlime extends Character {
             searchPath(goalCol, goalRow);
 
             int i = new Random().nextInt(100)+1;
-            if(i>97&&projectile.alive==false&&shotAvailableCounter == 45){
-                projectile.set(worldX, worldY, direction, true, this);
+            if(i>97 && shotAvailableCounter == 45){
+                OBJ_Player_Projectile proj = new OBJ_Player_Projectile(gp);
+                proj.set(this.worldX, this.worldY, gp.player.worldX, gp.player.worldY, "polar", true, this);
                 gp.projectileList.add(projectile);
-                shotAvailableCounter=0;//d
+                shotAvailableCounter=0;
             }
 
         }else {
