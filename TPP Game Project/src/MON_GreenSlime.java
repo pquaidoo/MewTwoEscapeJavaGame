@@ -64,7 +64,7 @@ public class MON_GreenSlime extends Character {
             if(i>97 && shotAvailableCounter == 45){
                 OBJ_Player_Projectile proj = new OBJ_Player_Projectile(gp);
                 proj.set(this.worldX, this.worldY, gp.player.worldX, gp.player.worldY, "polar", true, this);
-                gp.projectileList.add(projectile);
+                gp.projectileList.add(proj);
                 shotAvailableCounter=0;
             }
 

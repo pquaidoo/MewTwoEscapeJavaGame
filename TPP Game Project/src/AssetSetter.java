@@ -32,9 +32,6 @@ public class AssetSetter {
         gp.obj[mapNum][5].worldX = 125 * gp.tileSize;
         gp.obj[mapNum][5].worldY = 72 * gp.tileSize;
 
-
-
-
         gp.obj[mapNum][6] = new OBJ_Chest(gp);
         gp.obj[mapNum][6].worldX = 125 * gp.tileSize;
         gp.obj[mapNum][6].worldY = 68 * gp.tileSize;
@@ -159,13 +156,6 @@ public class AssetSetter {
         gp.monster[mapNum][25] = new MON_GreenSlime(gp);
         gp.monster[mapNum][25].worldX = gp.tileSize * 171;
         gp.monster[mapNum][25].worldY = gp.tileSize * 83;
-
-
-
-
-
-
-
 
     }
 }

@@ -17,6 +17,10 @@ public class OBJ_Player_Projectile extends Projectile{
 
     }
     public void set(int worldX, int worldY, int mx, int my, String direction,boolean alive, Character user) {
+        if(user!=gp.player){
+            speed =5;
+        }
+
 
         this.worldX = worldX;
         this.worldY = worldY;
