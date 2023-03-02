@@ -201,7 +201,7 @@ public class Player extends Character{
             }
 
             attackCanceled = false;
-           gp.keyH.enterPressed = false;//resets
+           gp.keyH.enterPressed = false;    //resets
 
 
 
