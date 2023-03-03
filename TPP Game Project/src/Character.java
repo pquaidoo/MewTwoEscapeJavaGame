@@ -463,14 +463,13 @@ public class Character {
 
 
             //NEXT WORLDX & WORLDY
-            int nextX = gp.pFinder.pathList.get(0).col * gp.tileSize;
+            int nextX = gp.pFinder.pathList.get(0).col * gp.tileSize + 10;
             int nextY = gp.pFinder.pathList.get(0).row * gp.tileSize;
 
             int enLeftX = worldX-1 +solidArea.x;
-            int enRightX = worldX-1 + solidArea.x + solidArea.width;
+            int enRightX = worldX-1 + solidArea.x + solidArea.width ;
             int enTopY = worldY + solidArea.y;
             int enBottomY = worldY + solidArea.y + solidArea.height;
-
 
             if(enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
                 direction = "up";
