@@ -12,11 +12,11 @@ public class MON_Boss extends Character {
         defense = 0;
         projectile = new OBJ_ElecticBall(gp);
 
-
-        solidArea.x = 3;
-        solidArea.y = 18;
-        solidArea.width = 42;
-        solidArea.height = 30;
+        int size = gp.tileSize*5;
+        solidArea.x = 48;
+        solidArea.y = 48;
+        solidArea.width = size - 48*2;
+        solidArea.height = size - 48;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
@@ -70,24 +70,12 @@ public class MON_Boss extends Character {
             speed++;
         }
         if(life == 0) {
-
             BossDead = true;
         }
+        if(getTileDistance(gp.player) < 10) {
+            moveTowardPlayer(60);
+        } else {
 
-        if(onPath == true ) {
-            int goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
-            int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
-
-            searchPath(goalCol, goalRow);
-
-            int i = new Random().nextInt(100)+1;
-            if(i>97&&projectile.alive==false&&shotAvailableCounter == 45){
-                projectile.set(worldX, worldY, direction, true, this);
-                gp.projectileList.add(projectile);
-                shotAvailableCounter=0;//d
-            }
-
-        }else {
             actionLockCounter++;
 
             if (actionLockCounter == 120) { // Slows down NPC so he moves every 2 seconds (60FPS)
@@ -110,6 +98,7 @@ public class MON_Boss extends Character {
                 actionLockCounter = 0;
             }
         }
+
 
     }
     public void checkDrop() {

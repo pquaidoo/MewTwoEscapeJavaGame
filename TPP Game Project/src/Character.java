@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Random;
 
 /**
  *  Template class for Player, Enemy, NPC
@@ -77,6 +78,34 @@ public class Character {
 
     public Character(GamePanel gp) {
         this.gp = gp;
+    }
+    public int getCenterX() {
+        int centerX = worldX + left1.getWidth()/2;
+        return centerX;
+    }
+    public int getCenterY() {
+        int centerY = worldY + up1.getHeight()/2;
+        return centerY;
+    }
+    public int getXdistance(Character target) {
+        int xDistance = Math.abs(getCenterX() - target.getCenterX());
+        return xDistance;
+    }
+    public int getYdistance(Character target) {
+        int yDistance = Math.abs(getCenterY() - target.getCenterY());
+        return yDistance;
+    }
+    public int getTileDistance(Character target) {
+        int tileDistance = (getXdistance(target) + getYdistance(target))/gp.tileSize;
+        return tileDistance;
+    }
+    public int getGoalCol(Character target) {
+        int goalCol = (target.worldX + target.solidArea.x) / gp.tileSize;
+        return goalCol;
+    }
+    public int getGoalRow(Character target) {
+        int goalRow = (target.worldY + target.solidArea.y) / gp.tileSize;
+        return goalRow;
     }
     public void setAction() {}
     public void damageReaction() {};
@@ -165,7 +194,126 @@ public class Character {
             shotAvailableCounter++;
         }
     }
+    public void checkShootOrNot(int rate, int shotInterval) {
+        int i = new Random().nextInt(rate);
+        if(i == 0 && projectile.alive == false && shotAvailableCounter == shotInterval){
+            OBJ_Player_Projectile proj = new OBJ_Player_Projectile(gp);
+            proj.set(this.worldX, this.worldY, gp.player.worldX, gp.player.worldY, "polar", true, this);
+            gp.projectileList.add(proj);
+            shotAvailableCounter=0;
+        }
+    }
+    public void checkStartChasingOrNot(Character target, int distance, int rate) {
+        if(getTileDistance(target) < distance) {
+            int i = new Random().nextInt(rate);
+            if(i == 0) {
+                onPath = true;
+            }
+        }
+    }
+    public void checkStopChasingOrNot(Character target, int distance, int rate) {
+        if(getTileDistance(target) > distance) {
+            int i = new Random().nextInt(rate);
+            if(i == 0) {
+                onPath = false;
+            }
+        }
+    }
+    public void getRandomDirection() {
+        actionLockCounter++;
 
+        if(actionLockCounter == 120) {
+            Random random = new Random();
+            int i = random.nextInt(100)+1;
+
+            if (i <= 25) {
+                direction = "up";
+            }
+            if (i > 25 && i <= 50) {
+                direction = "down";
+            }
+            if (i > 50 && i <= 75) {
+                direction = "left";
+            }
+            if (i > 65 && i <= 100) {
+                direction = "right";
+            }
+
+            actionLockCounter = 0;
+        }
+    }
+    public void attacking(){
+        spriteCounter++;
+
+        if(spriteCounter <=5){//for speed of animation
+            spriteNum =1;
+
+        }if(spriteCounter>5 &&spriteCounter<=25){
+            spriteNum=2;
+
+            //SAVE CURRENT X, Y, AND SOLID AREA
+            int currentWorldX = worldX;
+            int currentWorldY = worldY;
+            int solidAreaWidth = solidArea.width;
+            int solidAreaHeight = solidArea.height;
+            //ADJUST PLAYER'S X,Y, AND SOLID AREA
+            switch(direction){
+                case"up":worldY-=attackArea.height; break;
+                case"down":worldY+=attackArea.height;break;
+                case"left":worldX-=attackArea.width;break;
+                case"right":worldX+=attackArea.width; break;
+
+            }
+            //attack area becomes solid area
+            solidArea.width = attackArea.width;
+            solidArea.height = attackArea.height;
+
+            if(type == 2) {
+                if(gp.cChecker.checkPlayer(this) == true) {
+                    damagePlayer(attack);
+                }
+            } else { // Player
+                //check monster collision with the updated worldx, worldy and solid area
+                int monsterIndex = gp.cChecker.checkCharacter(this,gp.monster);
+                gp.player.damageMonster(monsterIndex, attack);
+            }
+
+            worldX=currentWorldX;
+            worldY=currentWorldY;
+            solidArea.width = solidAreaWidth;
+            solidArea.height = solidAreaHeight;
+
+
+        }
+        if(spriteCounter>25){
+            spriteNum=1;
+            spriteCounter =0;
+            attacking=false;
+        }
+    }
+    public void moveTowardPlayer(int interval) {
+        actionLockCounter++;
+
+        if(actionLockCounter > interval) {
+            if(getXdistance(gp.player) > getYdistance(gp.player)) {
+                if(gp.player.getCenterX() < getCenterX()) {
+                    direction = "left";
+                }
+                else {
+                    direction = "right";
+                }
+            }
+            else if(getXdistance(gp.player) < getYdistance(gp.player)) {
+                if(gp.player.getCenterY() < getCenterY()) {
+                    direction = "up";
+                }
+                else {
+                    direction = "down";
+                }
+            }
+            actionLockCounter = 0;
+        }
+    }
     public void damagePlayer(int attack){
         if(gp.player.invincible == false) {
             // we can give damage
@@ -185,9 +333,9 @@ public class Character {
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-        if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
+        if (worldX + gp.tileSize*5 > gp.player.worldX - gp.player.screenX &&
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
+                worldY + gp.tileSize*5 > gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
             switch(direction) {
                 case "up", "polar":

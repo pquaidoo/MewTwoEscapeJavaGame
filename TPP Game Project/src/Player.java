@@ -273,48 +273,6 @@ public class Player extends Character{
         }
 
     }
-    public void attacking(){
-        spriteCounter++;
-
-        if(spriteCounter <=5){//for speed of animation
-            spriteNum =1;
-
-        }if(spriteCounter>5 &&spriteCounter<=25){
-            spriteNum=2;
-
-            //SAVE CURRENT X, Y, AND SOLID AREA
-            int currentWorldX = worldX;
-            int currentWorldY = worldY;
-            int solidAreaWidth = solidArea.width;
-            int solidAreaHeight = solidArea.height;
-            //ADJUST PLAYER'S X,Y, AND SOLID AREA
-            switch(direction){
-                case"up":worldY-=attackArea.height; break;
-                case"down":worldY+=attackArea.height;break;
-                case"left":worldX-=attackArea.width;break;
-                case"right":worldX+=attackArea.width; break;
-
-            }
-            //attack area becomes solid area
-            solidArea.width = attackArea.width;
-            solidArea.height = attackArea.height;
-            //check monster collision with the updated worldx, worldy and solid area
-            int monsterIndex = gp.cChecker.checkCharacter(this,gp.monster);
-            damageMonster(monsterIndex, attack);
-
-            worldX=currentWorldX;
-            worldY=currentWorldY;
-            solidArea.width = solidAreaWidth;
-            solidArea.height = solidAreaHeight;
-
-
-        }
-        if(spriteCounter>25){
-            spriteNum=1;
-            spriteCounter =0;
-            attacking=false;
-        }
-    }
     public void pickupObject(int i){
         if(i !=999){
 
