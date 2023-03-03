@@ -74,6 +74,15 @@ public class MON_Boss extends Character {
         }
         if(getTileDistance(gp.player) < 10) {
             moveTowardPlayer(60);
+            if(shotAvailableCounter == 45){
+                OBJ_Player_Projectile proj = new OBJ_Player_Projectile(gp);
+                proj.set(getCenterX(),getCenterY(), gp.player.worldX, gp.player.worldY, "polar", true, this);
+                gp.projectileList.add(proj);
+                shotAvailableCounter=0;
+            }
+
+
+
         } else {
 
             actionLockCounter++;
