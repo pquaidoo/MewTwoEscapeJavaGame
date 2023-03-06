@@ -32,7 +32,7 @@ public class Projectile extends Character{
             //System.out.println(collisionOn);
             if(collisionOn==true){
                 alive = false;
-                gp.playSE(8);
+                gp.playSE(1);
             }
             collisionOn = false;        //resets collision
         }

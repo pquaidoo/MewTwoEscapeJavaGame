@@ -11,6 +11,7 @@ import java.util.Random;
  */
 
 public class Character {
+
     GamePanel gp;
     public BufferedImage up1, up2, down1, down2, left1,left2, right1, right2;   //Instantiates Sprite Images.
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2,
@@ -21,6 +22,7 @@ public class Character {
     public boolean collision = false;
     public BufferedImage image, image2, image3;
     public boolean inRage = false;
+    public boolean isRage = false;
     public boolean BossDead = false;
     String dialogues[] = new String[20];
     public int level;
@@ -48,6 +50,8 @@ public class Character {
     boolean attacking = false;
     public boolean alive = true;
     public boolean dying = false;
+    public boolean reviving  = false;
+
     boolean hpBarOn = false;
     public boolean onPath = false;
 
@@ -60,6 +64,7 @@ public class Character {
     public int actionLockCounter = 0;
     int dyingCounter = 0;
     int hpBarCounter = 0;
+    int drawRange =5;
 
 
     //CHARACTER ATTRIBUTES
@@ -141,7 +146,7 @@ public class Character {
         gp.cChecker.checkCharacter(this, gp.monster);
         boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
-        if(this.type == 2 && contactPlayer == true) {
+        if(this.type <=2 && contactPlayer == true) {
             damagePlayer(attack);
         }
     }
@@ -268,7 +273,7 @@ public class Character {
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
 
-            if(type == 2) {
+            if(type <= 2) {
                 if(gp.cChecker.checkPlayer(this) == true) {
                     damagePlayer(attack);
                 }
@@ -328,15 +333,17 @@ public class Character {
 
     }
     public void draw(Graphics2D g2) {
-
+        if(drawRange>10){
+            System.out.println(drawRange);
+        }
         BufferedImage image = null;
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-        if (worldX + gp.tileSize*5 > gp.player.worldX - gp.player.screenX &&
-                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-                worldY + gp.tileSize*5 > gp.player.worldY - gp.player.screenY &&
-                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+        if (worldX + gp.tileSize*drawRange > gp.player.worldX - gp.player.screenX &&
+                worldX - gp.tileSize*drawRange < gp.player.worldX + gp.player.screenX &&
+                worldY + gp.tileSize*drawRange > gp.player.worldY - gp.player.screenY &&
+                worldY - gp.tileSize*drawRange < gp.player.worldY + gp.player.screenY) {
             switch(direction) {
                 case "up", "polar":
                     if (spriteNum==1){
@@ -373,7 +380,7 @@ public class Character {
                     break;
             }
             // Monster HP Bar
-            if(type == 2 && hpBarOn == true) {
+            if(type <= 2 && hpBarOn == true) {
 
                 double oneScale = (double)gp.tileSize/maxLife;
                 double hpBarValue = oneScale*life;
@@ -390,14 +397,37 @@ public class Character {
                     hpBarOn = false;
                 }
             }
+            if(type==3){
+                drawRange=80;
+                double oneScale = (double)gp.screenWidth/maxLife;
+                double hpBarValue = oneScale*life;
+
+                g2.setColor(new Color(35, 35, 35));
+                g2.fillRect(0, 0, gp.screenWidth, gp.tileSize);
+
+                g2.setColor(new Color(255, 0, 30));
+                g2.fillRect(1, 1,(int)hpBarValue, gp.tileSize-1);
+
+                hpBarCounter++;
+                if(hpBarCounter > 600) {
+                    hpBarCounter = 0;
+                    hpBarOn = false;
+                }
+            }
 
             if(invincible == true) {
                 hpBarOn = true;
                 hpBarCounter = 0;
                 changeAlpha(g2,0.4f);
+
             }
             if(dying == true) {
                 dyingAnimation(g2);
+                if(type==3){
+                    gp.stopMusic();
+                    gp.playMusic(0);
+                    gp.eHandler.setBossbattle(false);
+                }
             }
 
             g2.drawImage(image, screenX, screenY,null);
@@ -420,6 +450,21 @@ public class Character {
         if(dyingCounter > i*8) {
             dying = false;
             alive = false;
+        }
+    }
+    public void reviveAnimation(Graphics2D g2) {
+        dyingCounter++;
+        int i = 5;
+
+        if(dyingCounter <= 5) {changeAlpha(g2, 0f);}
+        if(dyingCounter > i && dyingCounter <= i*2) {changeAlpha(g2, 1f);}
+        if(dyingCounter > i*2 && dyingCounter <= i*3) {changeAlpha(g2, 0f);}
+        if(dyingCounter > i*3 && dyingCounter <= i*4) {changeAlpha(g2, 1f);}
+        if(dyingCounter > i*4 && dyingCounter <= i*5) {changeAlpha(g2, 0f);}
+        if(dyingCounter > i*5 && dyingCounter <= i*6) {changeAlpha(g2, 1f);}
+        if(dyingCounter > i*6 && dyingCounter <= i*7) {changeAlpha(g2, 0f);}
+        if(dyingCounter > i*7 && dyingCounter <= i*8) {changeAlpha(g2, 1f);}
+        if(dyingCounter > i*8) {
         }
     }
     public void changeAlpha(Graphics2D g2, float alphaValue) {

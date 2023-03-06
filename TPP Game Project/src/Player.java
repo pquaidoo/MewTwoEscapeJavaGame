@@ -61,7 +61,6 @@ public class Player extends Character{
         projectile = new OBJ_Fireball(gp);
         attack= getAttack();
         defense = getDefense();
-        System.out.println(speed);
     }
     public void setDefaultPositions() {
 
@@ -303,7 +302,7 @@ public class Player extends Character{
                 case "Chest":
                     gp.ui.gameFinished = true;
                     gp.stopMusic();
-                    gp.playSE(2);
+                    gp.playSE(0);//needs work
                     break;
             }
         }
@@ -356,7 +355,7 @@ public class Player extends Character{
                 gp.monster[gp.currentMap][i].invincible = true;
                 gp.monster[gp.currentMap][i].damageReaction();
                 System.out.println(gp.monster[gp.currentMap][i].life);
-                if(gp.monster[gp.currentMap][i].life<=0){
+                if(gp.monster[gp.currentMap][i].life<=0 && type==2 && gp.monster[gp.currentMap][i].reviving==false){
                     gp.monster[gp.currentMap][i].dying = true;
                 }
             }

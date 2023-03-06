@@ -3,6 +3,8 @@ import java.awt.*;
 public class EventHandler {
 
     GamePanel gp;
+    public boolean bossbattle = false;
+
     EventRect eventRect[][];
 
     int previousEventX, getPreviousEventY;
@@ -29,9 +31,20 @@ public class EventHandler {
             if(col == gp.maxWorldCol){
                 col = 0;
                 row++;
+
             }
         }
 
+    }
+    public boolean isBossbattlele(){
+        if(bossbattle==true){
+            return true;
+        }
+        return false;
+
+    }
+    public void setBossbattle(boolean bool){
+        bossbattle=bool;
     }
 
     public void checkEvent() {
@@ -101,8 +114,9 @@ public class EventHandler {
         gp.player.worldX = gp.tileSize * x;
         gp.player.worldY = gp.tileSize * y;
         gp.stopMusic();
-        gp.playMusic(8);
+        gp.playMusic(2);
         gp.aSetter.setBoss();
+        bossbattle=true;
     }
     public void damagePit(int col, int row, int gameState) {
 

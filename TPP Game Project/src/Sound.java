@@ -14,9 +14,9 @@ public class Sound {
         //soundURL[0] = getClass().getResource("/TPP Game Project/res/sound/BlueBoyAdventure.wav");
         File file = new File("TPP Game Project/res/sound/BlueBoyAdventure.wav");//Alternative way to get sound
         soundURL[0] = file.toURI().toURL();
-        File file1 =new File("TPP Game Project/res/sound/coin.wav");
+        File file1 =new File("TPP Game Project/res/sound/impact.wav");
         soundURL[1] = file1.toURI().toURL();
-        File file2 = new File("TPP Game Project/res/sound/fanfare.wav");
+        File file2 = new File("TPP Game Project/res/sound/boss_theme2.wav");
         soundURL[2] = file2.toURI().toURL();
         File file3 = new File("TPP Game Project/res/sound/powerup.wav");
         soundURL[3] = file3.toURI().toURL();
@@ -28,7 +28,7 @@ public class Sound {
         soundURL[6] = file6.toURI().toURL();
         File file7 = new File("TPP Game Project/res/sound/swingweapon.wav");
         soundURL[7] = file7.toURI().toURL();
-        File file8 = new File("TPP Game Project/res/sound/boss_theme2.wav");
+        File file8 = new File("TPP Game Project/res/sound/shootprojectile.wav");
         soundURL[8] = file8.toURI().toURL();
         File file9 = new File("TPP Game Project/res/sound/gameover.wav");
         soundURL[9] = file9.toURI().toURL();

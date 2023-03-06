@@ -89,6 +89,7 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setMonster();
         aSetter.setNPC();
         playMusic(0);
+        eHandler.setBossbattle(false);
     }
     public void restart() {
         player.setDefaultValues();
@@ -249,6 +250,9 @@ public class GamePanel extends JPanel implements Runnable {
 
             }
             tileM.draw2(graphics2);
+            if(eHandler.isBossbattlele()==true) {
+                monster[currentMap][2].draw(graphics2);
+            }
             //EMPTY CHARACTER LIST
             characterList.clear();
 

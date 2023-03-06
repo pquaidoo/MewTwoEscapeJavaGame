@@ -1,19 +1,23 @@
+import jdk.jfr.Event;
+
+import java.awt.*;
 import java.util.Random;
 
 public class MON_Boss extends Character {
     int tempPlayerX;
     int tempPlayerY;
+    int lives=1;
+
     int shotAvailableCounter1;
     public MON_Boss(GamePanel gp) {
         super(gp);
-        type = 2;
+        type = 3;
         name = "Boss";
         speed = 0;
-        maxLife = 30;
+        maxLife = 10;
         life = maxLife;
         attack = 10;
         defense = 0;
-        projectile = new OBJ_ElecticBall(gp);
 
         int size = gp.tileSize*5;
         solidArea.x = 48;
@@ -47,6 +51,16 @@ public class MON_Boss extends Character {
             left1 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
             left2 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
         }
+        if(isRage == true) {
+            up1 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
+            up2 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
+            down1 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
+            down2 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
+            right1 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
+            right2 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
+            left1 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
+            left2 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
+        }
     }
     public void update(){
         super.update();
@@ -66,28 +80,41 @@ public class MON_Boss extends Character {
         }
     }
     public void setAction() {
-
-
-        if(inRage == false && life < 15) {
+        if(isRage==true){
+            getImage();
+            speed++;
+            System.out.println("he is mister rage");
+        } else if(inRage == false && life < 50) {
             inRage = true;
             getImage();
             speed++;
         }
-        if(life == 0) {
-            BossDead = true;
-        }
-        if(getTileDistance(gp.player) < 10) {
-            moveTowardPlayer(60);
-            if(shotAvailableCounter1%30<=0&&shotAvailableCounter1-60<=0) {
-                System.out.println(shotAvailableCounter1);
 
-                OBJ_Boss_Projectile proj = new OBJ_Boss_Projectile(gp, this);
-                proj.set(getCenterX(), getCenterY(), tempPlayerX, tempPlayerY, "polar", true, this);
-                gp.projectileList.add(proj);
-            }
-            if(shotAvailableCounter1==60){
+        if(life == 0&&lives==0) {
+            BossDead = true;
+            gp.eHandler.setBossbattle(false);
+        }else if(life==1){
+            reviving=true;
+            Revive();
+            reviving=false;
+
+        }
+        if(getTileDistance(gp.player) < 100) {
+            moveTowardPlayer(60);
+            if(shotAvailableCounter1%25==0) {
+                System.out.println(shotAvailableCounter1+"\n"+"--------");
                 tempPlayerX=gp.player.worldX;
                 tempPlayerY=gp.player.worldY;
+                if(shotAvailableCounter%15==0) {
+                    System.out.println(shotAvailableCounter);
+
+                    OBJ_Boss_Projectile proj = new OBJ_Boss_Projectile(gp, this);
+                    proj.set(getCenterX(), getCenterY(), tempPlayerX, tempPlayerY, "polar", true, this);
+                    gp.projectileList.add(proj);
+                }
+            }
+            if(shotAvailableCounter1==50){
+
             }
             if(shotAvailableCounter1 == 100){
                     shotAvailableCounter1 = 0;
@@ -148,6 +175,19 @@ public class MON_Boss extends Character {
         }
 
     }
+    public void Revive(){
+        lives =0;
+        while(life!=maxLife){
+            life+=(double)life/10;
+            reviving=true;
+            isRage=true;
+        }
+        reviving=false;
+        invincible=false;
+
+
+    }
+
 }
 
 //        type = 2;

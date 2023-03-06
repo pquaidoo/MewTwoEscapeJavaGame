@@ -8,7 +8,7 @@ public class OBJ_Boss_Projectile extends Projectile{
 
 
             name = "pProj";
-            speed = 15;
+            speed = 20;
             maxLife = 80;
             life = maxLife;
             attack = 2;
@@ -20,10 +20,7 @@ public class OBJ_Boss_Projectile extends Projectile{
 
         }
         public void set(int worldX, int worldY, int mx, int my, String direction,boolean alive, Character user) {
-            if(user!=gp.player){
-                speed =10;
-                attack=3;
-            }
+
             this.worldX = worldX;
             this.worldY = worldY;
             this.mx=mx;
