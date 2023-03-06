@@ -14,6 +14,7 @@ public class Projectile extends Character{
         this.alive = alive;
         this.user = user;
         this.life = this.maxLife;
+
     }
 
     public void update() {

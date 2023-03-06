@@ -34,7 +34,7 @@ public class AssetSetter {
 
         gp.obj[mapNum][6] = new OBJ_Chest(gp);
         gp.obj[mapNum][6].worldX = 125 * gp.tileSize;
-        gp.obj[mapNum][6].worldY = 68 * gp.tileSize;
+        gp.obj[mapNum][6].worldY = 19 * gp.tileSize;
 
         gp.obj[mapNum][7] = new OBJ_Boots(gp);
         gp.obj[mapNum][7].worldX = 37 * gp.tileSize;
@@ -60,10 +60,6 @@ public class AssetSetter {
         gp.monster[mapNum][1] = new MON_GreenSlime(gp);
         gp.monster[mapNum][1].worldX = gp.tileSize * 82;
         gp.monster[mapNum][1].worldY = gp.tileSize * 168;
-
-        gp.monster[mapNum][2] = new MON_Boss(gp);
-        gp.monster[mapNum][2].worldX = gp.tileSize * 125;
-        gp.monster[mapNum][2].worldY = gp.tileSize * 80;
 
         gp.monster[mapNum][3] = new MON_Static_Down(gp);
         gp.monster[mapNum][3].worldX = gp.tileSize * 92;
@@ -157,5 +153,11 @@ public class AssetSetter {
         gp.monster[mapNum][25].worldX = gp.tileSize * 171;
         gp.monster[mapNum][25].worldY = gp.tileSize * 83;
 
+    }
+    public void setBoss(){
+        int mapNum= 0;
+        gp.monster[mapNum][2] = new MON_Boss(gp);
+        gp.monster[mapNum][2].worldX = gp.tileSize * 125;
+        gp.monster[mapNum][2].worldY = gp.tileSize * 28;
     }
 }

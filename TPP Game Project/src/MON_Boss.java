@@ -1,14 +1,17 @@
 import java.util.Random;
 
 public class MON_Boss extends Character {
+    int tempPlayerX;
+    int tempPlayerY;
+    int shotAvailableCounter1;
     public MON_Boss(GamePanel gp) {
         super(gp);
         type = 2;
         name = "Boss";
-        speed = 1;
+        speed = 0;
         maxLife = 30;
         life = maxLife;
-        attack = 5;
+        attack = 10;
         defense = 0;
         projectile = new OBJ_ElecticBall(gp);
 
@@ -64,6 +67,7 @@ public class MON_Boss extends Character {
     }
     public void setAction() {
 
+
         if(inRage == false && life < 15) {
             inRage = true;
             getImage();
@@ -74,22 +78,37 @@ public class MON_Boss extends Character {
         }
         if(getTileDistance(gp.player) < 10) {
             moveTowardPlayer(60);
-            if(shotAvailableCounter == 45){
-                OBJ_Player_Projectile proj = new OBJ_Player_Projectile(gp);
-                proj.set(getCenterX(),getCenterY(), gp.player.worldX, gp.player.worldY, "polar", true, this);
+            if(shotAvailableCounter1%30<=0&&shotAvailableCounter1-60<=0) {
+                System.out.println(shotAvailableCounter1);
+
+                OBJ_Boss_Projectile proj = new OBJ_Boss_Projectile(gp, this);
+                proj.set(getCenterX(), getCenterY(), tempPlayerX, tempPlayerY, "polar", true, this);
                 gp.projectileList.add(proj);
-                shotAvailableCounter=0;
+            }
+            if(shotAvailableCounter1==60){
+                tempPlayerX=gp.player.worldX;
+                tempPlayerY=gp.player.worldY;
+            }
+            if(shotAvailableCounter1 == 100){
+                    shotAvailableCounter1 = 0;
+
+
+            }
+            if(shotAvailableCounter1 < 100) {
+                shotAvailableCounter1++;
             }
 
 
 
         } else {
-
+            tempPlayerX=gp.player.worldX;
+            tempPlayerY= gp.player.worldY;
             actionLockCounter++;
 
             if (actionLockCounter == 120) { // Slows down NPC so he moves every 2 seconds (60FPS)
                 Random random = new Random();
                 int i = random.nextInt(100) + 1; //random num 1 - 100
+
 
                 if (i <= 25) {
                     direction = "up";

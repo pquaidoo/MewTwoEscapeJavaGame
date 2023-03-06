@@ -8,6 +8,8 @@ public class EventHandler {
     int previousEventX, getPreviousEventY;
     boolean canTouchEvent = true;
 
+
+
     public EventHandler(GamePanel gp) {
         this.gp = gp;
         eventRect = new EventRect[gp.maxWorldCol][gp.maxWorldRow];
@@ -16,10 +18,10 @@ public class EventHandler {
         int row =0;
         while(col<gp.maxWorldCol && row<gp.maxWorldRow){
             eventRect[col][row] = new EventRect();
-            eventRect[col][row].x = 23;
-            eventRect[col][row].y = 23;
-            eventRect[col][row].width = 2;
-            eventRect[col][row].height = 2;
+            eventRect[col][row].x = 0;
+            eventRect[col][row].y = 0;
+            eventRect[col][row].width = gp.tileSize;
+            eventRect[col][row].height = gp.tileSize;
             eventRect[col][row].eventRectDefaultX = eventRect[col][row].x;
             eventRect[col][row].eventRectDefaultY = eventRect[col][row].y;
 
@@ -51,8 +53,11 @@ public class EventHandler {
             }
         }
 
-        if(hit(31, 19, "up") == true) {
-            teleport(gp.dialogueState);
+        if(hit(151, 71, "up") == true||hit(151, 71, "left") == true||hit(151, 71, "up-left") == true) {
+            teleport(gp.dialogueState,98 ,72);
+        }
+        if(hit(125, 94, "up") == true) {
+            bossBattle(gp.dialogueState, 125,42);
         }
 
     }
@@ -80,14 +85,24 @@ public class EventHandler {
 
         return hit;
     }
-    public void teleport(int gameState) {
+    public void teleport(int gameState,int x,int y) {
 
         gp.gameState = gameState;
         //super.speak(0);
-        System.out.println("teleport");
-        gp.ui.currentDialogue = "Teleport!";
-        gp.player.worldX = gp.tileSize * 37;
-        gp.player.worldY = gp.tileSize * 10;
+        gp.ui.currentDialogue = "------";
+        gp.player.worldX = gp.tileSize * x;
+        gp.player.worldY = gp.tileSize * y;
+    }
+    public void bossBattle(int gameState,int x,int y) {
+
+        gp.gameState = gameState;
+        //super.speak(0);
+        gp.ui.currentDialogue = "------";
+        gp.player.worldX = gp.tileSize * x;
+        gp.player.worldY = gp.tileSize * y;
+        gp.stopMusic();
+        gp.playMusic(8);
+        gp.aSetter.setBoss();
     }
     public void damagePit(int col, int row, int gameState) {
 

@@ -233,13 +233,12 @@ public class Player extends Character{
 
         if( gp.mouseIn.mousePress == true && shotAvailableCounter == 10) {
             // SET DEFAULT COORDINATES, DIRECTION AND USER
-            OBJ_Player_Projectile proj = new OBJ_Player_Projectile(gp);
+            OBJ_Player_Projectile proj = new OBJ_Player_Projectile(gp,this);
             gp.player.speed = slowSpeed;
             proj.set(gp.player.worldX, gp.player.worldY, mouseIn.mx, mouseIn.my, "polar", true, this);
 
             // ADD IT TO THE LIST
             gp.projectileList.add(proj);
-            System.out.println(speed);
             shotAvailableCounter = 0;
 
 

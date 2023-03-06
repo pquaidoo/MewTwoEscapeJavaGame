@@ -197,7 +197,7 @@ public class Character {
     public void checkShootOrNot(int rate, int shotInterval) {
         int i = new Random().nextInt(rate);
         if(i == 0 && projectile.alive == false && shotAvailableCounter == shotInterval){
-            OBJ_Player_Projectile proj = new OBJ_Player_Projectile(gp);
+            OBJ_Player_Projectile proj = new OBJ_Player_Projectile(gp,this);
             proj.set(this.worldX, this.worldY, gp.player.worldX, gp.player.worldY, "polar", true, this);
             gp.projectileList.add(proj);
             shotAvailableCounter=0;

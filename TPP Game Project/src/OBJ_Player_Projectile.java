@@ -1,9 +1,10 @@
 public class OBJ_Player_Projectile extends Projectile{
     GamePanel gp;
 
-    public OBJ_Player_Projectile(GamePanel gp) {
+    public OBJ_Player_Projectile(GamePanel gp, Character user) {
         super(gp);
         this.gp=gp;
+
 
         name = "pProj";
         speed = 15;
@@ -12,8 +13,8 @@ public class OBJ_Player_Projectile extends Projectile{
         attack = 2;
         useCost = 1;
         alive = false;
-        //System.out.println("firing");
-        getImage();
+        this.user=user;
+            getImage(1);
 
     }
     public void set(int worldX, int worldY, int mx, int my, String direction,boolean alive, Character user) {
@@ -28,6 +29,7 @@ public class OBJ_Player_Projectile extends Projectile{
         this.direction = direction;
         this.alive = alive;
         this.user = user;
+       // System.out.println(user);
         this.life = this.maxLife;
 
         double distX=(mx-(worldX));
@@ -36,23 +38,17 @@ public class OBJ_Player_Projectile extends Projectile{
         VelX = (distX/dist)*speed;
         VelY = (distY/dist)*speed;
 
-
-        System.out.println("----------------------------------------");
-        System.out.println("world Position: "+worldX +", "+worldY);
-        System.out.println("slope: "+distX +", "+distY+", "+dist);
-
-        System.out.println("Vel: "+VelX +", "+VelY);
-
     }
-    public void getImage() {
-        up1 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize);
-        up2 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize);
-        down1 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize);
-        down2 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize);
-        right1 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize);
-        right2 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize);
-        left1 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize);
-        left2 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize);
+    public void getImage(int i) {
+
+        up1 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize,i);
+        up2 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize,i);
+        down1 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize,i);
+        down2 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize,i);
+        right1 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize,i);
+        right2 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize,i);
+        left1 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize,i);
+        left2 = setup("TPP Game Project/res/Projectile/mewtwo_projectile",gp.tileSize,gp.tileSize,i);
     }
 
 }
