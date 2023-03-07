@@ -83,6 +83,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
     public void retry() {
         player.speed = 10; //temp fix
+        monster[0][2]=null;
+        monster[0][26]=null;
         player.setDefaultPositions();
         player.resetoreLifeAndMan();
         aSetter.setObject();
@@ -159,10 +161,16 @@ public class GamePanel extends JPanel implements Runnable {
                         monster[currentMap][i].update();
                     }
                     if(monster[currentMap][i].alive == false) {
-                        System.out.println("monster is alive: "+monster[currentMap][i].alive+monster[currentMap][i]);
+                       // System.out.println("monster is alive: "+monster[currentMap][i].alive+monster[currentMap][i]);
                         monster[currentMap][i].checkDrop();
                         monster[currentMap][i] = null;
                     }
+                    if( eHandler.isBossbattlele()==true){
+                        if( monster[currentMap][2]==null){
+                            eHandler.setBossbattle(false);
+                        }
+                    }
+
                 }
             }
             for(int i = 0; i < projectileList.size(); i++) {
@@ -251,9 +259,16 @@ public class GamePanel extends JPanel implements Runnable {
 
 
             }
+
             tileM.draw2(graphics2);
             if(eHandler.isBossbattlele()==true) {
-                monster[currentMap][2].draw(graphics2);
+                if(monster[currentMap][2]!=null){
+                    monster[currentMap][2].draw(graphics2);
+                }else if(monster[currentMap][26]!=null){
+                    System.out.println("lol");
+                    monster[currentMap][26].draw(graphics2);
+                }
+
             }
             //EMPTY CHARACTER LIST
             characterList.clear();

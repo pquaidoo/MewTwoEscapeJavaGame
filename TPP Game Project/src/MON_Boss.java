@@ -13,8 +13,8 @@ public class MON_Boss extends Character {
         super(gp);
         type = 4;
         name = "Boss";
-        speed = 0;
-        maxLife = 10;
+        speed = 3;
+        maxLife = 30;
         life = maxLife;
         attack = 10;
         defense = 0;
@@ -88,11 +88,11 @@ public class MON_Boss extends Character {
         if(getTileDistance(gp.player) < 100) {
             moveTowardPlayer(60);
             if(shotAvailableCounter1%25==0) {
-                System.out.println(shotAvailableCounter1+"\n"+"--------");
+//                System.out.println(shotAvailableCounter1+"\n"+"--------");
                 tempPlayerX=gp.player.worldX;
                 tempPlayerY=gp.player.worldY;
                 if(shotAvailableCounter%15==0) {
-                    System.out.println(shotAvailableCounter);
+
 
                     OBJ_Boss_Projectile proj = new OBJ_Boss_Projectile(gp, this);
                     proj.set(getCenterX(), getCenterY(), tempPlayerX, tempPlayerY, "polar", true, this);
@@ -250,11 +250,8 @@ public class MON_Boss extends Character {
             }
             if(dying == true) {
                 gp.stopMusic();
-                gp.playMusic(1);//suspence music
                 dyingAnimation(g2);
                 gp.eHandler.setBossbattle(false);
-                gp.stopMusic();
-                gp.playMusic(1);//replay boss music
                 alive=false;
             }
 

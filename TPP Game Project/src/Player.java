@@ -193,11 +193,11 @@ public class Player extends Character{
                 }
             }
 
-            if(keyH.enterPressed == true && attackCanceled== false){
-                gp.playSE(7);
-                attacking = true;
-                spriteCounter = 0;
-            }
+//            if(keyH.enterPressed == true && attackCanceled== false){
+//                gp.playSE(7);
+//                attacking = true;
+//                spriteCounter = 0;
+//            }
 
             attackCanceled = false;
            gp.keyH.enterPressed = false;    //resets
@@ -266,7 +266,11 @@ public class Player extends Character{
             if(life <= 0) {
                 gp.gameState = gp.gameOverState;
                 gp.stopMusic();
+                gp.playMusic(0);
+                gp.stopMusic();
+                gp.stopMusic();
                 gp.playSE(9);
+
             }
         }
 

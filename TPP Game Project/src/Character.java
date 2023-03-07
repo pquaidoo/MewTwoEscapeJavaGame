@@ -417,9 +417,8 @@ public class Character {
 
             }
             if(dying == true||type==3&&reviving==true) {
+
                 dyingAnimation(g2);
-
-
             }
 
             g2.drawImage(image, screenX, screenY,null);
@@ -435,6 +434,8 @@ public class Character {
         if(dyingCounter <= 5) {
             changeAlpha(g2, 0f);
             if(reviving==true&&type==3) {
+                gp.stopMusic();
+                gp.playMusic(7);
                 i=20;
                 life += (double) maxLife / 10;
             }
@@ -488,8 +489,14 @@ public class Character {
                 dying=false;
                 alive=true;
                 life=maxLife;
+                gp.stopMusic();
+                gp.playMusic(2);
+                for (int j = 0; j < 999999999; j++) {
+                    for (int k = 0; k < 999999999; k++) {
+                    }
+                }
+                gp.playMusic(2);
 
-                System.out.println(":-"+life);//doesnt make it here
             }else{
                 dying = false;
                 alive = false;
