@@ -31,7 +31,6 @@ public class MON_Boss_Super extends Character {
         getImage();
         dying=false;
         alive=true;
-        System.out.println("o boy");
         gp.eHandler.setBossbattle(true);
         getImage();
     }
@@ -82,7 +81,6 @@ public class MON_Boss_Super extends Character {
     public void setAction() {
 
         if(life == 0&&reviving!=true) {
-            gp.stopMusic();
             gp.stopMusic();
             gp.playMusic(0);
             BossDead = true;

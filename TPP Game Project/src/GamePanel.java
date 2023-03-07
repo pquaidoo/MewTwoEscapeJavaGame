@@ -85,6 +85,7 @@ public class GamePanel extends JPanel implements Runnable {
         player.speed = 10; //temp fix
         monster[0][2]=null;
         monster[0][26]=null;
+
         player.setDefaultPositions();
         player.resetoreLifeAndMan();
         aSetter.setObject();
@@ -265,7 +266,6 @@ public class GamePanel extends JPanel implements Runnable {
                 if(monster[currentMap][2]!=null){
                     monster[currentMap][2].draw(graphics2);
                 }else if(monster[currentMap][26]!=null){
-                    System.out.println("lol");
                     monster[currentMap][26].draw(graphics2);
                 }
 

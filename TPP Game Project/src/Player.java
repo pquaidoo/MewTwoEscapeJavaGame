@@ -358,7 +358,6 @@ public class Player extends Character{
                 gp.monster[gp.currentMap][i].life-=damage;
                 gp.monster[gp.currentMap][i].invincible = true;
                 gp.monster[gp.currentMap][i].damageReaction();
-                System.out.println(gp.monster[gp.currentMap][i].life);
                 if(gp.monster[gp.currentMap][i].life<=0 ){
                     gp.monster[gp.currentMap][i].dying = true;
                 }
@@ -466,7 +465,7 @@ public class Player extends Character{
 
         //Changes image, puts it where it goes, changes how big it is.
        // graphics2.drawImage(image, screenX, screenY,null);
-       graphics2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+       //graphics2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
        // graphics2.drawRect(gp.Pathnode[col][row].col,node[col][row].row);
 
 

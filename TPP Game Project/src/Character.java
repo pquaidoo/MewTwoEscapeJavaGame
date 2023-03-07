@@ -22,7 +22,6 @@ public class Character {
     public boolean collision = false;
     public BufferedImage image, image2, image3;
     public boolean inRage = false;
-    public boolean isRage = false;
     public boolean BossDead = false;
     String dialogues[] = new String[20];
     public int level;
@@ -495,7 +494,7 @@ public class Character {
                     for (int k = 0; k < 999999999; k++) {
                     }
                 }
-                gp.playMusic(2);
+
 
             }else{
                 dying = false;

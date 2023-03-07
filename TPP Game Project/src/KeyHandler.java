@@ -168,11 +168,13 @@ public class KeyHandler implements KeyListener {
         }
         if(code == KeyEvent.VK_ENTER) {
             if(gp.ui.commandNum == 0) {
+                gp.stopMusic();
                 gp.retry();
                 gp.gameState = gp.playState;
                 gp.ui.playTime = 0;
             }
             else if(gp.ui.commandNum == 1) {
+                gp.stopMusic();
                 gp.gameState = gp.titleState;
                 gp.restart();
             }
