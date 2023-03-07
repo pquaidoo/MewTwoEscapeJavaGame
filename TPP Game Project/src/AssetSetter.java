@@ -153,6 +153,10 @@ public class AssetSetter {
         gp.monster[mapNum][25].worldX = gp.tileSize * 171;
         gp.monster[mapNum][25].worldY = gp.tileSize * 83;
 
+        gp.monster[mapNum][27] = new MON_Joltik(gp);
+        gp.monster[mapNum][27].worldX = gp.tileSize * 120;
+        gp.monster[mapNum][27].worldY = gp.tileSize * 120;
+
     }
     public void setBoss(){
         int mapNum= 0;
