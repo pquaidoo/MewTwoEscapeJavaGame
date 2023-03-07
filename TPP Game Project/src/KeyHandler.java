@@ -93,6 +93,7 @@ public class KeyHandler implements KeyListener {
     }
     public void playState(int code) {
         if (code == KeyEvent.VK_W) {
+
             upPressed = true;
         }
 
@@ -167,11 +168,13 @@ public class KeyHandler implements KeyListener {
         }
         if(code == KeyEvent.VK_ENTER) {
             if(gp.ui.commandNum == 0) {
+                gp.stopMusic();
                 gp.retry();
                 gp.gameState = gp.playState;
                 gp.ui.playTime = 0;
             }
             else if(gp.ui.commandNum == 1) {
+                gp.stopMusic();
                 gp.gameState = gp.titleState;
                 gp.restart();
             }
@@ -179,6 +182,7 @@ public class KeyHandler implements KeyListener {
     }
     public void mapState(int code) {
         if(code == KeyEvent.VK_M) {
+
             gp.gameState = gp.playState;
         }
     }

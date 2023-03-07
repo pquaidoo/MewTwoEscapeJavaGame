@@ -8,19 +8,23 @@ import java.io.IOException;
  * Controls player sprites and stats.
  */
 public class Player extends Character{
+    MouseInput mouseIn;
+    int slowSpeed;
+    int currentSpeed;
 
     KeyHandler keyH;
     public final int screenX;
     public final int screenY;
     int hasKey = 0;
     public boolean attackCanceled = false;
-    public Player(GamePanel gp, KeyHandler keyH){
+    public Player(GamePanel gp, KeyHandler keyH, MouseInput mouseIn){
         super(gp);
+        this.mouseIn = mouseIn;
         this.keyH=keyH;
         screenX = gp.screenWidth/2 - gp.tileSize/2;
         screenY = gp.screenHeight/2 - gp.tileSize/2;  //sets camera size
 
-        solidArea = new Rectangle(8,16,32,32);
+        solidArea = new Rectangle(16,16,32,36);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
@@ -41,7 +45,9 @@ public class Player extends Character{
     public void setDefaultValues(){
         worldX = gp.tileSize * 125;
         worldY = gp.tileSize * 125;
-        speed = 20;
+        speed = 10;
+        slowSpeed = speed-6;
+         currentSpeed =speed;
         //PLAYER STATUS
         maxLife = 6;
         life = maxLife;
@@ -55,7 +61,6 @@ public class Player extends Character{
         projectile = new OBJ_Fireball(gp);
         attack= getAttack();
         defense = getDefense();
-        System.out.println(speed);
     }
     public void setDefaultPositions() {
 
@@ -83,14 +88,14 @@ public class Player extends Character{
         //up1. ImageIO.read(getClass().getResourceAsStream("TPP Game Project/res/player/boy_up_1"));
         //what was used in tutorial ^
         int i=2;
-        up1 = setup("TPP Game Project/res/player/mewtwo_up_1",gp.tileSize,gp.tileSize);
-        up2 = setup("TPP Game Project/res/player/mewtwo_up_2",gp.tileSize,gp.tileSize);
-        down1 = setup("TPP Game Project/res/player/mewtwo_down_1",gp.tileSize,gp.tileSize);
-        down2 = setup("TPP Game Project/res/player/mewtwo_down_2",gp.tileSize,gp.tileSize);
-        right1 = setup("TPP Game Project/res/player/mewtwo_right_1",gp.tileSize,gp.tileSize);
-        right2 = setup("TPP Game Project/res/player/mewtwo_right_2",gp.tileSize,gp.tileSize);
-        left1 = setup("TPP Game Project/res/player/mewtwo_left_1",gp.tileSize,gp.tileSize);
-        left2 = setup("TPP Game Project/res/player/mewtwo_left_2",gp.tileSize,gp.tileSize);
+        up1 = setup("TPP Game Project/res/player/super_mewtwo_up_1",gp.tileSize,gp.tileSize*i);
+        up2 = setup("TPP Game Project/res/player/super_mewtwo_up_2",gp.tileSize,gp.tileSize*i);
+        down1 = setup("TPP Game Project/res/player/super_mewtwo_down_1",gp.tileSize,gp.tileSize*i);
+        down2 = setup("TPP Game Project/res/player/super_mewtwo_down_2",gp.tileSize,gp.tileSize*i);
+        right1 = setup("TPP Game Project/res/player/super_mewtwo_right_1",gp.tileSize,gp.tileSize*i);
+        right2 = setup("TPP Game Project/res/player/super_mewtwo_right_2",gp.tileSize,gp.tileSize*i);
+        left1 = setup("TPP Game Project/res/player/super_mewtwo_left_1",gp.tileSize,gp.tileSize*i);
+        left2 = setup("TPP Game Project/res/player/super_mewtwo_left_2",gp.tileSize,gp.tileSize*i);
     }
     public void getPlayerAttackImage(){
         attackUp1 = setup("TPP Game Project/res/player/boy_attack_up_1",gp.tileSize,gp.tileSize*2);
@@ -188,13 +193,14 @@ public class Player extends Character{
                 }
             }
 
-            if(keyH.enterPressed == true && attackCanceled== false){
-                gp.playSE(7);
-                attacking = true;
-                spriteCounter = 0;
-            }
+//            if(keyH.enterPressed == true && attackCanceled== false){
+//                gp.playSE(7);
+//                attacking = true;
+//                spriteCounter = 0;
+//            }
+
             attackCanceled = false;
-           gp.keyH.enterPressed = false;//resets
+           gp.keyH.enterPressed = false;    //resets
 
 
 
@@ -211,16 +217,35 @@ public class Player extends Character{
             }
         }
 
-        if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 45) {
+        if(gp.keyH.shotKeyPressed == true && shotAvailableCounter == 10) {
             // SET DEFAULT COORDINATES, DIRECTION AND USER
-            projectile.set(worldX, worldY, direction, true, this);
+            Projectile proj = new OBJ_Fireball(gp);
+            proj.set(worldX, worldY, direction, true, this);
 
             // ADD IT TO THE LIST
-            gp.projectileList.add(projectile);
+            gp.projectileList.add(proj);
 
             shotAvailableCounter = 0;
 
             gp.playSE(8);
+        }
+
+        if( gp.mouseIn.mousePress == true && shotAvailableCounter == 10) {
+            // SET DEFAULT COORDINATES, DIRECTION AND USER
+            OBJ_Player_Projectile proj = new OBJ_Player_Projectile(gp,this);
+            gp.player.speed = slowSpeed;
+            proj.set(gp.player.worldX, gp.player.worldY, mouseIn.mx, mouseIn.my, "polar", true, this);
+
+            // ADD IT TO THE LIST
+            gp.projectileList.add(proj);
+            shotAvailableCounter = 0;
+
+
+            gp.playSE(8);
+            mouseIn.mousePress=false;
+        }else if(slowCounter == 15){
+            speed = currentSpeed;
+            slowCounter = 0;
         }
 
         if(invincible == true) {
@@ -231,58 +256,24 @@ public class Player extends Character{
                 invincibleCounter = 0;
             }
         }
-        if(shotAvailableCounter < 45) {
+        if(shotAvailableCounter < 10) {
             shotAvailableCounter++;
+        }
+        if(slowCounter < 15) {
+            slowCounter++;
         }
         if(keyH.godModeOn == false) {
             if(life <= 0) {
                 gp.gameState = gp.gameOverState;
                 gp.stopMusic();
+                gp.playMusic(0);
+                gp.stopMusic();
+                gp.stopMusic();
                 gp.playSE(9);
-            }
-        }
-    }
-    public void attacking(){
-        spriteCounter++;
-
-        if(spriteCounter <=5){//for speed of animation
-            spriteNum =1;
-
-        }if(spriteCounter>5 &&spriteCounter<=25){
-            spriteNum=2;
-
-            //SAVE CURRENT X, Y, AND SOLID AREA
-            int currentWorldX = worldX;
-            int currentWorldY = worldY;
-            int solidAreaWidth = solidArea.width;
-            int solidAreaHeight = solidArea.height;
-            //ADJUST PLAYER'S X,Y, AND SOLID AREA
-            switch(direction){
-                case"up":worldY-=attackArea.height; break;
-                case"down":worldY+=attackArea.height;break;
-                case"left":worldX-=attackArea.width;break;
-                case"right":worldX+=attackArea.width; break;
 
             }
-            //attack area becomes solid area
-            solidArea.width = attackArea.width;
-            solidArea.height = attackArea.height;
-            //check monster collision with the updated worldx, worldy and solid area
-            int monsterIndex = gp.cChecker.checkCharacter(this,gp.monster);
-            damageMonster(monsterIndex, attack);
-
-            worldX=currentWorldX;
-            worldY=currentWorldY;
-            solidArea.width = solidAreaWidth;
-            solidArea.height = solidAreaHeight;
-
-
         }
-        if(spriteCounter>25){
-            spriteNum=1;
-            spriteCounter =0;
-            attacking=false;
-        }
+
     }
     public void pickupObject(int i){
         if(i !=999){
@@ -315,7 +306,7 @@ public class Player extends Character{
                 case "Chest":
                     gp.ui.gameFinished = true;
                     gp.stopMusic();
-                    gp.playSE(2);
+                    gp.playSE(0);//needs work
                     break;
             }
         }
@@ -367,8 +358,7 @@ public class Player extends Character{
                 gp.monster[gp.currentMap][i].life-=damage;
                 gp.monster[gp.currentMap][i].invincible = true;
                 gp.monster[gp.currentMap][i].damageReaction();
-                System.out.println(gp.monster[gp.currentMap][i].life);
-                if(gp.monster[gp.currentMap][i].life<=0){
+                if(gp.monster[gp.currentMap][i].life<=0 ){
                     gp.monster[gp.currentMap][i].dying = true;
                 }
             }
@@ -475,7 +465,7 @@ public class Player extends Character{
 
         //Changes image, puts it where it goes, changes how big it is.
        // graphics2.drawImage(image, screenX, screenY,null);
-       graphics2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+       //graphics2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
        // graphics2.drawRect(gp.Pathnode[col][row].col,node[col][row].row);
 
 

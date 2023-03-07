@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenHeight = tileSize * maxScreenRow; //576 px
     int FPS =60;
     TileManager tileM = new TileManager(this);
-
+    MouseInput mouseIn = new MouseInput(this);
     KeyHandler keyH= new KeyHandler(this);
     Sound music = new Sound();
     Sound se = new Sound();
@@ -44,14 +44,15 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     // ENTITY AND OBJECT
-    public Player player = new Player(this, keyH);
-    public Character obj[][] = new Character[maxMap][10];
+    public Player player = new Player(this, keyH, mouseIn);
+    public MON_Boss boss = new MON_Boss(this);
+    public Character obj[][] = new Character[maxMap][11];
     public Character npc[][] = new Character[maxMap][10];
-    public Character monster[][] = new Character[maxMap][20];
+    public Character monster[][] = new Character[maxMap][50];
     public ArrayList<Character> projectileList = new ArrayList<>();
     ArrayList<Character> characterList =new ArrayList<>();
 
-    // GAME STATE
+    // GAME STATEd
     public final int titleState = 0;
     public int gameState;
     public final int playState = 1;
@@ -69,6 +70,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);               //improved rendering performance
         this.addKeyListener(keyH);
+        this.addMouseListener(mouseIn);
         this.setFocusable(true);                    //makes gamePanel "focused to receive input", so basically makes input faster ig.
     }
 
@@ -80,13 +82,17 @@ public class GamePanel extends JPanel implements Runnable {
         gameState = titleState;
     }
     public void retry() {
-        player.speed = 4; //temp fix
+        player.speed = 10; //temp fix
+        monster[0][2]=null;
+        monster[0][26]=null;
+
         player.setDefaultPositions();
         player.resetoreLifeAndMan();
         aSetter.setObject();
         aSetter.setMonster();
         aSetter.setNPC();
         playMusic(0);
+        eHandler.setBossbattle(false);
     }
     public void restart() {
         player.setDefaultValues();
@@ -152,12 +158,20 @@ public class GamePanel extends JPanel implements Runnable {
             for(int i = 0; i < monster[0].length; i++) {
                 if(monster[currentMap][i] != null) {
                     if(monster[currentMap][i].alive == true && monster[currentMap][i].dying == false) {
+
                         monster[currentMap][i].update();
                     }
                     if(monster[currentMap][i].alive == false) {
+                       // System.out.println("monster is alive: "+monster[currentMap][i].alive+monster[currentMap][i]);
                         monster[currentMap][i].checkDrop();
                         monster[currentMap][i] = null;
                     }
+                    if( eHandler.isBossbattlele()==true){
+                        if( monster[currentMap][2]==null){
+                            eHandler.setBossbattle(false);
+                        }
+                    }
+
                 }
             }
             for(int i = 0; i < projectileList.size(); i++) {
@@ -210,6 +224,7 @@ public class GamePanel extends JPanel implements Runnable {
             tileM.draw(graphics2);                          //Tiles before player so tiles don't cover player.
 
             characterList.add(player);
+
             for(int i = 0; i< npc[0].length;i++){
                 if(npc[currentMap][i]!=null){
                     characterList.add(npc[currentMap][i]);
@@ -243,6 +258,16 @@ public class GamePanel extends JPanel implements Runnable {
             for (int i = 0; i < characterList.size(); i++) {
                 characterList.get(i).draw(graphics2);
 
+
+            }
+
+            tileM.draw2(graphics2);
+            if(eHandler.isBossbattlele()==true) {
+                if(monster[currentMap][2]!=null){
+                    monster[currentMap][2].draw(graphics2);
+                }else if(monster[currentMap][26]!=null){
+                    monster[currentMap][26].draw(graphics2);
+                }
 
             }
             //EMPTY CHARACTER LIST

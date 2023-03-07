@@ -23,19 +23,19 @@ public class MON_Static_Down extends Character {
         getImage();
     }
     public void getImage() {
-        up1 = setup("TPP Game Project/res/monster/greenslime_down_1",gp.tileSize,gp.tileSize);
-        up2 = setup("TPP Game Project/res/monster/greenslime_down_2",gp.tileSize,gp.tileSize);
-        down1 = setup("TPP Game Project/res/monster/greenslime_down_1",gp.tileSize,gp.tileSize);
-        down2 = setup("TPP Game Project/res/monster/greenslime_down_2",gp.tileSize,gp.tileSize);
-        left1 = setup("TPP Game Project/res/monster/greenslime_down_1",gp.tileSize,gp.tileSize);
-        left2 = setup("TPP Game Project/res/monster/greenslime_down_2",gp.tileSize,gp.tileSize);
-        right1 = setup("TPP Game Project/res/monster/greenslime_down_1",gp.tileSize,gp.tileSize);
-        right2 = setup("TPP Game Project/res/monster/greenslime_down_2",gp.tileSize,gp.tileSize);
+        up1 = setup("TPP Game Project/res/monster/elec_down_1",gp.tileSize,gp.tileSize);
+        up2 = setup("TPP Game Project/res/monster/elec_down_2",gp.tileSize,gp.tileSize);
+        down1 = setup("TPP Game Project/res/monster/elec_down_1",gp.tileSize,gp.tileSize);
+        down2 = setup("TPP Game Project/res/monster/elec_down_2",gp.tileSize,gp.tileSize);
+        left1 = setup("TPP Game Project/res/monster/elec_down_1",gp.tileSize,gp.tileSize);
+        left2 = setup("TPP Game Project/res/monster/elec_down_2",gp.tileSize,gp.tileSize);
+        right1 = setup("TPP Game Project/res/monster/elec_down_1",gp.tileSize,gp.tileSize);
+        right2 = setup("TPP Game Project/res/monster/elec_down_2",gp.tileSize,gp.tileSize);
     }
     public void setAction() {
 
         int i = new Random().nextInt(100)+1;
-        if(i>99&&projectile.alive==false&&shotAvailableCounter == 45){
+        if(i>90&&projectile.alive==false&&shotAvailableCounter == 45){
             projectile.set(worldX, worldY, direction, true, this);
             gp.projectileList.add(projectile);
             shotAvailableCounter=0;//d
