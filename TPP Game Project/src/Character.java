@@ -50,7 +50,7 @@ public class Character {
     boolean attacking = false;
    public boolean alive = true;
     public boolean dying = false;
-    public boolean reviving  = false;
+    public boolean reviving;
 
     boolean hpBarOn = false;
     public boolean onPath = false;
@@ -416,14 +416,10 @@ public class Character {
                 changeAlpha(g2,0.4f);
 
             }
-            if(dying == true) {
+            if(dying == true||type==3&&reviving==true) {
                 dyingAnimation(g2);
-                if(type==3){
 
-                    gp.stopMusic();
-                    gp.playMusic(0);
-                    gp.eHandler.setBossbattle(false);
-                }
+
             }
 
             g2.drawImage(image, screenX, screenY,null);
@@ -436,32 +432,63 @@ public class Character {
         int i = 5;
 
 
-        if(dyingCounter <= 5) {changeAlpha(g2, 0f);}
+        if(dyingCounter <= 5) {
+            changeAlpha(g2, 0f);
+            if(reviving==true&&type==3) {
+                i=20;
+                life += (double) maxLife / 10;
+            }
+
+        }
         if(dyingCounter > i && dyingCounter <= i*2) {
-            life+=(double)maxLife/10;
-            changeAlpha(g2, 1f);}
+            changeAlpha(g2, 1f);
+            if(reviving==true&&type==3) {
+                life += (double) maxLife / 10;
+            }
+
+        }
         if(dyingCounter > i*2 && dyingCounter <= i*3) {
-            life+=(double)maxLife/10;
-            changeAlpha(g2, 0f);}
+            changeAlpha(g2, 0f);
+            if(reviving==true&&type==3) {
+                life += (double) maxLife / 10;
+            }
+        }
         if(dyingCounter > i*3 && dyingCounter <= i*4) {
-            life+=(double)maxLife/10;
-            changeAlpha(g2, 1f);}
+            changeAlpha(g2, 1f);
+            if(reviving==true&&type==3) {
+                life += (double) maxLife / 10;
+            }
+        }
         if(dyingCounter > i*4 && dyingCounter <= i*5) {
-            life+=(double)maxLife/10;
-            changeAlpha(g2, 0f);}
+            changeAlpha(g2, 0f);
+            if(reviving==true&&type==3) {
+                life += (double) maxLife / 10;
+            }
+        }
         if(dyingCounter > i*5 && dyingCounter <= i*6) {
-            life+=(double)maxLife/10;
-            changeAlpha(g2, 1f);}
+            changeAlpha(g2, 1f);
+            if(reviving==true&&type==3) {
+                life += (double) maxLife / 10;
+            }
+        }
         if(dyingCounter > i*6 && dyingCounter <= i*7) {
-            life+=(double)maxLife/10;
-            changeAlpha(g2, 0f);}
+            changeAlpha(g2, 0f);
+            if(reviving==true&&type==3) {
+                life += (double) maxLife / 10;
+            }
+        }
         if(dyingCounter > i*7 && dyingCounter <= i*8) {
-            life+=(double)maxLife/10;
-            changeAlpha(g2, 1f);}
+            changeAlpha(g2, 1f);
+            if(reviving==true&&type==3) {
+                life += (double) maxLife / 10;
+            }
+        }
         if(dyingCounter > i*8) {
             if(reviving==true&&type==3){
+                dying=false;
+                alive=true;
+                life=maxLife;
 
-                i=10;
                 System.out.println(":-"+life);//doesnt make it here
             }else{
                 dying = false;

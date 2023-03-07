@@ -116,7 +116,7 @@ public class EventHandler {
         gp.stopMusic();
         gp.playMusic(2);
         gp.aSetter.setBoss();
-        bossbattle=true;
+       setBossbattle(true);
     }
     public void damagePit(int col, int row, int gameState) {
 

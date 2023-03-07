@@ -11,7 +11,7 @@ public class MON_Boss extends Character {
     int shotAvailableCounter1;
     public MON_Boss(GamePanel gp) {
         super(gp);
-        type = 2;
+        type = 4;
         name = "Boss";
         speed = 0;
         maxLife = 10;
@@ -146,8 +146,6 @@ public class MON_Boss extends Character {
         gp.stopMusic();
         gp.playMusic(1);//suspence music
         gp.eHandler.setBossbattle(false);
-
-        alive=false;
         gp.monster[0][26] = new MON_Boss_Super(gp);
         gp.monster[0][26].worldX = gp.monster[0][2].worldX;
         gp.monster[0][26].worldY =  gp.monster[0][2].worldY;
@@ -230,7 +228,7 @@ public class MON_Boss extends Character {
                     hpBarOn = false;
                 }
             }
-            if(type==3){
+            if(type==4){
                 drawRange=80;
                 double oneScale = (double)gp.screenWidth/maxLife;
                 double hpBarValue = oneScale*life;

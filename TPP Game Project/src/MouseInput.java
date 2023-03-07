@@ -23,8 +23,7 @@ public class MouseInput implements MouseListener {
                 mx = (e.getX() + (gp.player.worldX)-gp.player.screenX);
                 my = (e.getY() + (gp.player.worldY)-gp.player.screenY);
 
-                System.out.println("---------------------------------");
-                System.out.println("Mouse: "+mx +", "+my);
+
                 // System.out.println("getx"+e.getX());
                 //System.out.println("screen: "+gp.player.screenX+", "+gp.player.screenY);
 
