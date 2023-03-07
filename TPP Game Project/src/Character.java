@@ -48,7 +48,7 @@ public class Character {
     public boolean collisionOn = false;
     public boolean invincible = false;
     boolean attacking = false;
-    public boolean alive = true;
+   public boolean alive = true;
     public boolean dying = false;
     public boolean reviving  = false;
 
@@ -334,7 +334,6 @@ public class Character {
     }
     public void draw(Graphics2D g2) {
         if(drawRange>10){
-            System.out.println(drawRange);
         }
         BufferedImage image = null;
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
@@ -408,11 +407,7 @@ public class Character {
                 g2.setColor(new Color(255, 0, 30));
                 g2.fillRect(1, 1,(int)hpBarValue, gp.tileSize-1);
 
-                hpBarCounter++;
-                if(hpBarCounter > 600) {
-                    hpBarCounter = 0;
-                    hpBarOn = false;
-                }
+
             }
 
             if(invincible == true) {
@@ -424,6 +419,7 @@ public class Character {
             if(dying == true) {
                 dyingAnimation(g2);
                 if(type==3){
+
                     gp.stopMusic();
                     gp.playMusic(0);
                     gp.eHandler.setBossbattle(false);
@@ -439,34 +435,42 @@ public class Character {
         dyingCounter++;
         int i = 5;
 
-        if(dyingCounter <= 5) {changeAlpha(g2, 0f);}
-        if(dyingCounter > i && dyingCounter <= i*2) {changeAlpha(g2, 1f);}
-        if(dyingCounter > i*2 && dyingCounter <= i*3) {changeAlpha(g2, 0f);}
-        if(dyingCounter > i*3 && dyingCounter <= i*4) {changeAlpha(g2, 1f);}
-        if(dyingCounter > i*4 && dyingCounter <= i*5) {changeAlpha(g2, 0f);}
-        if(dyingCounter > i*5 && dyingCounter <= i*6) {changeAlpha(g2, 1f);}
-        if(dyingCounter > i*6 && dyingCounter <= i*7) {changeAlpha(g2, 0f);}
-        if(dyingCounter > i*7 && dyingCounter <= i*8) {changeAlpha(g2, 1f);}
-        if(dyingCounter > i*8) {
-            dying = false;
-            alive = false;
-        }
-    }
-    public void reviveAnimation(Graphics2D g2) {
-        dyingCounter++;
-        int i = 5;
 
         if(dyingCounter <= 5) {changeAlpha(g2, 0f);}
-        if(dyingCounter > i && dyingCounter <= i*2) {changeAlpha(g2, 1f);}
-        if(dyingCounter > i*2 && dyingCounter <= i*3) {changeAlpha(g2, 0f);}
-        if(dyingCounter > i*3 && dyingCounter <= i*4) {changeAlpha(g2, 1f);}
-        if(dyingCounter > i*4 && dyingCounter <= i*5) {changeAlpha(g2, 0f);}
-        if(dyingCounter > i*5 && dyingCounter <= i*6) {changeAlpha(g2, 1f);}
-        if(dyingCounter > i*6 && dyingCounter <= i*7) {changeAlpha(g2, 0f);}
-        if(dyingCounter > i*7 && dyingCounter <= i*8) {changeAlpha(g2, 1f);}
+        if(dyingCounter > i && dyingCounter <= i*2) {
+            life+=(double)maxLife/10;
+            changeAlpha(g2, 1f);}
+        if(dyingCounter > i*2 && dyingCounter <= i*3) {
+            life+=(double)maxLife/10;
+            changeAlpha(g2, 0f);}
+        if(dyingCounter > i*3 && dyingCounter <= i*4) {
+            life+=(double)maxLife/10;
+            changeAlpha(g2, 1f);}
+        if(dyingCounter > i*4 && dyingCounter <= i*5) {
+            life+=(double)maxLife/10;
+            changeAlpha(g2, 0f);}
+        if(dyingCounter > i*5 && dyingCounter <= i*6) {
+            life+=(double)maxLife/10;
+            changeAlpha(g2, 1f);}
+        if(dyingCounter > i*6 && dyingCounter <= i*7) {
+            life+=(double)maxLife/10;
+            changeAlpha(g2, 0f);}
+        if(dyingCounter > i*7 && dyingCounter <= i*8) {
+            life+=(double)maxLife/10;
+            changeAlpha(g2, 1f);}
         if(dyingCounter > i*8) {
+            if(reviving==true&&type==3){
+
+                i=10;
+                System.out.println(":-"+life);//doesnt make it here
+            }else{
+                dying = false;
+                alive = false;
+            }
+
         }
     }
+
     public void changeAlpha(Graphics2D g2, float alphaValue) {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
 

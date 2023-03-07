@@ -48,7 +48,7 @@ public class GamePanel extends JPanel implements Runnable {
     public MON_Boss boss = new MON_Boss(this);
     public Character obj[][] = new Character[maxMap][11];
     public Character npc[][] = new Character[maxMap][10];
-    public Character monster[][] = new Character[maxMap][26];
+    public Character monster[][] = new Character[maxMap][50];
     public ArrayList<Character> projectileList = new ArrayList<>();
     ArrayList<Character> characterList =new ArrayList<>();
 

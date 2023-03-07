@@ -355,7 +355,7 @@ public class Player extends Character{
                 gp.monster[gp.currentMap][i].invincible = true;
                 gp.monster[gp.currentMap][i].damageReaction();
                 System.out.println(gp.monster[gp.currentMap][i].life);
-                if(gp.monster[gp.currentMap][i].life<=0 && type==2 && gp.monster[gp.currentMap][i].reviving==false){
+                if(gp.monster[gp.currentMap][i].life<=0 ){
                     gp.monster[gp.currentMap][i].dying = true;
                 }
             }

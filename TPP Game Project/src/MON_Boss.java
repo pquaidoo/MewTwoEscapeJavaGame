@@ -1,17 +1,17 @@
 import jdk.jfr.Event;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class MON_Boss extends Character {
     int tempPlayerX;
     int tempPlayerY;
-    int lives=1;
 
     int shotAvailableCounter1;
     public MON_Boss(GamePanel gp) {
         super(gp);
-        type = 3;
+        type = 2;
         name = "Boss";
         speed = 0;
         maxLife = 10;
@@ -51,16 +51,7 @@ public class MON_Boss extends Character {
             left1 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
             left2 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
         }
-        if(isRage == true) {
-            up1 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
-            up2 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
-            down1 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
-            down2 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
-            right1 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
-            right2 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
-            left1 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
-            left2 = setup("TPP Game Project/res/monster/magnezone_down_2", gp.tileSize * i, gp.tileSize * i);
-        }
+
     }
     public void update(){
         super.update();
@@ -80,23 +71,18 @@ public class MON_Boss extends Character {
         }
     }
     public void setAction() {
-        if(isRage==true){
-            getImage();
-            speed++;
-            System.out.println("he is mister rage");
-        } else if(inRage == false && life < 50) {
+
+       if(inRage == false && life < 50) {
             inRage = true;
             getImage();
             speed++;
         }
-
-        if(life == 0&&lives==0) {
+        if(life <= 0) {
             BossDead = true;
+
+            dying=true;
+
             gp.eHandler.setBossbattle(false);
-        }else if(life==1){
-            reviving=true;
-            Revive();
-            reviving=false;
 
         }
         if(getTileDistance(gp.player) < 100) {
@@ -157,9 +143,14 @@ public class MON_Boss extends Character {
 
     }
     public void checkDrop() {
-        gp.obj[0][8] = new OBJ_Key(gp);
-        gp.obj[0][8].worldX = worldX;
-        gp.obj[0][8].worldY = worldY;
+        gp.stopMusic();
+        gp.playMusic(1);//suspence music
+        gp.eHandler.setBossbattle(false);
+
+        alive=false;
+        gp.monster[0][26] = new MON_Boss_Super(gp);
+        gp.monster[0][26].worldX = gp.monster[0][2].worldX;
+        gp.monster[0][26].worldY =  gp.monster[0][2].worldY;
     }
     public void damageReaction() {
 
@@ -175,40 +166,141 @@ public class MON_Boss extends Character {
         }
 
     }
-    public void Revive(){
-        lives =0;
-        while(life!=maxLife){
-            life+=(double)life/10;
-            reviving=true;
-            isRage=true;
+    public void draw(Graphics2D g2) {
+        if(drawRange>10){
         }
-        reviving=false;
-        invincible=false;
+        BufferedImage image = null;
+        int screenX = worldX - gp.player.worldX + gp.player.screenX;
+        int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
+        if (worldX + gp.tileSize*drawRange > gp.player.worldX - gp.player.screenX &&
+                worldX - gp.tileSize*drawRange < gp.player.worldX + gp.player.screenX &&
+                worldY + gp.tileSize*drawRange > gp.player.worldY - gp.player.screenY &&
+                worldY - gp.tileSize*drawRange < gp.player.worldY + gp.player.screenY) {
+            switch(direction) {
+                case "up", "polar":
+                    if (spriteNum==1){
+                        image = up1;
+                    }
+                    if (spriteNum == 2){
+                        image = up2;
+                    }
+
+                    break;
+                case "down":
+                    if (spriteNum==1){
+                        image = down1;
+                    }
+                    if (spriteNum == 2){
+                        image = down2;
+                    }
+                    break;
+                case "right", "up-right", "down-right":
+                    if (spriteNum==1){
+                        image = right1;
+                    }
+                    if (spriteNum == 2){
+                        image = right2;
+                    }
+                    break;
+                case "left", "up-left", "down-left":
+                    if (spriteNum==1){
+                        image = left1;
+                    }
+                    if (spriteNum == 2){
+                        image = left2;
+                    }
+                    break;
+            }
+            // Monster HP Bar
+            if(type <= 2 && hpBarOn == true) {
+
+                double oneScale = (double)gp.tileSize/maxLife;
+                double hpBarValue = oneScale*life;
+
+                g2.setColor(new Color(35, 35, 35));
+                g2.fillRect(screenX-1, screenY-16, gp.tileSize+2, 12);
+
+                g2.setColor(new Color(255, 0, 30));
+                g2.fillRect(screenX, screenY - 15,(int)hpBarValue, 10);
+
+                hpBarCounter++;
+                if(hpBarCounter > 600) {
+                    hpBarCounter = 0;
+                    hpBarOn = false;
+                }
+            }
+            if(type==3){
+                drawRange=80;
+                double oneScale = (double)gp.screenWidth/maxLife;
+                double hpBarValue = oneScale*life;
+
+                g2.setColor(new Color(35, 35, 35));
+                g2.fillRect(0, 0, gp.screenWidth, gp.tileSize);
+
+                g2.setColor(new Color(255, 0, 30));
+                g2.fillRect(1, 1,(int)hpBarValue, gp.tileSize-1);
+
+
+            }
+
+            if(invincible == true) {
+                hpBarOn = true;
+                hpBarCounter = 0;
+                changeAlpha(g2,0.4f);
+
+            }
+            if(dying == true) {
+                gp.stopMusic();
+                gp.playMusic(1);//suspence music
+                dyingAnimation(g2);
+                gp.eHandler.setBossbattle(false);
+                gp.stopMusic();
+                gp.playMusic(1);//replay boss music
+                alive=false;
+            }
+
+            g2.drawImage(image, screenX, screenY,null);
+            changeAlpha(g2, 1f);
+        }
+    }
+    public void dyingAnimation(Graphics2D g2) {
+
+
+
+            dyingCounter++;
+            int i = 10;
+
+            if (dyingCounter <= 5) {
+                changeAlpha(g2, 0f);
+            }
+            if (dyingCounter > i && dyingCounter <= i * 2) {
+                changeAlpha(g2, 1f);
+            }
+            if (dyingCounter > i * 2 && dyingCounter <= i * 3) {
+                changeAlpha(g2, 0f);
+            }
+            if (dyingCounter > i * 3 && dyingCounter <= i * 4) {
+                changeAlpha(g2, 1f);
+            }
+            if (dyingCounter > i * 4 && dyingCounter <= i * 5) {
+                changeAlpha(g2, 0f);
+            }
+            if (dyingCounter > i * 5 && dyingCounter <= i * 6) {
+                changeAlpha(g2, 1f);
+            }
+            if (dyingCounter > i * 6 && dyingCounter <= i * 7) {
+                changeAlpha(g2, 0f);
+            }
+            if (dyingCounter > i * 7 && dyingCounter <= i * 8) {
+                changeAlpha(g2, 1f);
+            }
+            if (dyingCounter > i * 8) {
+                dying = false;
+                // alive = false;
+            }
 
     }
-
 }
 
-//        type = 2;
-//                name = monName;
-//                defaultSpeed = 1;
-//                speed = defaultSpeed;
-//                maxLife = 50;
-//                life = maxLife;
-//                attack = 10;
-//                defense = 2;
-//                exp = 50;
-//                projectile = new OBJ_ElecticBall(gp);
-//                //      knockBackPower = 5;
-//
-//                int size = gp.tileSize * 5;
-//                solidArea.x = 48;
-//                solidArea.y = 48;
-//                solidArea.width = size - 48 * 2;
-//                solidArea.height = size - 48;
-//                solidAreaDefaultX = solidArea.x;
-//                solidAreaDefaultY = solidArea.y;
-//                attackArea.width = 170;
-//                attackArea.height = 170;
 
