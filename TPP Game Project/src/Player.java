@@ -347,7 +347,7 @@ public class Player extends Character{
     public void damageMonster(int i, int attack){
         if(i !=999){
 
-            if(gp.monster[gp.currentMap][i].invincible == false){
+            if(gp.monster[gp.currentMap][i].invincible == false  || gp.monster[gp.currentMap][i].invincible == true){ //temp fix
                 gp.playSE(5);
 
                 int damage = attack - gp.monster[gp.currentMap][i].defense;

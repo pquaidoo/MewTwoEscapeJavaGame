@@ -246,7 +246,7 @@ public class MON_Boss_Super extends Character {
             if(invincible == true) {
                 hpBarOn = true;
                 hpBarCounter = 0;
-                changeAlpha(g2,0.4f);
+                //changeAlpha(g2,0.4f);
 
             }
             if(dying == true) {
