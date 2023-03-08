@@ -217,19 +217,6 @@ public class Player extends Character{
             }
         }
 
-        if(gp.keyH.shotKeyPressed == true && shotAvailableCounter == 10) {
-            // SET DEFAULT COORDINATES, DIRECTION AND USER
-            Projectile proj = new OBJ_Fireball(gp);
-            proj.set(worldX, worldY, direction, true, this);
-
-            // ADD IT TO THE LIST
-            gp.projectileList.add(proj);
-
-            shotAvailableCounter = 0;
-
-            gp.playSE(8);
-        }
-
         if( gp.mouseIn.mousePress == true && shotAvailableCounter == 10) {
             // SET DEFAULT COORDINATES, DIRECTION AND USER
             OBJ_Player_Projectile proj = new OBJ_Player_Projectile(gp,this);

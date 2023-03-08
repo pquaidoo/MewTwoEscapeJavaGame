@@ -273,8 +273,6 @@ public class GamePanel extends JPanel implements Runnable {
             //EMPTY CHARACTER LIST
             characterList.clear();
 
-            // MINI MAP
-            map.drawMiniMap(graphics2);
 
             //UI
             ui.draw(graphics2);
