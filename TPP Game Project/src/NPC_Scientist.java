@@ -1,12 +1,8 @@
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Random;
 
-public class NPC_OldMan extends Character{
+public class NPC_Scientist extends Character{
 
-    public NPC_OldMan(GamePanel gp) {
+    public NPC_Scientist(GamePanel gp) {
         super(gp);
 
         direction = "down";
@@ -22,14 +18,14 @@ public class NPC_OldMan extends Character{
         solidAreaDefaultY = solidArea.y;
     }
     public void getImage(){
-        up1 = setup("TPP Game Project/res/npc/oldman_up_1",gp.tileSize,gp.tileSize);
-        up2 = setup("TPP Game Project/res/npc/oldman_up_2",gp.tileSize,gp.tileSize);
-        down1 = setup("TPP Game Project/res/npc/oldman_down_1",gp.tileSize,gp.tileSize);
-        down2 = setup("TPP Game Project/res/npc/oldman_down_2",gp.tileSize,gp.tileSize);
-        right1 = setup("TPP Game Project/res/npc/oldman_right_1",gp.tileSize,gp.tileSize);
-        right2 = setup("TPP Game Project/res/npc/oldman_right_2",gp.tileSize,gp.tileSize);
-        left1 = setup("TPP Game Project/res/npc/oldman_left_1",gp.tileSize,gp.tileSize);
-        left2 = setup("TPP Game Project/res/npc/oldman_left_2",gp.tileSize,gp.tileSize);
+        up1 = setup("TPP Game Project/res/npc/scientist_up_1",gp.tileSize,gp.tileSize);
+        up2 = setup("TPP Game Project/res/npc/scientist_up_2",gp.tileSize,gp.tileSize);
+        down1 = setup("TPP Game Project/res/npc/scientist_down_1",gp.tileSize,gp.tileSize);
+        down2 = setup("TPP Game Project/res/npc/scientist_down_2",gp.tileSize,gp.tileSize);
+        right1 = setup("TPP Game Project/res/npc/scientist_right_1",gp.tileSize,gp.tileSize);
+        right2 = setup("TPP Game Project/res/npc/scientist_right_2",gp.tileSize,gp.tileSize);
+        left1 = setup("TPP Game Project/res/npc/scientist_left_1",gp.tileSize,gp.tileSize);
+        left2 = setup("TPP Game Project/res/npc/scientist_left_2",gp.tileSize,gp.tileSize);
     }
     public void setAction() {
 
