@@ -27,14 +27,14 @@ public class MON_Joltik extends Character {
         getImage();
     }
     public void getImage() {
-        up1 = setup("TPP Game Project/res/monster/magnamite_down_1",gp.tileSize,gp.tileSize);
-        up2 = setup("TPP Game Project/res/monster/magnamite_down_2",gp.tileSize,gp.tileSize);
-        down1 = setup("TPP Game Project/res/monster/magnamite_down_1",gp.tileSize,gp.tileSize);
-        down2 = setup("TPP Game Project/res/monster/magnamite_down_2",gp.tileSize,gp.tileSize);
-        left1 = setup("TPP Game Project/res/monster/magnamite_down_1",gp.tileSize,gp.tileSize);
-        left2 = setup("TPP Game Project/res/monster/magnamite_down_2",gp.tileSize,gp.tileSize);
-        right1 = setup("TPP Game Project/res/monster/magnamite_down_1",gp.tileSize,gp.tileSize);
-        right2 = setup("TPP Game Project/res/monster/magnamite_down_2",gp.tileSize,gp.tileSize);
+        up1 = setup("TPP Game Project/res/monster/joltik_up_1",gp.tileSize,gp.tileSize);
+        up2 = setup("TPP Game Project/res/monster/joltik_up_2",gp.tileSize,gp.tileSize);
+        down1 = setup("TPP Game Project/res/monster/joltik_down_1",gp.tileSize,gp.tileSize);
+        down2 = setup("TPP Game Project/res/monster/joltik_down_2",gp.tileSize,gp.tileSize);
+        left1 = setup("TPP Game Project/res/monster/joltik_left_1",gp.tileSize,gp.tileSize);
+        left2 = setup("TPP Game Project/res/monster/joltik_left_2",gp.tileSize,gp.tileSize);
+        right1 = setup("TPP Game Project/res/monster/joltik_right_1",gp.tileSize,gp.tileSize);
+        right2 = setup("TPP Game Project/res/monster/joltik_right_2",gp.tileSize,gp.tileSize);
     }
     public void update() {
         super.update();
