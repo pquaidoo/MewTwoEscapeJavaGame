@@ -1,12 +1,14 @@
 import java.util.Random;
 
-public class Missle extends Character {
-    public Missle(GamePanel gp) {
+public class MON_Genesect extends Character {
+    int shotAvailableCounter1=0;
+
+    public MON_Genesect(GamePanel gp) {
         super(gp);
 
         type = 2;
         name = "Green Slime";
-        speed = 8;
+        speed = 1;
         maxLife = 15;
         life = maxLife;
         attack = 5;
@@ -24,14 +26,14 @@ public class Missle extends Character {
         getImage();
     }
     public void getImage() {
-        up1 = setup("TPP Game Project/res/monster/pichu_missle_down_1",gp.tileSize,gp.tileSize);
-        up2 = setup("TPP Game Project/res/monster/pichu_missle_down_2",gp.tileSize,gp.tileSize);
-        down1 = setup("TPP Game Project/res/monster/pichu_missle_down_1",gp.tileSize,gp.tileSize);
-        down2 = setup("TPP Game Project/res/monster/pichu_missle_down_2",gp.tileSize,gp.tileSize);
-        left1 = setup("TPP Game Project/res/monster/pichu_missle_down_1",gp.tileSize,gp.tileSize);
-        left2 = setup("TPP Game Project/res/monster/pichu_missle_down_2",gp.tileSize,gp.tileSize);
-        right1 = setup("TPP Game Project/res/monster/pichu_missle_down_1",gp.tileSize,gp.tileSize);
-        right2 = setup("TPP Game Project/res/monster/pichu_missle_down_2",gp.tileSize,gp.tileSize);
+        up1 = setup("TPP Game Project/res/monster/magnamite_down_1",gp.tileSize,gp.tileSize);
+        up2 = setup("TPP Game Project/res/monster/magnamite_down_2",gp.tileSize,gp.tileSize);
+        down1 = setup("TPP Game Project/res/monster/magnamite_down_1",gp.tileSize,gp.tileSize);
+        down2 = setup("TPP Game Project/res/monster/magnamite_down_2",gp.tileSize,gp.tileSize);
+        left1 = setup("TPP Game Project/res/monster/magnamite_down_1",gp.tileSize,gp.tileSize);
+        left2 = setup("TPP Game Project/res/monster/magnamite_down_2",gp.tileSize,gp.tileSize);
+        right1 = setup("TPP Game Project/res/monster/magnamite_down_1",gp.tileSize,gp.tileSize);
+        right2 = setup("TPP Game Project/res/monster/magnamite_down_2",gp.tileSize,gp.tileSize);
     }
     public void update(){
         super.update();
@@ -41,9 +43,9 @@ public class Missle extends Character {
 
         if(onPath == false && tileDistance < 5){
             int i = new Random().nextInt(100)+1;
-                    if(i>50){
-                        onPath= true;
-                    }
+            if(i>50){
+                onPath= true;
+            }
 
         }
         if(onPath==true&&tileDistance>20){
@@ -60,7 +62,29 @@ public class Missle extends Character {
 
             searchPath(goalCol, goalRow);
 
-            int i = new Random().nextInt(100)+1;
+            if(shotAvailableCounter1%25==0) {
+//                System.out.println(shotAvailableCounter1+"\n"+"--------");
+
+                if(shotAvailableCounter%15==0) {
+
+
+                    OBJ_Boss_Projectile proj = new OBJ_Boss_Projectile(gp, this);
+                    proj.set(getCenterX(), getCenterY(), gp.player.worldX, gp.player.worldY, "polar", true, this);
+
+                    gp.projectileList.add(proj);
+                }
+            }
+            if(shotAvailableCounter1==50){
+
+            }
+            if(shotAvailableCounter1 == 100){
+                shotAvailableCounter1 = 0;
+
+
+            }
+            if(shotAvailableCounter1 < 100) {
+                shotAvailableCounter1++;
+            }
 
         }else {
             actionLockCounter++;
@@ -102,3 +126,4 @@ public class Missle extends Character {
 
     }
 }
+

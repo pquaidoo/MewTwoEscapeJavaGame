@@ -29,6 +29,7 @@ public class TileManager {
             setup(4, "sand", true);
             setup(5, "wall2", true);
             setup(6, "black", true);
+            setup(7, "wall3",true);
         }
     public void setup(int index, String imageName, boolean collision) {
             UtilityTool uTool = new UtilityTool();
