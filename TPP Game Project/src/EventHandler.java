@@ -61,9 +61,31 @@ public class EventHandler {
             //pass coordinates and direction
             damagePit(34,7,gp.dialogueState);
              }
-            if(hit(179,123, "any") == true) {
-                healingPool(gp.dialogueState);
+            for(int i = 179; i <= 183; i++) {
+                for(int j = 123; j <= 125; j++) {
+                    if(hit(i,j,"any") == true) {
+                        healingPool(gp.dialogueState);
+                    }
+                }
             }
+//            if(hit(179,123, "any") == true) {
+//                healingPool(gp.dialogueState);
+//            }
+//            if(hit(180,123, "any") == true) {
+//                healingPool(gp.dialogueState);
+//            }
+//            if(hit(181,123, "any") == true) {
+//                healingPool(gp.dialogueState);
+//            }
+//            if(hit(179,124, "any") == true) {
+//                healingPool(gp.dialogueState);
+//            }
+//            if(hit(179,125, "any") == true) {
+//                healingPool(gp.dialogueState);
+//            }
+//            if(hit(179,126, "any") == true) {
+//                healingPool(gp.dialogueState);
+//            }
         }
 
         if(hit(98, 71, "any") == true) {
