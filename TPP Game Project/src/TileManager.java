@@ -30,6 +30,8 @@ public class TileManager {
             setup(5, "wall2", true);
             setup(6, "black", true);
             setup(7, "wall3",true);
+            setup(8, "heal",false);
+            setup(9, "teleport",false);
         }
     public void setup(int index, String imageName, boolean collision) {
             UtilityTool uTool = new UtilityTool();

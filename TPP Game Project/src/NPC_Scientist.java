@@ -63,10 +63,10 @@ public class NPC_Scientist extends Character{
 
     }
     public void setDialogue() {
-        dialogues[0] = "Hello, lad.";
-        dialogues[1] = "So you've came to the island\n for the secret treasure...";
-        dialogues[2] = "I used to be a great wizard but now... \nI'm too old for taking an adventure";
-        dialogues[3] = "STOP RIGHT THERE, CRIMINAL\n SCUM.";
+        dialogues[0] = "Bhov: please dont kill me!";
+        dialogues[1] = "Bhov: bhov did not do any work...:(";
+        dialogues[2] = "Bhov: bhov did do work! :]";
+        dialogues[3] = "Bhov: give us our money now!";
 
     }
     public void speak() {

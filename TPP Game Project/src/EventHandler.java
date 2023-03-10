@@ -88,8 +88,11 @@ public class EventHandler {
 //            }
         }
 
-        if(hit(98, 71, "any") == true) {
-            teleport(gp.dialogueState,151 ,71);
+        if(hit(151, 70, "any") == true) {
+            teleport(gp.dialogueState,97 ,70);
+        }
+        if(hit(98, 70, "any") == true) {
+            teleport(gp.dialogueState,152,70);
         }
         if(hit(125, 94, "up") == true) {
             bossBattle(gp.dialogueState, 125,42);
@@ -124,7 +127,7 @@ public class EventHandler {
 
         gp.gameState = gameState;
         //super.speak(0);
-        gp.ui.currentDialogue = "------";
+        gp.ui.currentDialogue = "Teleport!";
         gp.player.worldX = gp.tileSize * x;
         gp.player.worldY = gp.tileSize * y;
     }
@@ -132,7 +135,7 @@ public class EventHandler {
 
         gp.gameState = gameState;
         //super.speak(0);
-        gp.ui.currentDialogue = "------";
+        gp.ui.currentDialogue = "RUMBLE";
         gp.player.worldX = gp.tileSize * x;
         gp.player.worldY = gp.tileSize * y;
         gp.stopMusic();
@@ -154,7 +157,7 @@ public class EventHandler {
         if(gp.keyH.enterPressed  == true) {
             gp.player.attackCanceled = true;
             gp.gameState = gameState;
-            gp.ui.currentDialogue = "You Drunk the water.\nYour life has been recovered.";
+            gp.ui.currentDialogue = "Health UP!";
             gp.player.life = gp.player.maxLife;
             canTouchEvent =false;
 
