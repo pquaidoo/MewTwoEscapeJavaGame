@@ -49,7 +49,7 @@ public class Player extends Character{
         slowSpeed = speed-6;
         currentSpeed = speed;
         //PLAYER STATUS
-        maxLife = 6;
+        maxLife = 10;
         life = maxLife;
         strength =1;
         dexterity =1;
