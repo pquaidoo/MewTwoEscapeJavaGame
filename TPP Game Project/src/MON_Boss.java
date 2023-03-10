@@ -15,7 +15,7 @@ public class MON_Boss extends Character {
         type = 4;
         name = "Boss";
         speed = 3;
-        maxLife = 30;
+        maxLife = 100;
         life = maxLife;
         attack = 10;
         defense = 0;
