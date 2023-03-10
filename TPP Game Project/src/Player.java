@@ -47,7 +47,7 @@ public class Player extends Character{
         worldY = gp.tileSize * 125;
         speed = 10;
         slowSpeed = speed-6;
-         currentSpeed =speed;
+        currentSpeed = speed;
         //PLAYER STATUS
         maxLife = 6;
         life = maxLife;
@@ -286,7 +286,7 @@ public class Player extends Character{
                     break;
                 case "Boots":
                     gp.playSE(3);
-                    speed += 10;        // if you make this 100 you weirdly can barely move.
+                    currentSpeed += 5;        // if you make this 100 you weirdly can barely move.
                     gp.obj[gp.currentMap][i] = null;
                     gp.ui.showMessage("Speed up!");
                     break;

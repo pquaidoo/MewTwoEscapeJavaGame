@@ -61,13 +61,13 @@ public class EventHandler {
             //pass coordinates and direction
             damagePit(34,7,gp.dialogueState);
              }
-            if(hit(23,7, "any") == true) {
+            if(hit(179,123, "any") == true) {
                 healingPool(gp.dialogueState);
             }
         }
 
-        if(hit(151, 71, "up") == true||hit(151, 71, "left") == true||hit(151, 71, "up-left") == true) {
-            teleport(gp.dialogueState,98 ,72);
+        if(hit(98, 71, "any") == true) {
+            teleport(gp.dialogueState,151 ,71);
         }
         if(hit(125, 94, "up") == true) {
             bossBattle(gp.dialogueState, 125,42);
