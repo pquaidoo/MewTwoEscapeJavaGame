@@ -162,7 +162,7 @@ public class UI {
 
     public void drawTitleScreen(){
 
-        g2.setColor(new Color(70, 120, 80));
+        g2.setColor(new Color(0, 0, 0));
         g2.fillRect(0, 0 , gp.screenWidth, gp.screenHeight);
         //TITLE NAME
         g2.setFont(g2.getFont().deriveFont(Font.BOLD,69F));
