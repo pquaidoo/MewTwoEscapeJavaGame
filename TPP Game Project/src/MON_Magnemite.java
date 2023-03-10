@@ -1,12 +1,12 @@
 import java.util.Random;
 
-public class MON_GreenSlime extends Character {
-    public MON_GreenSlime(GamePanel gp) {
+public class MON_Magnemite extends Character {
+    public MON_Magnemite(GamePanel gp) {
         super(gp);
 
         type = 2;
         name = "Green Slime";
-        speed = 1;
+        speed = 4;
         maxLife = 15;
         life = maxLife;
         attack = 5;
