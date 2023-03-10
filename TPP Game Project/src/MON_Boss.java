@@ -7,6 +7,7 @@ import java.util.Random;
 public class MON_Boss extends Character {
     int tempPlayerX;
     int tempPlayerY;
+    int missleCounter = 0;
 
     int shotAvailableCounter1;
     public MON_Boss(GamePanel gp) {
@@ -54,6 +55,7 @@ public class MON_Boss extends Character {
 
     }
     public void update(){
+        missleCounter++;
         super.update();
         int xDistance = Math.abs(worldX - gp.player.worldX);
         int yDistance = Math.abs(worldY - gp.player.worldY);
@@ -142,13 +144,45 @@ public class MON_Boss extends Character {
 
 
     }
+    public void missle() {
+        if(inRage && missleCounter >= 120) {
+            System.out.println(gp.monster[0][2].worldX + "     " + gp.monster[0][2].worldY);
+            int positiveX = gp.monster[0][2].worldX + 1;
+            int negativeX = gp.monster[0][2].worldX - 1;
+            int positiveY = gp.monster[0][2].worldY + 1;
+            int negativeY = gp.monster[0][2].worldY - 1;
+            int tileNum = gp.tileM.mapTileNum[gp.currentMap][worldY][positiveX];
+            int tileNum2 = gp.tileM.mapTileNum[gp.currentMap][worldY][negativeX];
+            int tileNum3 = gp.tileM.mapTileNum[gp.currentMap][positiveY][worldX];
+            int tileNum4 = gp.tileM.mapTileNum[gp.currentMap][negativeY][worldX];
+            int validX = 0;
+            int validY = 0;
+            if (gp.tileM.Tiles[tileNum].collision == false) {
+                validX = positiveX;
+                validY = gp.monster[0][2].worldY;
+            } else if (gp.tileM.Tiles[tileNum2].collision == false) {
+                validX = negativeX;
+                validY = gp.monster[0][2].worldY;
+            } else if (gp.tileM.Tiles[tileNum3].collision == false) {
+                validX = gp.monster[0][2].worldX;
+                validY = positiveY;
+            } else if (gp.tileM.Tiles[tileNum4].collision == false) {
+                validX = gp.monster[0][2].worldX;
+                validY = negativeY;
+            }
+
+            gp.monster[0][28] = new Missle(gp);
+            gp.monster[0][28].worldX = validX;
+            gp.monster[0][28].worldY = validY;
+        }
+    }
     public void checkDrop() {
         gp.stopMusic();
         gp.playMusic(1);//suspence music
         gp.eHandler.setBossbattle(false);
         gp.monster[0][26] = new MON_Boss_Super(gp);
         gp.monster[0][26].worldX = gp.monster[0][2].worldX;
-        gp.monster[0][26].worldY =  gp.monster[0][2].worldY;
+        gp.monster[0][26].worldY = gp.monster[0][2].worldY;
     }
     public void damageReaction() {
 

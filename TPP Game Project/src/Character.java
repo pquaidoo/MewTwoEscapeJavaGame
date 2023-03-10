@@ -508,6 +508,7 @@ public class Character {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
 
     }
+    public void missle() {}
     public void checkDrop() {}
     public BufferedImage setup(String imagePath, int width, int height) {
         UtilityTool uTool = new UtilityTool();

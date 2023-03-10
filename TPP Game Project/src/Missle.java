@@ -1,12 +1,13 @@
 import java.util.Random;
 
 public class Missle extends Character {
+    int timer = 0;
     public Missle(GamePanel gp) {
         super(gp);
 
         type = 2;
         name = "Green Slime";
-        speed = 8;
+        speed = 9;
         maxLife = 15;
         life = maxLife;
         attack = 5;
@@ -34,20 +35,24 @@ public class Missle extends Character {
         right2 = setup("TPP Game Project/res/monster/pichu_missle_down_2",gp.tileSize,gp.tileSize);
     }
     public void update(){
+        timer++;
         super.update();
         int xDistance = Math.abs(worldX - gp.player.worldX);
         int yDistance = Math.abs(worldY - gp.player.worldY);
         int tileDistance = (xDistance + yDistance)/gp.tileSize;
 
-        if(onPath == false && tileDistance < 5){
+        if( onPath == false && tileDistance < 5){
             int i = new Random().nextInt(100)+1;
                     if(i>50){
                         onPath= true;
                     }
 
         }
-        if(onPath==true&&tileDistance>20){
+        if(onPath==true&&tileDistance>50){
             onPath = false;
+        }
+        if (gp.cChecker.checkPlayer(this) || timer >= 600) {
+            life = 0;
         }
     }
     public void setAction() {

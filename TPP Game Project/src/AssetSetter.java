@@ -20,17 +20,17 @@ public class AssetSetter {
         gp.obj[mapNum][2].worldX = 150 * gp.tileSize;
         gp.obj[mapNum][2].worldY = 100 * gp.tileSize;
 
-        gp.obj[mapNum][3] = new OBJ_Door(gp);
-        gp.obj[mapNum][3].worldX = 125 * gp.tileSize;
-        gp.obj[mapNum][3].worldY = 109 * gp.tileSize;
-
-        gp.obj[mapNum][4] = new OBJ_Door(gp);
-        gp.obj[mapNum][4].worldX = 121 * gp.tileSize;
-        gp.obj[mapNum][4].worldY = 109 * gp.tileSize;
+//        gp.obj[mapNum][3] = new OBJ_Door(gp);
+//        gp.obj[mapNum][3].worldX = 125 * gp.tileSize;
+//        gp.obj[mapNum][3].worldY = 109 * gp.tileSize;
 //
-        gp.obj[mapNum][5] = new OBJ_Door(gp);
-        gp.obj[mapNum][5].worldX = 125 * gp.tileSize;
-        gp.obj[mapNum][5].worldY = 72 * gp.tileSize;
+//        gp.obj[mapNum][4] = new OBJ_Door(gp);
+//        gp.obj[mapNum][4].worldX = 121 * gp.tileSize;
+//        gp.obj[mapNum][4].worldY = 109 * gp.tileSize;
+////
+//        gp.obj[mapNum][5] = new OBJ_Door(gp);
+//        gp.obj[mapNum][5].worldX = 125 * gp.tileSize;
+//        gp.obj[mapNum][5].worldY = 72 * gp.tileSize;
 
         gp.obj[mapNum][6] = new OBJ_Chest(gp);
         gp.obj[mapNum][6].worldX = 125 * gp.tileSize;
