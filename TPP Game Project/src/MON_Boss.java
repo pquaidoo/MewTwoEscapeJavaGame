@@ -146,7 +146,7 @@ public class MON_Boss extends Character {
     }
     public void missle() {
 
-       if(inRage && missleCounter >= 120) {
+       if(inRage && missleCounter >= 400) {
 
             int  rightX = (gp.monster[0][2].getCenterX() )/gp.tileSize + 3;
             int leftX = (gp.monster[0][2].worldX)/gp.tileSize - 1;

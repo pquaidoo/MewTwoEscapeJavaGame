@@ -84,7 +84,10 @@ public class GamePanel extends JPanel implements Runnable {
     public void retry() {
         monster[0][2]=null;
         monster[0][26]=null;
-
+        monster[0][100] = null;
+        monster[0][101] = null;
+        monster[0][102] = null;
+        monster[0][103] = null;
         player.setDefaultPositions();
         player.setDefaultValues();
         player.resetoreLifeAndMan();

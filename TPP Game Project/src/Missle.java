@@ -7,7 +7,7 @@ public class Missle extends Character {
         System.out.println("ok buddy");
         type = 2;
         name = "Missle";
-        speed = 9;
+        speed = 8;
         maxLife = 1;
         life = maxLife;
         attack = 5;
