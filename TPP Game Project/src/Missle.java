@@ -4,15 +4,15 @@ public class Missle extends Character {
     int timer = 0;
     public Missle(GamePanel gp) {
         super(gp);
-
+        System.out.println("ok buddy");
         type = 2;
-        name = "Green Slime";
+        name = "Missle";
         speed = 9;
-        maxLife = 15;
+        maxLife = 1;
         life = maxLife;
         attack = 5;
         defense = 0;
-        projectile = new OBJ_ElecticBall(gp);
+
 
 
         solidArea.x = 3;

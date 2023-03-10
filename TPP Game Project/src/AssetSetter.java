@@ -40,9 +40,9 @@ public class AssetSetter {
         gp.obj[mapNum][7].worldX = 37 * gp.tileSize;
         gp.obj[mapNum][7].worldY = 42 * gp.tileSize;
 
-        gp.obj[mapNum][8] = new OBJ_Door(gp);
-        gp.obj[mapNum][8].worldX = 125 * gp.tileSize;
-        gp.obj[mapNum][8].worldY = 96 * gp.tileSize;
+//        gp.obj[mapNum][8] = new OBJ_Door(gp);
+//        gp.obj[mapNum][8].worldX = 125 * gp.tileSize;
+//        gp.obj[mapNum][8].worldY = 96 * gp.tileSize;
 
     }
     public void setNPC() {

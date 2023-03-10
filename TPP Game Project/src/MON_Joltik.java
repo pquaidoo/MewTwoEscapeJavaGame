@@ -54,7 +54,6 @@ public class MON_Joltik extends Character {
         }
     }
     public void setAction() {
-        System.out.println(directionChange);
             if (onPath == true) {
                 if(updateCounter > 30 && directionChange == false) {
                     speed = 10;

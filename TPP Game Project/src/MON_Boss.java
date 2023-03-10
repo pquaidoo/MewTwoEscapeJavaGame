@@ -8,7 +8,7 @@ public class MON_Boss extends Character {
     int tempPlayerX;
     int tempPlayerY;
     int missleCounter = 0;
-
+    int i=1;
     int shotAvailableCounter1;
     public MON_Boss(GamePanel gp) {
         super(gp);
@@ -23,8 +23,8 @@ public class MON_Boss extends Character {
         int size = gp.tileSize*5;
         solidArea.x = 48;
         solidArea.y = 48;
-        solidArea.width = size - 48*2;
-        solidArea.height = size - 48;
+        solidArea.width = size - 48*2;//3
+        solidArea.height = size - 48;//4
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
@@ -145,37 +145,51 @@ public class MON_Boss extends Character {
 
     }
     public void missle() {
-        if(inRage && missleCounter >= 120) {
-            System.out.println(gp.monster[0][2].worldX + "     " + gp.monster[0][2].worldY);
-            int positiveX = gp.monster[0][2].worldX + 1;
-            int negativeX = gp.monster[0][2].worldX - 1;
-            int positiveY = gp.monster[0][2].worldY + 1;
-            int negativeY = gp.monster[0][2].worldY - 1;
-            int tileNum = gp.tileM.mapTileNum[gp.currentMap][worldY][positiveX];
-            int tileNum2 = gp.tileM.mapTileNum[gp.currentMap][worldY][negativeX];
-            int tileNum3 = gp.tileM.mapTileNum[gp.currentMap][positiveY][worldX];
-            int tileNum4 = gp.tileM.mapTileNum[gp.currentMap][negativeY][worldX];
+
+       if(inRage && missleCounter >= 120) {
+
+            int  rightX = (gp.monster[0][2].getCenterX() )/gp.tileSize + 3;
+            int leftX = (gp.monster[0][2].worldX)/gp.tileSize - 1;
+            int upY = (gp.monster[0][2].worldY)/gp.tileSize - 1 ;
+            int downY = (gp.monster[0][2].getCenterY())/gp.tileSize;
+
+            int rightSide= gp.tileM.mapTileNum[gp.currentMap][rightX][getCenterY()/gp.tileSize];
+            int leftSide = gp.tileM.mapTileNum[gp.currentMap][leftX][getCenterY()/gp.tileSize];
+            int upSide = gp.tileM.mapTileNum[gp.currentMap][getCenterX()/gp.tileSize][upY];
+            int downSide = gp.tileM.mapTileNum[gp.currentMap][getCenterX()/gp.tileSize][downY];
             int validX = 0;
             int validY = 0;
-            if (gp.tileM.Tiles[tileNum].collision == false) {
-                validX = positiveX;
-                validY = gp.monster[0][2].worldY;
-            } else if (gp.tileM.Tiles[tileNum2].collision == false) {
-                validX = negativeX;
-                validY = gp.monster[0][2].worldY;
-            } else if (gp.tileM.Tiles[tileNum3].collision == false) {
-                validX = gp.monster[0][2].worldX;
-                validY = positiveY;
-            } else if (gp.tileM.Tiles[tileNum4].collision == false) {
-                validX = gp.monster[0][2].worldX;
-                validY = negativeY;
+            if (gp.tileM.Tiles[rightSide].collision == false) {
+                System.out.println("rightSide");
+                validX = rightX*gp.tileSize;
+                validY = getCenterY();
+            } else if (gp.tileM.Tiles[leftSide ].collision == false) {
+                System.out.println("leftSide");
+                validX = leftX*gp.tileSize;
+                validY = getCenterY();
+            } else if (gp.tileM.Tiles[upSide ].collision == false) {
+                System.out.println("upSide");
+                validX = getCenterX();
+                validY = upY*gp.tileSize;
+            } else if (gp.tileM.Tiles[downSide ].collision == false) {
+                System.out.println("downSide");
+                validX = getCenterX();
+                validY = downY*gp.tileSize;
             }
 
-            gp.monster[0][28] = new Missle(gp);
-            gp.monster[0][28].worldX = validX;
-            gp.monster[0][28].worldY = validY;
+            gp.monster[0][29+i] = new Missle(gp);
+            gp.monster[0][29+i].worldX = validX;
+            gp.monster[0][29+i].worldY = validY;
+            i++;
+            if(i==10){
+                i=1;
+            }
+           System.out.println("Missle Loc: "+validX/gp.tileSize+", "+validY/gp.tileSize);
+           System.out.println("Monster Loc: "+getCenterX()/gp.tileSize+", "+ getCenterY()/gp.tileSize);
+           missleCounter=0;
         }
     }
+
     public void checkDrop() {
         gp.stopMusic();
         gp.playMusic(1);//suspence music
