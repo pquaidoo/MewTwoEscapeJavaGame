@@ -8,9 +8,9 @@ public class MON_Joltik extends Character {
         type = 2;
         name = "Joltik";
         speed = 10;
-        maxLife = 15;
+        maxLife = 10;
         life = maxLife;
-        attack = 5;
+        attack = 3;
         defense = 0;
         projectile = new OBJ_ElecticBall(gp);
 
