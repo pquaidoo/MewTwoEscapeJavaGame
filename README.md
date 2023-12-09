@@ -1,4 +1,4 @@
-![alt text](https://github.com/[pquaidoo]/[MewTwoEscapeJavaGame]/blob/[main]/MewTwoEscape_Boss.jpg?raw=true)
+![alt text](https://github.com/[pquaidoo]/[MewTwoEscapeJavaGame]/blob/[main]/MewTwoEscape-Boss.jpg?raw=true)
 
 
 Mewtwo Escape Java Game
